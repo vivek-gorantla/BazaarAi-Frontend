@@ -1,0 +1,52 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+    <rect width="800" height="600" fill="#f4faf5"/>
+    
+    <!-- Abstract World Map (Dots/Shapes) -->
+    <g fill="#93a896">
+      <!-- North America -->
+      <path d="M 150 200 Q 200 150 280 180 Q 250 250 200 300 Q 120 250 150 200 Z" />
+      <path d="M 120 180 Q 150 120 220 140 Q 180 200 120 180 Z" />
+      <!-- South America -->
+      <path d="M 230 320 Q 280 300 300 380 Q 280 480 250 450 Q 200 380 230 320 Z" />
+      <!-- Europe/Africa -->
+      <path d="M 380 180 Q 450 120 520 180 Q 480 250 400 220 Z" />
+      <path d="M 380 250 Q 450 250 480 350 Q 450 450 400 400 Q 350 350 380 250 Z" />
+      <!-- Asia -->
+      <path d="M 500 150 Q 650 100 700 250 Q 600 350 500 250 Q 450 200 500 150 Z" />
+      <!-- Australia -->
+      <path d="M 620 380 Q 700 350 720 420 Q 680 480 620 450 Z" />
+    </g>
+
+    <!-- Network lines -->
+    <g stroke="#6b7280" stroke-width="2" fill="none">
+      <path d="M 180 220 Q 300 150 420 180" />
+      <path d="M 420 180 Q 550 150 650 220" />
+      <path d="M 180 220 Q 250 350 250 400" />
+      <path d="M 420 180 Q 450 300 420 400" />
+      <path d="M 250 400 Q 350 350 420 400" />
+      <path d="M 650 220 Q 700 300 680 400" />
+      <path d="M 420 400 Q 550 450 680 400" />
+    </g>
+
+    <!-- Glowing Nodes -->
+    <g fill="#fba973" opacity="0.4">
+      <circle cx="180" cy="220" r="40" />
+      <circle cx="250" cy="400" r="30" />
+      <circle cx="420" cy="180" r="35" />
+      <circle cx="420" cy="400" r="30" />
+      <circle cx="650" cy="220" r="45" />
+      <circle cx="680" cy="400" r="35" />
+    </g>
+    <g fill="#f37c4a">
+      <circle cx="180" cy="220" r="10" />
+      <circle cx="250" cy="400" r="8" />
+      <circle cx="420" cy="180" r="10" />
+      <circle cx="420" cy="400" r="8" />
+      <circle cx="650" cy="220" r="12" />
+      <circle cx="680" cy="400" r="10" />
+    </g>
+
+    <!-- Pill Label -->
+    <rect x="330" y="520" width="140" height="40" rx="20" fill="none" stroke="#6b7280" stroke-width="2"/>
+    <text x="400" y="546" font-family="sans-serif" font-size="20" font-weight="bold" fill="#374151" text-anchor="middle">DEMAND</text>
+  </svg>

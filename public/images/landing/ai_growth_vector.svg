@@ -1,0 +1,23 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#f8fafc"/>
+  <!-- Glowing background effect -->
+  <circle cx="400" cy="300" r="200" fill="#8b5cf6" opacity="0.1" filter="blur(20px)"/>
+  <!-- AI Core -->
+  <circle cx="400" cy="300" r="80" fill="#ffffff" filter="drop-shadow(0 10px 25px rgba(139,92,246,0.3))"/>
+  <circle cx="400" cy="300" r="60" fill="#8b5cf6"/>
+  <!-- Connections / Nodes -->
+  <line x1="400" y1="300" x2="250" y2="180" stroke="#a78bfa" stroke-width="4"/>
+  <circle cx="250" cy="180" r="20" fill="#ffffff" stroke="#8b5cf6" stroke-width="4"/>
+  
+  <line x1="400" y1="300" x2="550" y2="150" stroke="#a78bfa" stroke-width="4"/>
+  <circle cx="550" cy="150" r="25" fill="#ffffff" stroke="#8b5cf6" stroke-width="4"/>
+  
+  <line x1="400" y1="300" x2="600" y2="400" stroke="#a78bfa" stroke-width="4"/>
+  <circle cx="600" cy="400" r="15" fill="#ffffff" stroke="#8b5cf6" stroke-width="4"/>
+  
+  <line x1="400" y1="300" x2="200" y2="420" stroke="#a78bfa" stroke-width="4"/>
+  <circle cx="200" cy="420" r="30" fill="#ffffff" stroke="#8b5cf6" stroke-width="4"/>
+  
+  <!-- Growth Arrow -->
+  <path d="M 250 480 Q 400 500 550 250 L 520 230 M 550 250 L 580 270" stroke="#10b981" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="drop-shadow(0 5px 10px rgba(16,185,129,0.3))"/>
+</svg>

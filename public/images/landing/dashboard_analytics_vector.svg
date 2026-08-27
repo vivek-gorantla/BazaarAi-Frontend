@@ -1,0 +1,17 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#f8fafc"/>
+  <!-- UI Window -->
+  <rect x="100" y="100" width="600" height="400" rx="16" fill="#ffffff" filter="drop-shadow(0 20px 25px rgba(0,0,0,0.1))"/>
+  <!-- Sidebar -->
+  <rect x="100" y="100" width="140" height="400" rx="16" fill="#f1f5f9"/>
+  <!-- Content Bars -->
+  <rect x="280" y="320" width="40" height="120" rx="8" fill="#3b82f6"/>
+  <rect x="360" y="240" width="40" height="200" rx="8" fill="#60a5fa"/>
+  <rect x="440" y="180" width="40" height="260" rx="8" fill="#2563eb"/>
+  <rect x="520" y="280" width="40" height="160" rx="8" fill="#93c5fd"/>
+  <rect x="600" y="140" width="40" height="300" rx="8" fill="#1d4ed8"/>
+  <!-- Floating Metric Cards -->
+  <rect x="60" y="360" width="160" height="80" rx="12" fill="#ffffff" filter="drop-shadow(0 10px 15px rgba(0,0,0,0.1))"/>
+  <circle cx="100" cy="400" r="20" fill="#10b981" opacity="0.2"/>
+  <path d="M90 405 L97 412 L112 392" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

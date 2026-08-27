@@ -1,0 +1,16 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#f8fafc"/>
+  <rect x="150" y="120" width="500" height="360" rx="16" fill="#ffffff" filter="drop-shadow(0 20px 25px rgba(0,0,0,0.1))"/>
+  <!-- Search/Header -->
+  <rect x="190" y="160" width="300" height="40" rx="20" fill="#f1f5f9"/>
+  <circle cx="220" cy="180" r="10" stroke="#cbd5e1" stroke-width="3" fill="none"/>
+  <!-- Grid Items -->
+  <rect x="190" y="240" width="120" height="160" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <rect x="210" y="260" width="80" height="80" rx="8" fill="#10b981" opacity="0.2"/>
+  
+  <rect x="340" y="240" width="120" height="160" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <rect x="360" y="260" width="80" height="80" rx="8" fill="#14b8a6" opacity="0.2"/>
+  
+  <rect x="490" y="240" width="120" height="160" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <rect x="510" y="260" width="80" height="80" rx="8" fill="#0ea5e9" opacity="0.2"/>
+</svg>

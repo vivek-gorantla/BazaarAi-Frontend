@@ -1,0 +1,42 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+    <rect width="800" height="600" fill="#f4faf5"/>
+    
+    <!-- Base Line -->
+    <line x1="220" y1="420" x2="580" y2="420" stroke="#4b5563" stroke-width="4" stroke-linecap="round"/>
+    
+    <!-- Bars -->
+    <!-- Bar 1 (Orange) -->
+    <rect x="250" y="360" width="35" height="60" fill="#fba973" stroke="#4b5563" stroke-width="3"/>
+    <circle cx="267.5" cy="330" r="15" fill="#fba973" stroke="#4b5563" stroke-width="2"/>
+    <text x="267.5" y="335" font-family="sans-serif" font-size="14" font-weight="bold" fill="#4b5563" text-anchor="middle">&#8377;</text>
+
+    <!-- Bar 2 (Green) -->
+    <rect x="320" y="320" width="35" height="100" fill="#93a896" stroke="#4b5563" stroke-width="3"/>
+    <circle cx="337.5" cy="290" r="15" fill="#93a896" stroke="#4b5563" stroke-width="2"/>
+    <text x="337.5" y="295" font-family="sans-serif" font-size="14" font-weight="bold" fill="#4b5563" text-anchor="middle">&#8377;</text>
+
+    <!-- Bar 3 (Orange) -->
+    <rect x="390" y="270" width="35" height="150" fill="#fba973" stroke="#4b5563" stroke-width="3"/>
+    <circle cx="407.5" cy="240" r="15" fill="#fba973" stroke="#4b5563" stroke-width="2"/>
+    <text x="407.5" y="245" font-family="sans-serif" font-size="14" font-weight="bold" fill="#4b5563" text-anchor="middle">&#8377;</text>
+
+    <!-- Bar 4 (Green) -->
+    <rect x="460" y="210" width="35" height="210" fill="#93a896" stroke="#4b5563" stroke-width="3"/>
+    <circle cx="477.5" cy="180" r="15" fill="#93a896" stroke="#4b5563" stroke-width="2"/>
+    <text x="477.5" y="185" font-family="sans-serif" font-size="14" font-weight="bold" fill="#4b5563" text-anchor="middle">&#8377;</text>
+
+    <!-- Bar 5 (Orange) -->
+    <rect x="530" y="150" width="35" height="270" fill="#fba973" stroke="#4b5563" stroke-width="3"/>
+    <circle cx="547.5" cy="120" r="15" fill="#fba973" stroke="#4b5563" stroke-width="2"/>
+    <text x="547.5" y="125" font-family="sans-serif" font-size="14" font-weight="bold" fill="#4b5563" text-anchor="middle">&#8377;</text>
+
+    <!-- Upward Trend Arrow -->
+    <path d="M 230 300 Q 400 250 510 100" fill="none" stroke="#93a896" stroke-width="15" stroke-linecap="round"/>
+    <path d="M 230 300 Q 400 250 510 100" fill="none" stroke="#4b5563" stroke-width="5" stroke-linecap="round"/>
+    <!-- Arrow Head -->
+    <polygon points="490,90 530,70 520,120" fill="#fba973" stroke="#4b5563" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- Pill Label -->
+    <rect x="320" y="460" width="160" height="40" rx="20" fill="none" stroke="#6b7280" stroke-width="2"/>
+    <text x="400" y="486" font-family="sans-serif" font-size="16" font-weight="bold" fill="#374151" text-anchor="middle">PROFIT & LOSS</text>
+  </svg>

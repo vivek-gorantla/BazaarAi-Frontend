@@ -1,0 +1,17 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#f8fafc"/>
+  <!-- Conveyor / Process -->
+  <path d="M 100 400 L 700 400" stroke="#e2e8f0" stroke-width="20" stroke-linecap="round"/>
+  <!-- Box 1 -->
+  <rect x="200" y="280" width="100" height="100" rx="10" fill="#f59e0b"/>
+  <path d="M 220 320 L 250 350 L 280 300" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Box 2 (moving) -->
+  <rect x="400" y="280" width="100" height="100" rx="10" fill="#ef4444"/>
+  <line x1="360" y1="330" x2="380" y2="330" stroke="#fca5a5" stroke-width="6" stroke-linecap="round"/>
+  <line x1="340" y1="350" x2="370" y2="350" stroke="#fca5a5" stroke-width="6" stroke-linecap="round"/>
+  <!-- Status UI -->
+  <rect x="450" y="150" width="250" height="80" rx="40" fill="#ffffff" filter="drop-shadow(0 10px 15px rgba(0,0,0,0.1))"/>
+  <circle cx="490" cy="190" r="20" fill="#10b981"/>
+  <path d="M482 190 L488 196 L500 184" stroke="#ffffff" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <rect x="530" y="180" width="120" height="15" rx="7.5" fill="#e2e8f0"/>
+</svg>

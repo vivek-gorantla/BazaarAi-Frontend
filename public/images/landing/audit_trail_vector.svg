@@ -1,0 +1,40 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+    <rect width="800" height="600" fill="#f4faf5"/>
+    
+    <!-- Glow behind book -->
+    <rect x="230" y="130" width="340" height="280" fill="#fba973" opacity="0.3" filter="blur(20px)"/>
+    
+    <!-- Book Background -->
+    <path d="M 400 400 L 250 380 L 250 150 L 400 170 Z" fill="#d1d5db" stroke="#4b5563" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M 400 400 L 550 380 L 550 150 L 400 170 Z" fill="#d1d5db" stroke="#4b5563" stroke-width="3" stroke-linejoin="round"/>
+    
+    <!-- Book Pages -->
+    <path d="M 400 390 L 260 370 L 260 160 L 400 180 Z" fill="#f4faf5" stroke="#4b5563" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M 400 390 L 540 370 L 540 160 L 400 180 Z" fill="#f4faf5" stroke="#4b5563" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M 400 170 L 400 400" stroke="#4b5563" stroke-width="3"/>
+    
+    <!-- Lines on left page -->
+    <rect x="280" y="190" width="90" height="15" fill="#a3b8a6"/>
+    <line x1="280" y1="230" x2="380" y2="245" stroke="#a3b8a6" stroke-width="4" stroke-dasharray="30 10" transform="rotate(-8 330 230)"/>
+    <line x1="280" y1="260" x2="380" y2="275" stroke="#a3b8a6" stroke-width="4" stroke-dasharray="20 15 40 10" transform="rotate(-8 330 260)"/>
+    <line x1="280" y1="290" x2="380" y2="305" stroke="#fba973" stroke-width="4" transform="rotate(-8 330 290)"/>
+    <line x1="280" y1="320" x2="380" y2="335" stroke="#a3b8a6" stroke-width="4" stroke-dasharray="50 10" transform="rotate(-8 330 320)"/>
+    
+    <!-- Lines on right page -->
+    <line x1="420" y1="195" x2="520" y2="180" stroke="#fba973" stroke-width="4" stroke-dasharray="40 10" transform="rotate(8 470 195)"/>
+    <line x1="420" y1="225" x2="520" y2="210" stroke="#a3b8a6" stroke-width="4" stroke-dasharray="25 15" transform="rotate(8 470 225)"/>
+    <line x1="420" y1="285" x2="520" y2="270" stroke="#a3b8a6" stroke-width="4" transform="rotate(8 470 285)"/>
+    <line x1="420" y1="315" x2="520" y2="300" stroke="#fba973" stroke-width="4" stroke-dasharray="15 10 30" transform="rotate(8 470 315)"/>
+    
+    <!-- Shield -->
+    <path d="M 400 220 C 440 220 460 210 460 210 C 460 260 440 320 400 350 C 360 320 340 260 340 210 C 340 210 360 220 400 220 Z" fill="#a3b8a6" stroke="#4b5563" stroke-width="4" stroke-linejoin="round"/>
+    <!-- Lock -->
+    <rect x="385" y="270" width="30" height="25" rx="4" fill="#fba973" stroke="#4b5563" stroke-width="3"/>
+    <path d="M 390 270 L 390 255 C 390 245 410 245 410 255 L 410 270" fill="none" stroke="#4b5563" stroke-width="3"/>
+    <circle cx="400" cy="282" r="3" fill="#4b5563"/>
+    <line x1="400" y1="285" x2="400" y2="290" stroke="#4b5563" stroke-width="2"/>
+
+    <!-- Pill Label -->
+    <rect x="330" y="440" width="140" height="40" rx="20" fill="none" stroke="#6b7280" stroke-width="2"/>
+    <text x="400" y="466" font-family="sans-serif" font-size="16" font-weight="bold" fill="#374151" text-anchor="middle">AUDIT TRAIL</text>
+  </svg>
