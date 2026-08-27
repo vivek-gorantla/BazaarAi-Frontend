@@ -5,6 +5,10 @@ import { useRouter } from "next/navigation";
 import { Mic, Camera, FileSpreadsheet, Plus, Trash2, ArrowRight, X, Package } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../../../contexts/LanguageContext";
+import { AgentInput } from "../../../../agent/components/AgentInput";
+import { AgentSelect } from "../../../../agent/components/AgentSelect";
+import { AgentTextarea } from "../../../../agent/components/AgentTextarea";
+import { AgentUIRegistry } from "../../../../agent/registry";
 
 type Product = {
   id: string;
@@ -19,14 +23,14 @@ export default function ProductCatalogPage() {
   const router = useRouter();
   const { t } = useLanguage();
   const [storeId, setStoreId] = useState<string | null>(null);
-  
+
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
-  
+
   // Modal State
   const [showManualModal, setShowManualModal] = useState(false);
-  
+
   // Form State
   const [formData, setFormData] = useState({
     name: "",
@@ -46,6 +50,10 @@ export default function ProductCatalogPage() {
     } else {
       setFetching(false);
     }
+  }, []);
+
+  useEffect(() => {
+    AgentUIRegistry.registerPage("product-catalog", "Product Catalog");
   }, []);
 
   const fetchCatalog = async (id: string) => {
@@ -70,7 +78,7 @@ export default function ProductCatalogPage() {
   const handleManualSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!storeId) return;
-    
+
     setLoading(true);
     try {
       const res = await fetch(`/api/catalog/${storeId}/products`, {
@@ -87,7 +95,7 @@ export default function ProductCatalogPage() {
           source: "manual"
         })
       });
-      
+
       const data = await res.json();
       if (data.success) {
         // Add product to top of list
@@ -110,7 +118,7 @@ export default function ProductCatalogPage() {
 
   const handleDelete = async (productId: string) => {
     if (!confirm(t('merchant_onboarding.catalog.delete_confirm'))) return;
-    
+
     try {
       const res = await fetch(`/api/catalog/products/${productId}`, {
         method: "DELETE",
@@ -189,7 +197,7 @@ export default function ProductCatalogPage() {
 
           <div className="grid grid-cols-2 gap-4">
             {/* Speak Option */}
-            <button 
+            <button
               onClick={() => simulateIngestion("Voice")}
               className="bg-white hover:bg-[#EAF3EA] group rounded-[32px] p-6 text-left shadow-sm transition-all border border-transparent hover:border-[#496246]/20 flex flex-col items-start gap-4 h-48"
             >
@@ -203,7 +211,7 @@ export default function ProductCatalogPage() {
             </button>
 
             {/* Snap Option */}
-            <button 
+            <button
               onClick={() => simulateIngestion("Image")}
               className="bg-white hover:bg-[#EAF3EA] group rounded-[32px] p-6 text-left shadow-sm transition-all border border-transparent hover:border-[#496246]/20 flex flex-col items-start gap-4 h-48"
             >
@@ -217,7 +225,7 @@ export default function ProductCatalogPage() {
             </button>
 
             {/* CSV Option */}
-            <button 
+            <button
               onClick={() => simulateIngestion("CSV")}
               className="bg-white hover:bg-[#EAF3EA] group rounded-[32px] p-6 text-left shadow-sm transition-all border border-transparent hover:border-[#496246]/20 flex flex-col items-start gap-4 h-48"
             >
@@ -231,7 +239,7 @@ export default function ProductCatalogPage() {
             </button>
 
             {/* Manual Option */}
-            <button 
+            <button
               onClick={() => setShowManualModal(true)}
               className="bg-[#496246] hover:bg-[#3A4E38] group rounded-[32px] p-6 text-left shadow-md transition-all flex flex-col items-start gap-4 h-48"
             >
@@ -246,20 +254,20 @@ export default function ProductCatalogPage() {
           </div>
 
           <div className="mt-12 flex items-center justify-between">
-            <button 
+            <button
               onClick={() => router.back()}
               className="flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-gray-900 transition-colors uppercase tracking-widest"
             >
               {t('merchant_onboarding.catalog.back')}
             </button>
             <div className="flex items-center gap-4">
-              <button 
+              <button
                 onClick={() => router.push("/merchant/merchant-onboarding/payments-bank")}
                 className="px-6 py-4 text-[#496246] font-bold text-sm tracking-wide hover:bg-[#496246]/10 rounded-xl transition-all"
               >
                 SKIP FOR NOW
               </button>
-              <button 
+              <button
                 onClick={() => router.push("/merchant/merchant-onboarding/payments-bank")}
                 className="px-8 py-4 bg-[#496246] hover:bg-[#3A4E38] text-white rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all shadow-md transform hover:-translate-y-0.5"
               >
@@ -281,7 +289,7 @@ export default function ProductCatalogPage() {
               <Package size={20} className="text-[#496246]" />
             </div>
           </div>
-          
+
           <div className="flex-1 overflow-y-auto p-4 bg-[#fafbfa]">
             {fetching ? (
               <div className="flex flex-col items-center justify-center h-full text-gray-400">
@@ -298,7 +306,7 @@ export default function ProductCatalogPage() {
               <div className="space-y-3">
                 <AnimatePresence>
                   {products.map((product) => (
-                    <motion.div 
+                    <motion.div
                       key={product.id}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -319,7 +327,7 @@ export default function ProductCatalogPage() {
                           <span className="text-xs font-medium text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">{Number(product.stockQty)} {product.unit}s</span>
                         </div>
                       </div>
-                      <button 
+                      <button
                         onClick={() => handleDelete(product.id)}
                         className="w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
                         title="Delete product"
@@ -339,16 +347,16 @@ export default function ProductCatalogPage() {
       <AnimatePresence>
         {showManualModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <motion.div 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              exit={{ opacity: 0 }} 
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               onClick={() => setShowManualModal(false)}
               className="absolute inset-0 bg-gray-900/40 backdrop-blur-sm"
             />
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95, y: 20 }} 
-              animate={{ opacity: 1, scale: 1, y: 0 }} 
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               className="bg-white rounded-[32px] shadow-2xl w-full max-w-xl relative z-10 overflow-hidden flex flex-col max-h-[90vh]"
             >
@@ -357,47 +365,57 @@ export default function ProductCatalogPage() {
                   <h2 className="text-2xl font-black text-gray-900">{t('merchant_onboarding.catalog.modal_title')}</h2>
                   <p className="text-sm text-gray-500 font-medium">{t('merchant_onboarding.catalog.modal_subtitle')}</p>
                 </div>
-                <button 
+                <button
                   onClick={() => setShowManualModal(false)}
                   className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors"
                 >
                   <X size={20} />
                 </button>
               </div>
-              
+
               <div className="p-8 overflow-y-auto">
                 <form id="manual-form" onSubmit={handleManualSubmit} className="space-y-6">
                   <div>
                     <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.catalog.modal_name')}</label>
-                    <input
+                    <AgentInput
+                      agentId="name"
+                      agentLabel="Product Name"
+                      name="name"
                       required
                       value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder={t('merchant_onboarding.catalog.modal_name_ph')}
                       className="w-full px-4 py-3 bg-[#F2F7F2]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all"
                     />
                   </div>
-                  
+
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.catalog.modal_cat')}</label>
-                      <input
+                      <AgentInput
+                        agentId="category"
+                        agentLabel="Category"
+                        name="category"
                         required
                         value={formData.category}
-                        onChange={(e) => setFormData({...formData, category: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                         placeholder={t('merchant_onboarding.catalog.modal_cat_ph')}
                         className="w-full px-4 py-3 bg-[#F2F7F2]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all"
                       />
                     </div>
                     <div>
                       <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.catalog.modal_price')}</label>
-                      <input
+                      <AgentInput
+                        agentId="price"
+                        agentLabel="Price"
+                        agentType="number"
+                        name="price"
                         required
                         type="number"
                         min="0"
                         step="0.01"
                         value={formData.price}
-                        onChange={(e) => setFormData({...formData, price: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                         placeholder="0.00"
                         className="w-full px-4 py-3 bg-[#F2F7F2]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all"
                       />
@@ -407,34 +425,44 @@ export default function ProductCatalogPage() {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.catalog.modal_stock')}</label>
-                      <input
+                      <AgentInput
+                        agentId="stockQty"
+                        agentLabel="Stock Quantity"
+                        agentType="number"
+                        name="stockQty"
                         type="number"
                         min="0"
                         value={formData.stockQty}
-                        onChange={(e) => setFormData({...formData, stockQty: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, stockQty: e.target.value })}
                         placeholder="0"
                         className="w-full px-4 py-3 bg-[#F2F7F2]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all"
                       />
                     </div>
                     <div>
                       <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.catalog.modal_unit')}</label>
-                      <select
+                      <AgentSelect
+                        agentId="unit"
+                        agentLabel="Unit"
+                        name="unit"
                         value={formData.unit}
-                        onChange={(e) => setFormData({...formData, unit: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, unit: e.target.value })}
                         className="w-full px-4 py-3 bg-[#F2F7F2]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all appearance-none"
                       >
                         {['piece', 'kg', 'gram', 'litre', 'ml', 'pack', 'box', 'dozen', 'other'].map(u => (
                           <option key={u} value={u}>{u}</option>
                         ))}
-                      </select>
+                      </AgentSelect>
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.catalog.modal_desc')}</label>
-                    <textarea
+                    <AgentTextarea
+                      agentId="description"
+                      agentLabel="Description"
+                      name="description"
                       value={formData.description}
-                      onChange={(e) => setFormData({...formData, description: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                       placeholder={t('merchant_onboarding.catalog.modal_desc_ph')}
                       rows={3}
                       className="w-full px-4 py-3 bg-[#F2F7F2]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all resize-none"
@@ -444,14 +472,14 @@ export default function ProductCatalogPage() {
               </div>
 
               <div className="px-8 py-6 border-t border-gray-100 bg-gray-50 flex justify-end gap-3 rounded-b-[32px]">
-                <button 
+                <button
                   type="button"
                   onClick={() => setShowManualModal(false)}
                   className="px-6 py-3 font-bold text-gray-600 hover:text-gray-900 transition-colors"
                 >
                   Cancel
                 </button>
-                <button 
+                <button
                   type="submit"
                   form="manual-form"
                   disabled={loading}

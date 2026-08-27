@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { MapPin, Search, Truck, ArrowRight, Store } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../../../contexts/LanguageContext";
+import { AgentInput } from "../../../../agent/components/AgentInput";
+import { AgentSelect } from "../../../../agent/components/AgentSelect";
+import { AgentUIRegistry } from "../../../../agent/registry";
 
 export default function LocationDeliveryPage() {
   const router = useRouter();
@@ -60,8 +63,14 @@ export default function LocationDeliveryPage() {
     }
   }, []);
 
+  useEffect(() => {
+    AgentUIRegistry.registerPage("location-delivery", "Location & Delivery");
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e?.target?.name) {
+      setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    }
   };
 
   const handleToggle = () => {
@@ -290,7 +299,10 @@ export default function LocationDeliveryPage() {
               <div className="space-y-4">
                 <div>
                   <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1">{t('merchant_onboarding.location.street')}</label>
-                  <input
+                  <AgentInput
+                    agentId="address"
+                    agentLabel="Street Address"
+                    agentDescription="The primary street address for the store"
                     name="address"
                     value={formData.address}
                     onChange={handleChange}
@@ -301,7 +313,9 @@ export default function LocationDeliveryPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1">{t('merchant_onboarding.location.city')}</label>
-                    <input
+                    <AgentInput
+                      agentId="city"
+                      agentLabel="City"
                       name="city"
                       value={formData.city}
                       onChange={handleChange}
@@ -312,7 +326,9 @@ export default function LocationDeliveryPage() {
                   <div>
                     <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1">{t('merchant_onboarding.location.state')}</label>
                     <div className="relative">
-                      <select
+                      <AgentSelect
+                        agentId="state"
+                        agentLabel="State"
                         name="state"
                         value={formData.state}
                         onChange={handleChange}
@@ -323,7 +339,7 @@ export default function LocationDeliveryPage() {
                         <option value="Andhra Pradesh">Andhra Pradesh</option>
                         <option value="Karnataka">Karnataka</option>
                         <option value="Maharashtra">Maharashtra</option>
-                      </select>
+                      </AgentSelect>
                       <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-gray-400">
                         <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                       </div>
@@ -333,7 +349,9 @@ export default function LocationDeliveryPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1">{t('merchant_onboarding.location.postal')}</label>
-                    <input
+                    <AgentInput
+                      agentId="pincode"
+                      agentLabel="Postal Code"
                       name="pincode"
                       value={formData.pincode}
                       onChange={handleChange}
@@ -343,7 +361,9 @@ export default function LocationDeliveryPage() {
                   </div>
                   <div>
                     <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1">{t('merchant_onboarding.location.unit')}</label>
-                    <input
+                    <AgentInput
+                      agentId="unit"
+                      agentLabel="Unit/Apt"
                       name="unit"
                       value={formData.unit}
                       onChange={handleChange}

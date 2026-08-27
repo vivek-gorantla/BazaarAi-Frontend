@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { ArrowRight, Store, FileText, User, MessageSquare, Lightbulb } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../../../contexts/LanguageContext";
+import { AgentInput } from "../../../../agent/components/AgentInput";
+import { AgentUIRegistry } from "../../../../agent/registry";
+import { useEffect } from "react";
 
 export default function BusinessDetailsPage() {
   const router = useRouter();
@@ -20,13 +23,19 @@ export default function BusinessDetailsPage() {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e?.target?.name) {
+      setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    }
   };
+
+  useEffect(() => {
+    AgentUIRegistry.registerPage("business-details", "Business Details");
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    
+
     // In a real app we'd save this to a store or context. 
     // Here we create the store with placeholder required fields and the real provided fields.
     try {
@@ -117,7 +126,7 @@ export default function BusinessDetailsPage() {
         <div className="flex-1 max-w-xl">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <h1 className="text-4xl sm:text-5xl font-black text-gray-900 mb-4 leading-tight tracking-tight">
-              {t('merchant_onboarding.business.header_title').split('<br />').map((line, i) => <span key={i}>{line}<br/></span>)}
+              {t('merchant_onboarding.business.header_title').split('<br />').map((line, i) => <span key={i}>{line}<br /></span>)}
             </h1>
             <p className="text-gray-600 text-lg mb-8 leading-relaxed max-w-md">
               {t('merchant_onboarding.business.header_desc')}
@@ -133,13 +142,15 @@ export default function BusinessDetailsPage() {
                 </div>
                 <h2 className="text-xl font-bold text-gray-900">{t('merchant_onboarding.steps.store_identity')}</h2>
               </div>
-              
+
               <div className="space-y-5">
                 <div>
                   <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-2">
                     {t('merchant_onboarding.business.legal_name')}
                   </label>
-                  <input
+                  <AgentInput
+                    agentId="legalName"
+                    agentLabel="Legal Name"
                     name="legalName"
                     value={formData.legalName}
                     onChange={handleChange}
@@ -152,7 +163,9 @@ export default function BusinessDetailsPage() {
                   <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-2">
                     {t('merchant_onboarding.business.trading_name')}
                   </label>
-                  <input
+                  <AgentInput
+                    agentId="tradingName"
+                    agentLabel="Trading Name"
                     name="tradingName"
                     value={formData.tradingName}
                     onChange={handleChange}
@@ -171,13 +184,15 @@ export default function BusinessDetailsPage() {
                 </div>
                 <h2 className="text-xl font-bold text-gray-900">{t('merchant_onboarding.business.tax_title')}</h2>
               </div>
-              
+
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-2">
                     {t('merchant_onboarding.business.tax_id')}
                   </label>
-                  <input
+                  <AgentInput
+                    agentId="taxId"
+                    agentLabel="Tax ID"
                     name="taxId"
                     value={formData.taxId}
                     onChange={handleChange}
@@ -190,7 +205,9 @@ export default function BusinessDetailsPage() {
                   <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-2">
                     {t('merchant_onboarding.business.vat')}
                   </label>
-                  <input
+                  <AgentInput
+                    agentId="vatNumber"
+                    agentLabel="VAT Number"
                     name="vatNumber"
                     value={formData.vatNumber}
                     onChange={handleChange}
@@ -209,13 +226,16 @@ export default function BusinessDetailsPage() {
                 </div>
                 <h2 className="text-xl font-bold text-gray-900">{t('merchant_onboarding.business.contact_title')}</h2>
               </div>
-              
+
               <div className="space-y-5">
                 <div>
                   <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-2">
                     {t('merchant_onboarding.business.email')}
                   </label>
-                  <input
+                  <AgentInput
+                    agentId="businessEmail"
+                    agentLabel="Business Email"
+                    agentType="email"
                     name="businessEmail"
                     type="email"
                     value={formData.businessEmail}
@@ -229,7 +249,10 @@ export default function BusinessDetailsPage() {
                   <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-2">
                     {t('merchant_onboarding.business.phone')}
                   </label>
-                  <input
+                  <AgentInput
+                    agentId="supportPhone"
+                    agentLabel="Support Phone"
+                    agentType="tel"
                     name="supportPhone"
                     type="tel"
                     value={formData.supportPhone}
@@ -256,13 +279,13 @@ export default function BusinessDetailsPage() {
         {/* Right Column: Support Widgets */}
         <div className="hidden lg:flex flex-col gap-6 w-80 pt-16 relative z-10">
           {/* Chat Widget */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
             className="bg-white rounded-3xl p-6 shadow-sm border border-[#E8F0E7]"
           >
             <div className="flex gap-4 mb-4">
-              <img 
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop" 
+              <img
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop"
                 alt="Sarah Jenkins"
                 className="w-12 h-12 rounded-full object-cover"
               />
@@ -281,7 +304,7 @@ export default function BusinessDetailsPage() {
           </motion.div>
 
           {/* {t('merchant_onboarding.business.pro_tip')} Widget */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
             className="bg-[#F8EFEB] rounded-3xl p-6 shadow-sm border border-[#F0E0D6]"
           >

@@ -5,13 +5,15 @@ import { useRouter } from "next/navigation";
 import { ShieldCheck, ArrowRight, Building, Smartphone, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../../../contexts/LanguageContext";
+import { AgentInput } from "../../../../agent/components/AgentInput";
+import { AgentUIRegistry } from "../../../../agent/registry";
 
 export default function PaymentsBankPage() {
   const router = useRouter();
   const { t } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [storeId, setStoreId] = useState<string | null>(null);
-  
+
   const [formData, setFormData] = useState({
     bankAccountNumber: "",
     bankIfsc: "",
@@ -28,22 +30,28 @@ export default function PaymentsBankPage() {
           "Authorization": `Bearer ${localStorage.getItem("merchant_token")}`
         }
       })
-      .then(res => res.json())
-      .then(data => {
-        if (data.success && data.data) {
-          setFormData({
-            bankAccountNumber: data.data.bankAccountNumber || "",
-            bankIfsc: data.data.bankIfsc || "",
-            upiId: data.data.upiId || "",
-          });
-        }
-      })
-      .catch(console.error);
+        .then(res => res.json())
+        .then(data => {
+          if (data.success && data.data) {
+            setFormData({
+              bankAccountNumber: data.data.bankAccountNumber || "",
+              bankIfsc: data.data.bankIfsc || "",
+              upiId: data.data.upiId || "",
+            });
+          }
+        })
+        .catch(console.error);
     }
   }, []);
 
+  useEffect(() => {
+    AgentUIRegistry.registerPage("payments-bank", "Payments & Bank");
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e?.target?.name) {
+      setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    }
   };
 
   const handleSave = async () => {
@@ -148,12 +156,14 @@ export default function PaymentsBankPage() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="space-y-5">
                 <div>
                   <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.payments.account_no')}</label>
                   <div className="relative">
-                    <input
+                    <AgentInput
+                      agentId="bankAccountNumber"
+                      agentLabel="Account Number"
                       name="bankAccountNumber"
                       type="password"
                       value={formData.bankAccountNumber}
@@ -166,7 +176,9 @@ export default function PaymentsBankPage() {
                 </div>
                 <div>
                   <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.payments.ifsc')}</label>
-                  <input
+                  <AgentInput
+                    agentId="bankIfsc"
+                    agentLabel="IFSC Code"
                     name="bankIfsc"
                     value={formData.bankIfsc}
                     onChange={handleChange}
@@ -190,10 +202,12 @@ export default function PaymentsBankPage() {
                   </div>
                 </div>
               </div>
-              
+
               <div>
                 <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.payments.upi')}</label>
-                <input
+                <AgentInput
+                  agentId="upiId"
+                  agentLabel="UPI ID"
                   name="upiId"
                   value={formData.upiId}
                   onChange={handleChange}
@@ -205,20 +219,20 @@ export default function PaymentsBankPage() {
 
             {/* Action Buttons */}
             <div className="flex items-center justify-between mt-8 pt-4">
-              <button 
+              <button
                 onClick={() => router.back()}
                 className="flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-gray-900 transition-colors uppercase tracking-widest"
               >
                 {t('merchant_onboarding.payments.back')}
               </button>
               <div className="flex items-center gap-4">
-                <button 
+                <button
                   onClick={() => router.push("/merchant/merchant-onboarding/staff")}
                   className="px-6 py-4 text-[#496246] font-bold text-sm tracking-wide hover:bg-[#496246]/10 rounded-xl transition-all"
                 >
                   SKIP FOR NOW
                 </button>
-                <button 
+                <button
                   onClick={handleSave}
                   disabled={loading}
                   className="px-8 py-4 bg-[#496246] hover:bg-[#3A4E38] text-white rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all shadow-md transform hover:-translate-y-0.5 disabled:opacity-50"
@@ -233,10 +247,10 @@ export default function PaymentsBankPage() {
 
         {/* Right Column: Visual Shield / Card */}
         <div className="flex-1 w-full lg:max-w-md hidden lg:flex items-center justify-center relative">
-          
+
           <div className="absolute inset-0 bg-[#E8F0E7] rounded-[40px] transform rotate-3 scale-95 opacity-50"></div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ scale: 0.9, opacity: 0, rotate: -2 }}
             animate={{ scale: 1, opacity: 1, rotate: 0 }}
             transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
@@ -245,7 +259,7 @@ export default function PaymentsBankPage() {
             {/* Ambient glows */}
             <div className="absolute -top-20 -right-20 w-40 h-40 bg-green-500/20 rounded-full blur-3xl"></div>
             <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-[#D68C5E]/20 rounded-full blur-3xl"></div>
-            
+
             {/* Card Header */}
             <div className="flex justify-between items-start relative z-10">
               <ShieldCheck size={32} className="text-[#8BBA87]" />
@@ -265,9 +279,9 @@ export default function PaymentsBankPage() {
             {/* Card Details */}
             <div className="relative z-10 mt-auto space-y-4">
               <div className="font-mono text-white/90 text-lg tracking-[0.2em] flex justify-between">
-                <span>{formData.bankAccountNumber ? formData.bankAccountNumber.slice(0,4).padEnd(4, '•') : '••••'}</span>
-                <span>{formData.bankAccountNumber && formData.bankAccountNumber.length > 4 ? formData.bankAccountNumber.slice(4,8).padEnd(4, '•') : '••••'}</span>
-                <span>{formData.bankAccountNumber && formData.bankAccountNumber.length > 8 ? formData.bankAccountNumber.slice(8,12).padEnd(4, '•') : '••••'}</span>
+                <span>{formData.bankAccountNumber ? formData.bankAccountNumber.slice(0, 4).padEnd(4, '•') : '••••'}</span>
+                <span>{formData.bankAccountNumber && formData.bankAccountNumber.length > 4 ? formData.bankAccountNumber.slice(4, 8).padEnd(4, '•') : '••••'}</span>
+                <span>{formData.bankAccountNumber && formData.bankAccountNumber.length > 8 ? formData.bankAccountNumber.slice(8, 12).padEnd(4, '•') : '••••'}</span>
                 <span>{formData.bankAccountNumber && formData.bankAccountNumber.length > 12 ? formData.bankAccountNumber.slice(-4) : '••••'}</span>
               </div>
               <div className="flex justify-between items-end">

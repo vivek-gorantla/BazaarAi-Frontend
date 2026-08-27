@@ -5,6 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { Sidebar } from "@/components/Sidebar";
 import { Header } from "@/components/Header";
 import { GlobalVoiceFab } from "@/components/GlobalVoiceFab";
+import { OnboardingVoiceAgent } from "../../agent/components/OnboardingVoiceAgent";
 
 export default function MerchantLayout({
   children,
@@ -64,7 +65,8 @@ export default function MerchantLayout({
 
   if (isOnboarding) {
     return (
-      <div className="min-h-screen bg-[#F2F7F2] font-sans">
+      <div className="min-h-screen bg-[#F2F7F2] font-sans relative">
+        <OnboardingVoiceAgent />
         {children}
       </div>
     );

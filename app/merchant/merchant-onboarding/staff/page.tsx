@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { UserPlus, Trash2, CheckCircle2, UserCircle, Rocket } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../../../contexts/LanguageContext";
+import { AgentInput } from "../../../../agent/components/AgentInput";
+import { AgentSelect } from "../../../../agent/components/AgentSelect";
+import { AgentUIRegistry } from "../../../../agent/registry";
 
 type Staff = {
   id: string;
@@ -18,11 +21,11 @@ export default function StaffPage() {
   const router = useRouter();
   const { t } = useLanguage();
   const [storeId, setStoreId] = useState<string | null>(null);
-  
+
   const [staff, setStaff] = useState<Staff[]>([]);
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
-  
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -37,6 +40,10 @@ export default function StaffPage() {
     } else {
       setFetching(false);
     }
+  }, []);
+
+  useEffect(() => {
+    AgentUIRegistry.registerPage("staff", "Staff Setup");
   }, []);
 
   const fetchStaff = async (id: string) => {
@@ -61,7 +68,7 @@ export default function StaffPage() {
   const handleInvite = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!storeId) return;
-    
+
     setLoading(true);
     try {
       const res = await fetch(`/api/merchant/stores/${storeId}/staff`, {
@@ -73,7 +80,7 @@ export default function StaffPage() {
         },
         body: JSON.stringify(formData)
       });
-      
+
       const data = await res.json();
       if (data.success) {
         // Add to top of list
@@ -93,7 +100,7 @@ export default function StaffPage() {
 
   const handleDelete = async (staffId: string) => {
     if (!confirm(t('merchant_onboarding.staff.delete_confirm'))) return;
-    
+
     try {
       const res = await fetch(`/api/merchant/stores/${storeId}/staff/${staffId}`, {
         method: "DELETE",
@@ -177,24 +184,29 @@ export default function StaffPage() {
             <div className="space-y-5">
               <div>
                 <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.staff.name')}</label>
-                <input
+                <AgentInput
+                  agentId="name"
+                  agentLabel="Staff Name"
                   required
                   value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
                   placeholder={t('merchant_onboarding.staff.name_ph')}
                   className="w-full px-4 py-3 bg-[#F2F7F2]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all"
                 />
               </div>
-              
+
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.staff.phone')}</label>
                   <div className="relative">
                     <span className="absolute left-4 top-3.5 text-sm font-bold text-gray-400">+91</span>
-                    <input
+                    <AgentInput
+                      agentId="phone"
+                      agentLabel="Phone Number"
+                      agentType="tel"
                       required
                       value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
                       placeholder="9876543210"
                       className="w-full pl-12 pr-4 py-3 bg-[#F2F7F2]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all"
                     />
@@ -202,20 +214,22 @@ export default function StaffPage() {
                 </div>
                 <div>
                   <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.staff.role')}</label>
-                  <select
+                  <AgentSelect
+                    agentId="role"
+                    agentLabel="Role"
                     value={formData.role}
-                    onChange={(e) => setFormData({...formData, role: e.target.value})}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, role: e.target.value }))}
                     className="w-full px-4 py-3 bg-[#F2F7F2]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all appearance-none"
                   >
                     <option value="manager">{t('merchant_onboarding.staff.role_manager')}</option>
                     <option value="cashier">{t('merchant_onboarding.staff.role_cashier')}</option>
                     <option value="inventory">{t('merchant_onboarding.staff.role_inventory')}</option>
                     <option value="delivery">{t('merchant_onboarding.staff.role_delivery')}</option>
-                  </select>
+                  </AgentSelect>
                 </div>
               </div>
-              
-              <button 
+
+              <button
                 type="submit"
                 disabled={loading}
                 className="w-full py-4 mt-2 bg-[#496246] hover:bg-[#3A4E38] text-white rounded-xl font-bold text-sm tracking-wide transition-all shadow-md disabled:opacity-50"
@@ -228,13 +242,13 @@ export default function StaffPage() {
           {/* Final Finish Button */}
           <div className="flex flex-col items-center justify-center mt-12 pt-8 border-t border-gray-200">
             <div className="flex flex-col sm:flex-row w-full gap-4">
-              <button 
+              <button
                 onClick={() => router.push("/merchant/dashboard")}
                 className="flex-1 py-5 bg-white text-[#496246] border border-[#496246] rounded-2xl font-black text-lg tracking-wide flex items-center justify-center gap-3 transition-all hover:bg-[#496246]/5 w-full"
               >
                 SKIP FOR NOW
               </button>
-              <button 
+              <button
                 onClick={() => router.push("/merchant/dashboard")}
                 className="flex-1 py-5 bg-gradient-to-r from-[#2D3A2C] to-[#1A231A] text-white rounded-2xl font-black text-lg tracking-wide flex items-center justify-center gap-3 transition-all shadow-2xl transform hover:-translate-y-1 hover:shadow-[#496246]/30 w-full"
               >
@@ -242,7 +256,7 @@ export default function StaffPage() {
                 <Rocket size={20} className="text-[#D68C5E]" />
               </button>
             </div>
-            <button 
+            <button
               onClick={() => router.back()}
               className="mt-6 flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-gray-900 transition-colors uppercase tracking-widest"
             >
@@ -262,7 +276,7 @@ export default function StaffPage() {
               <UserCircle size={20} className="text-blue-600" />
             </div>
           </div>
-          
+
           <div className="flex-1 overflow-y-auto p-4 bg-[#fafbfa]">
             {fetching ? (
               <div className="flex flex-col items-center justify-center h-full text-gray-400">
@@ -279,7 +293,7 @@ export default function StaffPage() {
               <div className="space-y-3">
                 <AnimatePresence>
                   {staff.map((member) => (
-                    <motion.div 
+                    <motion.div
                       key={member.id}
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -304,7 +318,7 @@ export default function StaffPage() {
                           <span className="text-xs font-mono text-gray-400">+91 {member.phone}</span>
                         </div>
                       </div>
-                      <button 
+                      <button
                         onClick={() => handleDelete(member.id)}
                         className="w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
                         title="Remove staff"

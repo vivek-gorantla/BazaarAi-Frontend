@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { Image as ImageIcon, Store, Check, Edit2, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../../../contexts/LanguageContext";
+import { AgentTextarea } from "../../../../agent/components/AgentTextarea";
+import { AgentUIRegistry } from "../../../../agent/registry";
 
 const THEME_COLORS = [
   { name: "Green", hex: "#496246" },
@@ -20,7 +22,7 @@ export default function StoreIdentityPage() {
   const [loading, setLoading] = useState(false);
   const [storeId, setStoreId] = useState<string | null>(null);
   const [storeName, setStoreName] = useState("The Artisan Bakery");
-  
+
   const [formData, setFormData] = useState({
     bannerUrl: "",
     logoUrl: "",
@@ -39,23 +41,27 @@ export default function StoreIdentityPage() {
           "Authorization": `Bearer ${localStorage.getItem("merchant_token")}`
         }
       })
-      .then(res => res.json())
-      .then(data => {
-        if (data.success && data.data) {
-          setStoreName(data.data.tradingName || data.data.legalName || data.data.name);
-          if (data.data.description) setFormData(prev => ({ ...prev, description: data.data.description }));
-          if (data.data.themeColor) setFormData(prev => ({ ...prev, themeColor: data.data.themeColor }));
-          if (data.data.bannerUrl) setFormData(prev => ({ ...prev, bannerUrl: data.data.bannerUrl }));
-          if (data.data.logoUrl) setFormData(prev => ({ ...prev, logoUrl: data.data.logoUrl }));
-        }
-      })
-      .catch(console.error);
+        .then(res => res.json())
+        .then(data => {
+          if (data.success && data.data) {
+            setStoreName(data.data.tradingName || data.data.legalName || data.data.name);
+            if (data.data.description) setFormData(prev => ({ ...prev, description: data.data.description }));
+            if (data.data.themeColor) setFormData(prev => ({ ...prev, themeColor: data.data.themeColor }));
+            if (data.data.bannerUrl) setFormData(prev => ({ ...prev, bannerUrl: data.data.bannerUrl }));
+            if (data.data.logoUrl) setFormData(prev => ({ ...prev, logoUrl: data.data.logoUrl }));
+          }
+        })
+        .catch(console.error);
     }
+  }, []);
+
+  useEffect(() => {
+    AgentUIRegistry.registerPage("store-identity", "Store Identity");
   }, []);
 
   const handleSimulatedUpload = (field: "bannerUrl" | "logoUrl") => {
     // Simulate image upload by setting a placeholder image
-    const placeholder = field === "bannerUrl" 
+    const placeholder = field === "bannerUrl"
       ? "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=800&auto=format&fit=crop"
       : "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=200&auto=format&fit=crop";
     setFormData({ ...formData, [field]: placeholder });
@@ -156,8 +162,8 @@ export default function StoreIdentityPage() {
             <div className="bg-white rounded-[24px] p-6 shadow-sm">
               <h3 className="font-bold text-gray-900 mb-1">{t('merchant_onboarding.identity.banner_title')}</h3>
               <p className="text-xs text-gray-500 mb-4">{t('merchant_onboarding.identity.banner_desc')}</p>
-              
-              <div 
+
+              <div
                 onClick={() => handleSimulatedUpload("bannerUrl")}
                 className="w-full h-32 bg-[#F2F7F2] rounded-xl border-2 border-dashed border-[#B0D1B0] flex flex-col items-center justify-center cursor-pointer hover:bg-[#E8F0E7] transition-colors relative overflow-hidden"
               >
@@ -179,7 +185,7 @@ export default function StoreIdentityPage() {
               <div>
                 <h3 className="font-bold text-gray-900 mb-1">{t('merchant_onboarding.identity.logo_title')}</h3>
                 <p className="text-xs text-gray-500 mb-4 max-w-[200px]">{t('merchant_onboarding.identity.logo_desc')}</p>
-                <button 
+                <button
                   onClick={() => handleSimulatedUpload("logoUrl")}
                   className="px-4 py-2 bg-[#F2F7F2] text-[#496246] font-bold text-xs rounded-lg flex items-center gap-2 hover:bg-[#E8F0E7] transition-colors"
                 >
@@ -200,7 +206,7 @@ export default function StoreIdentityPage() {
             <div className="bg-white rounded-[24px] p-6 shadow-sm">
               <h3 className="font-bold text-gray-900 mb-1">{t('merchant_onboarding.identity.theme_title')}</h3>
               <p className="text-xs text-gray-500 mb-4">{t('merchant_onboarding.identity.theme_desc')}</p>
-              
+
               <div className="flex items-center gap-3">
                 {THEME_COLORS.map(color => (
                   <button
@@ -225,9 +231,12 @@ export default function StoreIdentityPage() {
             <div className="bg-white rounded-[24px] p-6 shadow-sm">
               <h3 className="font-bold text-gray-900 mb-1">{t('merchant_onboarding.identity.desc_title')}</h3>
               <p className="text-xs text-gray-500 mb-4">{t('merchant_onboarding.identity.desc_subtitle')}</p>
-              
+
               <div className="relative">
-                <textarea
+                <AgentTextarea
+                  agentId="description"
+                  agentLabel="Store Description"
+                  name="description"
                   value={formData.description}
                   onChange={(e) => {
                     if (e.target.value.length <= 500) {
@@ -246,13 +255,13 @@ export default function StoreIdentityPage() {
             {/* Action Buttons */}
             <div className="flex items-center justify-between mt-8">
               <div className="flex items-center gap-3">
-                <button 
+                <button
                   onClick={() => router.back()}
                   className="px-6 py-4 bg-[#E8F0E7] text-[#496246] rounded-xl font-bold text-sm tracking-wide hover:bg-[#DCE8DC] transition-colors"
                 >
                   Back
                 </button>
-                <button 
+                <button
                   onClick={() => handleSave(true)}
                   disabled={loading}
                   className="px-6 py-4 bg-white text-gray-700 rounded-xl font-bold text-sm tracking-wide shadow-sm hover:shadow-md transition-shadow disabled:opacity-50"
@@ -260,15 +269,15 @@ export default function StoreIdentityPage() {
                   Save Draft
                 </button>
               </div>
-              
+
               <div className="flex items-center gap-4">
-                <button 
+                <button
                   onClick={() => router.push("/merchant/merchant-onboarding/location-delivery")}
                   className="px-6 py-4 text-[#496246] font-bold text-sm tracking-wide hover:bg-[#496246]/10 rounded-xl transition-all"
                 >
                   SKIP FOR NOW
                 </button>
-                <button 
+                <button
                   onClick={() => handleSave(false)}
                   disabled={loading}
                   className="px-8 py-4 bg-[#496246] hover:bg-[#3A4E38] text-white rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all shadow-[0_8px_16px_rgba(73,98,70,0.2)] hover:-translate-y-0.5 disabled:opacity-50"
@@ -293,7 +302,7 @@ export default function StoreIdentityPage() {
           <div className="bg-white rounded-[40px] shadow-2xl p-2 border-[8px] border-gray-100 overflow-hidden relative min-h-[600px]">
             {/* Phone Header Mock */}
             <div className="w-32 h-6 bg-gray-100 rounded-b-3xl mx-auto absolute top-0 inset-x-0 z-20" />
-            
+
             <div className="w-full h-full bg-gray-50 rounded-[32px] overflow-hidden relative">
               {/* Banner */}
               <div className="h-40 bg-gray-300 relative">
@@ -315,7 +324,7 @@ export default function StoreIdentityPage() {
                       <Store size={24} className="text-gray-400" />
                     )}
                   </div>
-                  <div 
+                  <div
                     className="px-3 py-1 rounded-full text-white text-[10px] font-bold tracking-wider mb-2"
                     style={{ backgroundColor: formData.themeColor }}
                   >
@@ -331,7 +340,7 @@ export default function StoreIdentityPage() {
                 </p>
 
                 <div className="flex items-center gap-3">
-                  <button 
+                  <button
                     className="flex-1 py-3 text-white rounded-xl font-bold text-sm shadow-md"
                     style={{ backgroundColor: formData.themeColor }}
                   >
