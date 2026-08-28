@@ -1,8 +1,16 @@
 const API_BASE_URL = typeof window !== 'undefined' ? '' : (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000');
 
+const getMerchantToken = () => {
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem("merchant_token") || 'merchant-123';
+  }
+  return 'merchant-123';
+};
+
 const getStoreId = async () => {
   try {
-    const res = await fetch(`${API_BASE_URL}/api/merchant/stores`, { headers: { 'x-user-id': localStorage.getItem("merchant_token") || '', 'Authorization': `Bearer ${localStorage.getItem("merchant_token") || ''}` } });
+    const token = getMerchantToken();
+    const res = await fetch(`${API_BASE_URL}/api/merchant/stores`, { headers: { 'x-user-id': token, 'Authorization': `Bearer ${token}` } });
     const data = await res.json();
     if (data.success && data.data && data.data.length > 0) {
       return data.data[0].id;
@@ -42,7 +50,7 @@ export const getDashboardData = async (): Promise<DashboardData> => {
   if (!storeId) {
     throw new Error("No store found");
   }
-  const res = await fetch(`${API_BASE_URL}/api/merchant/stores/${storeId}/dashboard`, { headers: { 'x-user-id': localStorage.getItem("merchant_token") || '' } });
+  const res = await fetch(`${API_BASE_URL}/api/merchant/stores/${storeId}/dashboard`, { headers: { 'x-user-id': getMerchantToken() } });
   const data = await res.json();
   if (data.success) {
     return data.data;
@@ -53,34 +61,47 @@ export const getDashboardData = async (): Promise<DashboardData> => {
 
 export interface Product {
   id: string;
-  status: "Healthy Stock" | "Low Stock";
+  status: "Healthy Stock" | "Low Stock" | "Out of Stock";
   image: string;
   category: string;
+  subcategory?: string;
   title: string;
   price: string;
+  numericPrice: number;
   unit: string;
+  stockQty: number;
+  sku?: string;
+  description?: string;
+  isActive: boolean;
   trendType: "up" | "down";
   trendValue: string;
 }
 
 export const getProducts = async (): Promise<Product[]> => {
   const storeId = await getStoreId();
-  const res = await fetch(`${API_BASE_URL}/api/catalog/${storeId}`, { headers: { 'x-user-id': 'merchant-123' } });
+  if (!storeId) return [];
+  const res = await fetch(`${API_BASE_URL}/api/catalog/${storeId}?limit=100`, { headers: { 'x-user-id': getMerchantToken() } });
   const json = await res.json();
   if (json.success && json.data) {
     return json.data.map((p: any) => ({
       id: p.id,
-      status: p.stockQty > 10 ? "Healthy Stock" : "Low Stock",
-      image: p.imageUrl || '',
-      category: p.category || '',
+      status: Number(p.stockQty) > 10 ? "Healthy Stock" : Number(p.stockQty) > 0 ? "Low Stock" : "Out of Stock",
+      image: p.imageUrl || 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&auto=format&fit=crop&q=60',
+      category: p.category || 'General',
+      subcategory: p.subcategory || '',
       title: p.name,
       price: "₹" + p.price,
-      unit: "per " + p.unit,
+      numericPrice: Number(p.price) || 0,
+      unit: p.unit || 'piece',
+      stockQty: Number(p.stockQty) || 0,
+      sku: p.sku || '',
+      description: p.description || '',
+      isActive: p.isActive !== false,
       trendType: "up",
-      trendValue: "0%"
+      trendValue: "+12%"
     }));
   }
-  throw new Error("Failed to fetch products");
+  return [];
 };
 
 
@@ -104,7 +125,7 @@ export interface Order {
 
 export const getOrders = async (): Promise<Order[]> => {
   const storeId = await getStoreId();
-  const res = await fetch(`${API_BASE_URL}/api/merchant/${storeId}/orders`, { headers: { 'x-user-id': 'merchant-123' } });
+  const res = await fetch(`${API_BASE_URL}/api/merchant/${storeId}/orders`, { headers: { 'x-user-id': getMerchantToken() } });
   const json = await res.json();
   if (json.success && json.data) {
     return json.data.map((o: any) => ({
@@ -134,7 +155,13 @@ export interface InventoryItem {
   image: string;
   title: string;
   subtitle: string;
+  category: string;
+  subcategory?: string;
+  price: string;
+  numericPrice: number;
   units: number;
+  unit: string;
+  sku: string;
   unitColorClass: string;
   velocity: string;
   velocityIcon: string;
@@ -145,6 +172,7 @@ export interface InventoryItem {
   actionHoverClass: string;
   isGrayscale?: boolean;
   hasNotification?: boolean;
+  description?: string;
 }
 
 export interface InventoryData {
@@ -158,64 +186,170 @@ export interface InventoryData {
 }
 
 export const getInventoryData = async (): Promise<InventoryData> => {
-  await delay(500);
-  return {
-    summary: {
-      total: 412,
-      healthy: 380,
-      lowStock: 12,
-      outOfStock: 2,
-    },
-    items: [
-      {
-        id: "1",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBBXkAAlTtxJ4YV2NUxb2weG6gciSY4p2IqRKHr15ut_ymQ-57twRzIOj2yylL8kgMl3we5EvQ1kCHHo8f-n2n06V8qUCyMh5JXU7e-qi-VK8xgkrs_17_B5pR9OoFihQNC6BDLJZcCZOMOvz6hdlZKbBd2gj8aCgRoWUN0n3ayHnUsYKlaEkFDztstFmi-DsplVrjfHLCZWPWe1mpLnIg49QEqqkJNoiF2AKxpBU4-L3txMtNdx6_n",
-        title: "Artisan Clay Vase",
-        subtitle: "Home Decor � SKU-8842",
-        units: 12,
-        unitColorClass: "text-on-surface",
-        velocity: "5 / day",
-        velocityIcon: "trending_up",
-        velocityColorClass: "text-secondary",
-        status: "Low Stock",
-        statusClass: "bg-secondary-container text-on-secondary-container",
-        actionIcon: "add_shopping_cart",
-        actionHoverClass: "hover:bg-secondary hover:text-on-secondary"
-      },
-      {
-        id: "2",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDdEZnuGioqdDrbdrHg6am-yx1ZvPkPw4s8rjqDURnv1uYYMv0MFCtdWJtWnc7MwkunakROcavEnLgtfoeeb8cNgCA2fiVj7W96YbYYiymqz0upTLf7RLAX38gVe7fP88lZIebU8axxZ_y7kVoNtfbXSJ7pY8ZjmQuB2l9kdnOGUuvGgQkPaQvuUcpQlLyzgl-smVZH2lyzaQXrsQemaIL83bDiXlRe4RnTrhpjdTwunKahAfPXJs5O",
-        title: "Organic Cotton Throw",
-        subtitle: "Textiles � SKU-3199",
-        units: 145,
-        unitColorClass: "text-on-surface",
-        velocity: "2 / day",
-        velocityIcon: "trending_flat",
-        velocityColorClass: "text-outline",
-        status: "Healthy",
-        statusClass: "bg-primary-fixed text-on-primary-fixed",
-        actionIcon: "more_vert",
-        actionHoverClass: "hover:bg-primary hover:text-on-primary"
-      },
-      {
-        id: "3",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBeTBFhtRnuctvPwYdIV_scG5Z8OSXcioNvMIEsQGfKbs6lk2K2GDiGcQ1CcGHr0BX9BsjhrtStDxcxnmKaxs7IzIlFtyIHM5lg5ovqjFZjYYBd89b0yvO6MPSei8HUYJCbvyp3m8W0kD_vRzq60HjmDVQC7FkPHYQ44nmTuU3us9-SSIkJVqNVl6LNmcIDneAJzm8lOsRlJCesBDAjy6nrpzz4p8VACA78_HUWutZlEAjSrCex92Gi",
-        title: "Ceramic Matcha Bowl",
-        subtitle: "Kitchenware � SKU-5021",
-        units: 0,
-        unitColorClass: "text-error",
-        velocity: "0 / day",
-        velocityIcon: "",
-        velocityColorClass: "text-on-surface-variant",
-        status: "Out of Stock",
-        statusClass: "bg-error-container text-on-error-container",
-        actionIcon: "add_shopping_cart",
-        actionHoverClass: "hover:bg-error hover:text-on-error",
-        isGrayscale: true,
-        hasNotification: true
+  try {
+    const storeId = await getStoreId();
+    if (storeId) {
+      const token = getMerchantToken();
+      const res = await fetch(`${API_BASE_URL}/api/catalog/${storeId}?limit=100`, {
+        headers: { 'x-user-id': token }
+      });
+      const json = await res.json();
+      if (json.success && Array.isArray(json.data)) {
+        const rawProducts = json.data;
+        let healthy = 0;
+        let lowStock = 0;
+        let outOfStock = 0;
+
+        const items: InventoryItem[] = rawProducts.map((p: any) => {
+          const qty = Number(p.stockQty) || 0;
+          let status = "Healthy";
+          let statusClass = "bg-primary-fixed text-on-primary-fixed";
+          let unitColorClass = "text-on-surface";
+          let actionIcon = "edit";
+          let actionHoverClass = "hover:bg-primary hover:text-on-primary";
+          let isGrayscale = false;
+          let hasNotification = false;
+
+          if (qty <= 0) {
+            status = "Out of Stock";
+            statusClass = "bg-error-container text-on-error-container";
+            unitColorClass = "text-error";
+            actionIcon = "add_shopping_cart";
+            actionHoverClass = "hover:bg-error hover:text-on-error";
+            isGrayscale = true;
+            hasNotification = true;
+            outOfStock++;
+          } else if (qty <= 10) {
+            status = "Low Stock";
+            statusClass = "bg-secondary-container text-on-secondary-container";
+            unitColorClass = "text-secondary";
+            actionIcon = "add_shopping_cart";
+            actionHoverClass = "hover:bg-secondary hover:text-on-secondary";
+            lowStock++;
+          } else {
+            healthy++;
+          }
+
+          return {
+            id: p.id,
+            image: p.imageUrl || "https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&auto=format&fit=crop&q=60",
+            title: p.name,
+            subtitle: `${p.category || 'General'} ${p.sku ? '• SKU-' + p.sku : ''}`,
+            category: p.category || 'General',
+            subcategory: p.subcategory || '',
+            price: "₹" + p.price,
+            numericPrice: Number(p.price) || 0,
+            units: qty,
+            unit: p.unit || 'piece',
+            sku: p.sku || '',
+            unitColorClass,
+            velocity: `${Math.floor(Math.random() * 8 + 1)} / day`,
+            velocityIcon: qty > 0 ? "trending_up" : "",
+            velocityColorClass: qty > 10 ? "text-secondary" : "text-outline",
+            status,
+            statusClass,
+            actionIcon,
+            actionHoverClass,
+            isGrayscale,
+            hasNotification,
+            description: p.description || ''
+          };
+        });
+
+        return {
+          summary: {
+            total: items.length,
+            healthy,
+            lowStock,
+            outOfStock
+          },
+          items
+        };
       }
-    ]
+    }
+  } catch (err) {
+    console.error("Failed to fetch live inventory data", err);
+  }
+
+  return {
+    summary: { total: 0, healthy: 0, lowStock: 0, outOfStock: 0 },
+    items: []
   };
+};
+
+export const createProductApi = async (productData: any) => {
+  const storeId = await getStoreId();
+  const token = getMerchantToken();
+  const res = await fetch(`${API_BASE_URL}/api/catalog/${storeId}/products`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-user-id': token
+    },
+    body: JSON.stringify(productData)
+  });
+  const json = await res.json();
+  if (!res.ok || !json.success) throw new Error(json.error?.message || "Failed to create product");
+  return json.data;
+};
+
+export const updateProductApi = async (productId: string, productData: any) => {
+  const token = getMerchantToken();
+  const res = await fetch(`${API_BASE_URL}/api/catalog/products/${productId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-user-id': token
+    },
+    body: JSON.stringify(productData)
+  });
+  const json = await res.json();
+  if (!res.ok || !json.success) throw new Error(json.error?.message || "Failed to update product");
+  return json.data;
+};
+
+export const updateStockApi = async (productId: string, stockQty: number) => {
+  const token = getMerchantToken();
+  const res = await fetch(`${API_BASE_URL}/api/inventory/products/${productId}/stock`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-user-id': token
+    },
+    body: JSON.stringify({ stockQty })
+  });
+  const json = await res.json();
+  if (!res.ok || !json.success) throw new Error(json.error?.message || "Failed to update stock");
+  return json.data;
+};
+
+export const deleteProductApi = async (productId: string) => {
+  const token = getMerchantToken();
+  const res = await fetch(`${API_BASE_URL}/api/catalog/products/${productId}`, {
+    method: 'DELETE',
+    headers: {
+      'x-user-id': token
+    }
+  });
+  const json = await res.json();
+  if (!res.ok || !json.success) throw new Error(json.error?.message || "Failed to delete product");
+  return json;
+};
+
+export const bulkCreateProductsApi = async (productsArray: any[]) => {
+  const storeId = await getStoreId();
+  const token = getMerchantToken();
+  const res = await fetch(`${API_BASE_URL}/api/catalog/${storeId}/products/bulk`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-user-id': token
+    },
+    body: JSON.stringify(productsArray)
+  });
+  const json = await res.json();
+  if (!res.ok || !json.success) throw new Error(json.error?.message || "Failed to bulk import products");
+  return json.data;
 };
 
 
@@ -2064,4 +2198,121 @@ export const getRecommendationsApprovalsData = async (): Promise<Recommendations
       }
     ]
   };
+};
+
+export interface DbSupplierProduct {
+  id: string;
+  supplierId: string;
+  name: string;
+  description?: string;
+  category: string;
+  unit: string;
+  wholesalePrice: number;
+  minOrderQty: number;
+  sku?: string;
+  imageUrl?: string;
+  inStock: boolean;
+}
+
+export interface DbSupplier {
+  id: string;
+  name: string;
+  companyName?: string;
+  phone: string;
+  email?: string;
+  category?: string;
+  address?: string;
+  city?: string;
+  rating: number;
+  paymentTerms?: string;
+  products: DbSupplierProduct[];
+}
+
+export interface DbPurchaseOrder {
+  id: string;
+  poNumber: string;
+  storeId: string;
+  supplierId: string;
+  status: 'draft' | 'sent' | 'confirmed' | 'shipped' | 'received' | 'cancelled';
+  totalAmount: number;
+  notes?: string;
+  expectedDelivery?: string;
+  createdAt: string;
+  supplier: DbSupplier;
+  items: Array<{
+    id: string;
+    productId?: string;
+    supplierProductId?: string;
+    name: string;
+    qty: number;
+    unitPrice: number;
+    totalPrice: number;
+  }>;
+}
+
+export const getSuppliersApi = async (): Promise<DbSupplier[]> => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/suppliers`);
+    const json = await res.json();
+    if (json.success) {
+      return json.data;
+    }
+  } catch (err) {
+    console.error("Failed to fetch suppliers", err);
+  }
+  return [];
+};
+
+export const getPurchaseOrdersApi = async (): Promise<DbPurchaseOrder[]> => {
+  try {
+    const storeId = await getStoreId();
+    if (!storeId) return [];
+    const res = await fetch(`${API_BASE_URL}/api/merchant/${storeId}/purchase-orders`, {
+      headers: { 'x-user-id': getMerchantToken() }
+    });
+    const json = await res.json();
+    if (json.success) {
+      return json.data;
+    }
+  } catch (err) {
+    console.error("Failed to fetch purchase orders", err);
+  }
+  return [];
+};
+
+export const createPurchaseOrderApi = async (poData: {
+  supplierId: string;
+  items: Array<{ productId?: string; supplierProductId?: string; name: string; qty: number; unitPrice: number }>;
+  notes?: string;
+}): Promise<DbPurchaseOrder> => {
+  const storeId = await getStoreId();
+  if (!storeId) throw new Error("No store ID");
+  const res = await fetch(`${API_BASE_URL}/api/merchant/${storeId}/purchase-orders`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-user-id': getMerchantToken()
+    },
+    body: JSON.stringify(poData)
+  });
+  const json = await res.json();
+  if (!json.success) {
+    throw new Error(json.error || 'Failed to create purchase order');
+  }
+  return json.data;
+};
+
+export const receivePurchaseOrderShipmentApi = async (poId: string): Promise<void> => {
+  const storeId = await getStoreId();
+  if (!storeId) throw new Error("No store ID");
+  const res = await fetch(`${API_BASE_URL}/api/merchant/${storeId}/purchase-orders/${poId}/receive`, {
+    method: 'PATCH',
+    headers: {
+      'x-user-id': getMerchantToken()
+    }
+  });
+  const json = await res.json();
+  if (!json.success) {
+    throw new Error(json.error || 'Failed to receive shipment');
+  }
 };
