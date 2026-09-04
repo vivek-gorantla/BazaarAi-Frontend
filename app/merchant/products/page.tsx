@@ -8,6 +8,10 @@ import {
   deleteProductApi,
   Product
 } from '@/services/merchantApi';
+import { subscribeInventoryUpdated } from '@/services/eventBus';
+import { AgentInput } from '@/agent/components/AgentInput';
+import { AgentUIRegistry } from '@/agent/registry';
+import { MerchantImageAgent } from '@/agent/components/MerchantImageAgent';
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -24,6 +28,7 @@ export default function Products() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [agentEmptyFields, setAgentEmptyFields] = useState<string[]>([]);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -54,6 +59,16 @@ export default function Products() {
 
   useEffect(() => {
     loadProducts();
+    const unsubscribe = subscribeInventoryUpdated(() => {
+      loadProducts();
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // Register page with AgentUIRegistry so MerchantImageAgent knows which fields to fill
+  useEffect(() => {
+    AgentUIRegistry.registerPage('products', 'Product Catalog');
+    return () => AgentUIRegistry.clear();
   }, []);
 
   const handleToggleActive = async (product: Product, e: React.MouseEvent) => {
@@ -83,6 +98,7 @@ export default function Products() {
       imageUrl: '',
       isActive: true
     });
+    setAgentEmptyFields([]);
     setIsModalOpen(true);
   };
 
@@ -182,7 +198,7 @@ export default function Products() {
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
 
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div>
             <h1 className="font-display-lg text-display-lg text-on-surface mb-2 tracking-tight">Product Catalog Showcase</h1>
             <p className="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
@@ -191,11 +207,46 @@ export default function Products() {
           </div>
           <button
             onClick={handleOpenAddModal}
-            className="bg-primary hover:bg-primary/90 text-on-primary h-14 px-8 rounded-full flex items-center justify-center font-label-md text-label-md transition-all shadow-lg shadow-primary/20 shrink-0 gap-2"
+            className="bg-[#8C5A3B] hover:bg-[#7A4E33] text-white h-14 px-8 rounded-full flex items-center justify-center font-label-md text-label-md transition-all shadow-lg shadow-[#8C5A3B]/20 shrink-0 gap-2 font-bold"
           >
             <span className="material-symbols-outlined">add</span>
             Add Catalog Product
           </button>
+        </div>
+
+        {/* Page Capability Guide Banner (Rich Earthy Terracotta Brown to Forest Green Gradient) */}
+        <div className="mb-8 p-6 rounded-[28px] bg-gradient-to-r from-[#734828] via-[#4D3524] to-[#253627] text-white shadow-xl relative overflow-hidden border border-[#8C5A3B]/40">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="px-3 py-1 bg-white/10 text-[#E8F0E7] rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 border border-white/15">
+                  <span className="material-symbols-outlined text-[16px] text-emerald-400">inventory_2</span>
+                  Product Catalog Hub
+                </span>
+              </div>
+              <h2 className="text-xl font-black text-white tracking-tight">What You Can Do On This Page</h2>
+              <p className="text-xs text-[#D1E2CF] mt-1 max-w-2xl leading-relaxed font-medium">
+                Create & edit store catalog items, set retail pricing (₹), assign categories & units, configure SKU codes, and control online storefront availability.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-2.5 shrink-0">
+              <button
+                onClick={handleOpenAddModal}
+                className="px-5 py-2.5 bg-[#8C5A3B] text-white hover:bg-[#7A4E33] rounded-xl font-black text-xs shadow-md transition-all flex items-center gap-2"
+              >
+                <span className="material-symbols-outlined text-[18px]">add_circle</span>
+                + Add Product
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-4 pt-4 border-t border-white/10 flex flex-wrap items-center gap-4 text-xs font-semibold text-[#D1E2CF]">
+            <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-[16px] text-emerald-400">check_circle</span> Set Retail Prices (₹)</span>
+            <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-[16px] text-emerald-400">check_circle</span> Category & Subcategory Tagging</span>
+            <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-[16px] text-emerald-400">check_circle</span> Toggle Active Storefront Visibility</span>
+            <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-[16px] text-emerald-400">check_circle</span> Voice & Vision Camera Auto-Fill</span>
+          </div>
         </div>
 
         {/* Toolbar */}
@@ -350,12 +401,28 @@ export default function Products() {
               <h2 className="font-headline-lg text-headline-lg text-on-surface">
                 {editingProduct ? 'Edit Catalog Product' : 'Add Catalog Product'}
               </h2>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high"
-              >
-                <span className="material-symbols-outlined">close</span>
-              </button>
+              <div className="flex items-center gap-2">
+                {/* Snap & Fill with image agent */}
+                <MerchantImageAgent
+                  onFilled={(fills, partial) => {
+                    if (partial) {
+                      const filledIds = new Set(fills.map(f => f.fieldId));
+                      const allFields = AgentUIRegistry.getFields();
+                      setAgentEmptyFields(allFields.filter(f => !filledIds.has(f.id)).map(f => f.id));
+                    } else {
+                      setAgentEmptyFields([]);
+                    }
+                  }}
+                  label="Snap & Fill"
+                  className="px-4 py-2 bg-[#E8F0E7] text-[#496246] rounded-full font-label-md text-sm hover:bg-[#496246] hover:text-white transition-all flex items-center gap-2"
+                />
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high"
+                >
+                  <span className="material-symbols-outlined">close</span>
+                </button>
+              </div>
             </div>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -363,14 +430,24 @@ export default function Products() {
                 <label className="block font-label-md text-label-md text-on-surface mb-1 font-medium">
                   Product Name <span className="text-error">*</span>
                 </label>
-                <input
+                <AgentInput
+                  agentId="name"
+                  agentLabel="Product Name"
                   type="text"
+                  name="name"
                   required
                   value={formData.name}
                   onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                   placeholder="e.g. Premium Basmati Rice"
-                  className="w-full h-11 px-4 rounded-xl bg-surface-container border border-outline/20 font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary"
+                  className={`w-full h-11 px-4 rounded-xl border font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary transition-all ${
+                    agentEmptyFields.includes('name')
+                      ? 'bg-amber-50 border-amber-400 ring-2 ring-amber-200'
+                      : 'bg-surface-container border-outline/20'
+                  }`}
                 />
+                {agentEmptyFields.includes('name') && (
+                  <p className="mt-1 text-xs text-amber-600 font-medium">⚠ Please fill this field manually</p>
+                )}
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -388,16 +465,27 @@ export default function Products() {
                 </div>
                 <div>
                   <label className="block font-label-md text-label-md text-on-surface mb-1 font-medium">Price (₹) <span className="text-error">*</span></label>
-                  <input
+                  <AgentInput
+                    agentId="price"
+                    agentLabel="Price"
+                    agentType="number"
                     type="number"
+                    name="price"
                     step="0.01"
                     min="0"
                     required
                     value={formData.price}
                     onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value }))}
                     placeholder="120"
-                    className="w-full h-11 px-4 rounded-xl bg-surface-container border border-outline/20 font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary"
+                    className={`w-full h-11 px-4 rounded-xl border font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary transition-all ${
+                      agentEmptyFields.includes('price')
+                        ? 'bg-amber-50 border-amber-400 ring-2 ring-amber-200'
+                        : 'bg-surface-container border-outline/20'
+                    }`}
                   />
+                  {agentEmptyFields.includes('price') && (
+                    <p className="mt-1 text-xs text-amber-600 font-medium">⚠ Price needed — enter manually</p>
+                  )}
                 </div>
               </div>
 
@@ -439,12 +527,15 @@ export default function Products() {
 
               <div>
                 <label className="block font-label-md text-label-md text-on-surface mb-1 font-medium">Description</label>
-                <textarea
-                  rows={2}
+                <AgentInput
+                  agentId="description"
+                  agentLabel="Description"
+                  type="text"
+                  name="description"
                   value={formData.description}
                   onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
                   placeholder="Catalog details or product specs..."
-                  className="w-full p-3 rounded-xl bg-surface-container border border-outline/20 font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full h-11 px-4 rounded-xl bg-surface-container border border-outline/20 font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary"
                 />
               </div>
 
@@ -482,7 +573,7 @@ export default function Products() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-8 py-2.5 rounded-full bg-primary text-on-primary font-label-md hover:bg-primary/90 shadow-md disabled:opacity-50"
+                    className="px-8 py-2.5 rounded-full bg-[#8C5A3B] hover:bg-[#7A4E33] text-white font-label-md shadow-md disabled:opacity-50 font-bold"
                   >
                     {isSubmitting ? 'Saving...' : 'Save Product'}
                   </button>

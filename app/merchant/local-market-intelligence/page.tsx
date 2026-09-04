@@ -25,8 +25,19 @@ export default async function LocalMarketIntelligence() {
           </div>
 
           <div className="w-full relative rounded-3xl overflow-hidden shadow-md h-[400px] md:h-[500px]">
-            <div className="absolute inset-0 w-full h-full bg-cover bg-center" data-location="Sri Lakshmi Stores neighborhood, Bangalore, India" ></div>
-            <div className="absolute inset-0 bg-primary/5 mix-blend-multiply"></div>
+            <div className="absolute inset-0 w-full h-full">
+              <iframe
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                scrolling="no"
+                marginHeight={0}
+                marginWidth={0}
+                src={`https://www.openstreetmap.org/export/embed.html?bbox=${data.location.lng - 0.015}%2C${data.location.lat - 0.015}%2C${data.location.lng + 0.015}%2C${data.location.lat + 0.015}&layer=mapnik&marker=${data.location.lat}%2C${data.location.lng}`}
+                style={{ filter: "invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%)", pointerEvents: "auto" }}
+              ></iframe>
+            </div>
+            <div className="absolute inset-0 bg-surface/10 pointer-events-none mix-blend-multiply"></div>
             <div className="absolute inset-0 z-10 pointer-events-none">
               <svg className="w-full h-full opacity-60" preserveAspectRatio="none" viewBox="0 0 100 100">
                 <circle className="text-primary-container blur-2xl opacity-40 animate-pulse" cx="50" cy="50" fill="currentColor" r="10"></circle>

@@ -206,7 +206,7 @@ export function OnboardingVoiceAgent() {
                             {/* Visual indicator */}
                             <div className="relative flex items-center justify-center mb-5 h-28 w-28">
                                 {agentState === "idle" && (
-                                    <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center text-[#496246]">
+                                    <div className="w-20 h-20 bg-[#E8F0E7] rounded-full flex items-center justify-center text-[#496246]">
                                         <Mic size={32} />
                                     </div>
                                 )}
@@ -215,7 +215,7 @@ export function OnboardingVoiceAgent() {
                                     <>
                                         <div className="absolute w-28 h-28 bg-[#496246]/10 rounded-full animate-ping" style={{ animationDuration: "3s" }} />
                                         <div className="absolute w-22 h-22 bg-[#496246]/20 rounded-full animate-ping" style={{ animationDuration: "2s", animationDelay: "0.5s" }} />
-                                        <div className="relative w-20 h-20 bg-gradient-to-br from-[#496246] to-[#2D3A2C] rounded-full flex items-center justify-center shadow-xl shadow-[#496246]/30 gap-1 px-3 overflow-hidden">
+                                        <div className="relative w-20 h-20 bg-gradient-to-br from-[#496246] to-[#263925] rounded-full flex items-center justify-center shadow-xl shadow-[#496246]/30 gap-1 px-3 overflow-hidden">
                                             {[...Array(5)].map((_, i) => (
                                                 <motion.div
                                                     key={i}
@@ -229,15 +229,15 @@ export function OnboardingVoiceAgent() {
                                 )}
 
                                 {agentState === "transcribing" && (
-                                    <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center text-[#496246]">
+                                    <div className="w-20 h-20 bg-[#E8F0E7] rounded-full flex items-center justify-center text-[#496246]">
                                         <Loader2 size={32} className="animate-spin" />
                                     </div>
                                 )}
 
                                 {agentState === "streaming" && (
                                     <>
-                                        <div className="absolute w-28 h-28 bg-blue-400/10 rounded-full animate-ping" style={{ animationDuration: "2s" }} />
-                                        <div className="relative w-20 h-20 bg-gradient-to-br from-blue-500 to-[#496246] rounded-full flex items-center justify-center shadow-xl shadow-blue-500/20">
+                                        <div className="absolute w-28 h-28 bg-[#496246]/10 rounded-full animate-ping" style={{ animationDuration: "2s" }} />
+                                        <div className="relative w-20 h-20 bg-gradient-to-br from-[#496246] to-[#263925] rounded-full flex items-center justify-center shadow-xl shadow-[#496246]/20">
                                             <Zap size={32} className="text-white" fill="white" />
                                         </div>
                                         {filledCount > 0 && (
@@ -285,9 +285,9 @@ export function OnboardingVoiceAgent() {
                                 <motion.div
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    className="w-full mb-6 bg-gray-50/80 rounded-2xl p-3.5 border border-gray-100 text-left"
+                                    className="w-full mb-6 bg-[#F2F7F2] rounded-2xl p-3.5 border border-[#E8F0E7] text-left"
                                 >
-                                    <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-2 px-0.5">
+                                    <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#496246] mb-2 px-0.5">
                                         <Sparkles size={13} className="text-[#496246]" />
                                         <span>Fields you can speak ({registeredFields.length}):</span>
                                     </div>
@@ -295,7 +295,7 @@ export function OnboardingVoiceAgent() {
                                         {registeredFields.map((f) => (
                                             <span
                                                 key={f.id}
-                                                className="px-2.5 py-1 bg-white rounded-lg text-xs font-semibold text-gray-700 border border-gray-200 shadow-xs flex items-center gap-1.5"
+                                                className="px-2.5 py-1 bg-white rounded-lg text-xs font-semibold text-gray-700 border border-[#DCE8DC] shadow-xs flex items-center gap-1.5"
                                             >
                                                 <span className="w-1.5 h-1.5 rounded-full bg-[#496246]" />
                                                 {f.label}
@@ -321,7 +321,7 @@ export function OnboardingVoiceAgent() {
                                 {agentState === "recording" && (
                                     <button
                                         onClick={stopRecording}
-                                        className="flex-1 bg-gradient-to-r from-[#496246] to-[#2D3A2C] text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                                        className="flex-1 bg-gradient-to-r from-[#496246] to-[#263925] text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
                                     >
                                         <Mic size={18} />
                                         Send Recording

@@ -1,0 +1,160 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-tertiary":"#ffffff","on-secondary":"#ffffff","on-primary-fixed":"#2c112d","on-primary-container":"#d7aed3","surface-container-highest":"#e8e0e4","error":"#ba1a1a","tertiary-container":"#3c503a","on-error-container":"#93000a","secondary":"#625e58","inverse-surface":"#332f32","secondary-fixed":"#e8e1da","surface-tint":"#755373","surface-bright":"#fff7fb","primary-container":"#60405f","outline-variant":"#d0c3cb","on-secondary-container":"#66625c","surface-variant":"#e8e0e4","on-tertiary-fixed":"#0d200d","secondary-container":"#e5dfd7","tertiary-fixed":"#d1e9cb","inverse-on-surface":"#f6eff3","on-primary-fixed-variant":"#5c3c5b","outline":"#7e747c","error-container":"#ffdad6","on-tertiary-container":"#aac1a5","inverse-primary":"#e3badf","on-secondary-fixed-variant":"#4a4641","surface":"#fff7fb","on-surface":"#1d1b1e","on-surface-variant":"#4d444b","on-error":"#ffffff","tertiary-fixed-dim":"#b6cdb0","primary-fixed":"#ffd6fa","surface-container-lowest":"#ffffff","on-background":"#1d1b1e","secondary-fixed-dim":"#ccc6be","tertiary":"#263925","primary-fixed-dim":"#e3badf","surface-container-high":"#ede6ea","primary":"#472a47","surface-container-low":"#f9f2f6","surface-container":"#f3ecf0","on-primary":"#ffffff","surface-dim":"#dfd8dc","on-secondary-fixed":"#1e1b17","on-tertiary-fixed-variant":"#384c36","background":"#fff7fb"},"borderRadius":{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},"spacing":{"margin-mobile":"20px","gutter":"20px","margin-desktop":"120px","xl":"80px","md":"24px","base":"8px","sm":"12px","lg":"48px","xs":"4px"},"fontFamily":{"display":["Lexend"],"label-md":["Lexend"],"body-lg":["Lexend"],"headline-lg":["Lexend"],"body-md":["Lexend"],"label-sm":["Lexend"],"headline-md":["Lexend"],"headline-lg-mobile":["Lexend"]},"fontSize":{"display":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"800"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"700"}],"headline-lg-mobile":["28px",{"lineHeight":"34px","fontWeight":"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-white shadow-[0_4px_20px_rgba(96,64,95,0.05)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col"><div class="h-20 flex items-center justify-between gap-xl"><div class="flex items-center gap-md"><img alt="Bazaar Logo" class="h-10 w-10 rounded-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/><span class="font-headline-md text-headline-md text-primary tracking-tight">Bazaar</span></div><div class="flex-1 flex items-center gap-md"><div class="flex items-center gap-xs px-md py-sm bg-surface-container-low rounded-full min-w-[180px]"><span class="material-symbols-outlined text-primary text-[20px]">location_on</span><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant">Deliver to:</span><span class="font-label-md text-label-md text-on-surface truncate">Hyderabad, TS</span></div></div><div class="relative flex-1 group"><span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span><input class="w-full h-12 pl-12 pr-4 bg-surface-container-low border-none rounded-full font-body-md focus:ring-2 focus:ring-primary-container transition-all" data-path="search" placeholder="What are you looking for?" type="text"/></div></div><div class="flex items-center gap-md"><a class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="orders" href="#"><span class="material-symbols-outlined">receipt_long</span><span class="font-label-sm text-label-sm">Orders</span></a><a class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="wishlist" href="#"><span class="material-symbols-outlined">favorite</span><span class="font-label-sm text-label-sm">Wishlist</span></a><a class="relative flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="cart" href="#"><span class="material-symbols-outlined">shopping_bag</span><span class="absolute -top-1 -right-1 bg-primary text-on-primary text-[10px] w-4 h-4 flex items-center justify-center rounded-full">3</span><span class="font-label-sm text-label-sm">Cart</span></a><a class="ml-4 flex items-center gap-base p-xs rounded-full bg-surface-container hover:bg-surface-container-high transition-colors" data-path="account" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/><span class="material-symbols-outlined text-on-surface-variant">expand_more</span></a></div></div><nav class="h-12 flex items-center gap-xl border-t border-surface-container-highest" data-active-classes="text-primary font-bold border-b-2 border-primary"><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="home" href="#">Home</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="explore" href="#">Explore</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="categories" href="#">Categories</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="stores" href="#">Stores</a><a aria-current="page" class="h-full flex items-center transition-colors text-primary font-bold border-b-2 border-primary" data-path="offers" href="#">Offers</a></nav></div></header><main class="w-full pt-[128px] bg-background min-h-screen"><div class="flex flex-col w-full">
+<!-- Hero Section -->
+<section class="relative w-full rounded-[3rem] bg-surface-container overflow-hidden mb-margin-desktop p-xl flex flex-col md:flex-row items-center gap-lg">
+<div class="absolute inset-0 bg-gradient-to-r from-primary-container/20 to-transparent pointer-events-none"></div>
+<div class="flex-1 relative z-10 flex flex-col items-start gap-md">
+<span class="inline-flex items-center gap-xs px-sm py-xs bg-error-container text-on-error-container rounded-full font-label-md text-label-md uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]">local_fire_department</span>
+        Hot Right Now
+      </span>
+<h1 class="font-display text-display text-on-surface">Deals Dropping Around You</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">Discover time-sensitive flash deals and exclusive store promotions happening nearby. Tap into the map to uncover hidden savings.</p>
+<button class="mt-sm px-lg py-sm bg-primary text-on-primary rounded-full font-label-md text-label-md flex items-center gap-sm shadow-xl hover:-translate-y-1 transition-transform">
+        Explore Map
+        <span class="material-symbols-outlined">explore</span>
+</button>
+</div>
+<div class="flex-1 relative w-full aspect-video md:aspect-square max-w-md rounded-[2rem] overflow-hidden shadow-2xl">
+<div class="w-full h-full bg-cover bg-center" data-location="Manhattan, New York City" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDO-wAesg9W6_PqHlPlsdRt0177G9-m8sSpjghYqWANP97Tlf4Q18cM_dg4x-BBdewhVnyrv3iyucD1TPK3RmvG9MDEmt7xDWXhbIrLnl3zegVmMiMu5EOxoFhFA9ZIkvLcIdeqGoqR4NhNi04mUb-fLFR2Zp48nCM0VC2ih_WbwnnKFV7XwmL38fSgLVo78B5p8opwDv_qOU80rsb5rETUKkV5o-fMoJPgxkkxFZ_sGPF48qp09sM')"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-surface p-sm rounded-full shadow-2xl animate-bounce">
+<span class="material-symbols-outlined text-primary text-[32px]">loyalty</span>
+</div>
+</div>
+</section>
+<!-- Flash Deals Section -->
+<section class="mb-margin-desktop">
+<div class="flex items-end justify-between mb-lg">
+<div class="flex flex-col gap-xs">
+<span class="font-label-md text-label-md text-primary uppercase tracking-widest">[writing-mode:horizontal-tb] 01</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Flash Deals</h2>
+</div>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-xs" href="#">
+        View All <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+<!-- Deal Card 1 -->
+<article class="group relative flex flex-col bg-surface rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
+<div class="relative w-full aspect-square">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="High-end studio shot of a minimalist espresso machine in brushed steel, soft moody lighting, deep plum backdrop, extremely photorealistic, premium editorial product photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlRZ-PkAScndTpsQwOQ_JXngJbJBULhqS79kR11jvbF8tisz2dO4lJgOnoLoF8WTvqE8B31hXMaA_eDgv7Nrq3WfcE17bIiIu-7nnR4uDIYR7B_9Xa98cY-lQ-aB-846m0nfsqXU0cQjz75ZTsvPAv6HMK1UeTj6TDT6Qd44FxnddMHnnCwQVEIW5bPUHqHdQO90MOooAjCfjg1Xz0SHzhxj9Y2YkK6qw26TpvATBeaW3KFbMzCKY"/>
+<div class="absolute top-4 left-4 bg-error text-on-error px-sm py-xs rounded-full font-label-md text-label-md shadow-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">timer</span>
+            Ends in 2h
+          </div>
+</div>
+<div class="p-md flex flex-col gap-sm bg-surface-container-low">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface line-clamp-1">Aurora Espresso Maker</h3>
+<span class="font-headline-md text-headline-md text-primary">-60%</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Premium extraction for the perfect morning ritual.</p>
+<div class="mt-auto pt-sm flex justify-between items-center">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant line-through">$450.00</span>
+<span class="font-headline-md text-headline-md text-on-surface">$180.00</span>
+</div>
+<button class="w-12 h-12 bg-primary text-on-primary rounded-full flex justify-center items-center hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-md">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Deal Card 2 -->
+<article class="group relative flex flex-col bg-surface rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden mt-0 md:mt-lg">
+<div class="relative w-full aspect-square">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A beautifully crafted leather tote bag in rich camel color, resting on a textured concrete surface, soft natural window light, warm cream background, high-end fashion catalog aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUHKb4FFnGCR7GxEAbwtoKVRhdAxmbzT1_ME07aiz3HAibGVTs0esLAaBUlomG9-Y4IrYjJ8-YtUBNEMkszWXvvwTJtBOsE5LeDO3xg4IANf0Cuz_6smpFdjEFYslbPOjJttVilLJxnxmJqDBvkPYPX5sSe8vniXO4dSUYJKh7kNkHgdxOBp9s0_lTrb5ixb1CutYDQb20JVRqN0JAV1pdeAkI4FI1qY-IugGti9tjjOZZP3cWMiM"/>
+<div class="absolute top-4 left-4 bg-error text-on-error px-sm py-xs rounded-full font-label-md text-label-md shadow-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">timer</span>
+            Ends in 5h
+          </div>
+</div>
+<div class="p-md flex flex-col gap-sm bg-surface-container-low">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface line-clamp-1">Classic Leather Tote</h3>
+<span class="font-headline-md text-headline-md text-primary">-40%</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Hand-stitched genuine leather for everyday elegance.</p>
+<div class="mt-auto pt-sm flex justify-between items-center">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant line-through">$220.00</span>
+<span class="font-headline-md text-headline-md text-on-surface">$132.00</span>
+</div>
+<button class="w-12 h-12 bg-primary text-on-primary rounded-full flex justify-center items-center hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-md">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Deal Card 3 -->
+<article class="group relative flex flex-col bg-surface rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden lg:mt-xl">
+<div class="relative w-full aspect-square">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A sleek smart watch with a matte black metal band and glowing minimal interface, hovering above a dark plum gradient background, cinematic lighting, tech product photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0c1jDFUKW9CB_bzho2KSuW72SORwFc873bR6Aa_UP_kePTWy_Qu0M3uI1tnmtCWrOxeenrxFUvZIuAMvoaxOPoPRexXswfFgNV_qzWZy3WpjsVItHm_2jPCNJcJ9XzHRaeF9DXuJ3fmQ9uBl1iIbdf8FG7e94Nn9d1bfeNmBqeF1os_p9S8mAWHLUkLzbvlr77xCYERoVIB1NrPwDYVXXu8a1IxK6MAbyQODsMzXEofxDk5-zS00"/>
+<div class="absolute top-4 left-4 bg-error text-on-error px-sm py-xs rounded-full font-label-md text-label-md shadow-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">timer</span>
+            Ends in 12h
+          </div>
+</div>
+<div class="p-md flex flex-col gap-sm bg-surface-container-low">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface line-clamp-1">Nexus Smartwatch Pro</h3>
+<span class="font-headline-md text-headline-md text-primary">-25%</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Track your life with precision and style.</p>
+<div class="mt-auto pt-sm flex justify-between items-center">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant line-through">$299.00</span>
+<span class="font-headline-md text-headline-md text-on-surface">$224.25</span>
+</div>
+<button class="w-12 h-12 bg-primary text-on-primary rounded-full flex justify-center items-center hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-md">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- Store Exclusives Bento Grid -->
+<section class="mb-margin-desktop relative">
+<div class="absolute -top-32 -right-32 w-96 h-96 bg-primary-container/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex items-end justify-between mb-lg">
+<div class="flex flex-col gap-xs">
+<span class="font-label-md text-label-md text-primary uppercase tracking-widest">02</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Store Exclusives</h2>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md lg:gap-lg h-auto md:h-[600px]">
+<!-- Large Featured Block -->
+<div class="md:col-span-2 relative rounded-[3rem] overflow-hidden shadow-md group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" data-alt="Cozy artisan bakery interior, warm glowing lights, wooden shelves displaying rustic sourdough breads and pastries, soft focus background, inviting and appetizing aesthetic" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBh1AA_3e3vC0b1wSQlut1a7mSB8L_Gp97WHnJZaEKx1myrhvEPPA-GyTmtDAqXtBU0ZLa-cFEoGACkN7VOoPtlfTrK6I-IorxUJhpaUASfmTaUDZoj7r7Km_GlSoBHOe5U8bw52EvrZD78p4KDTBzq0SpmznOl72Nme9Wfg5ceylzouiUw0PiAAKfPNg4LloMYIdqKnCSdgblawyi57soTy5_SFPVTh8rV0M8taGb3ZimROHbuFoM')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-inverse/80 via-surface-inverse/30 to-transparent mix-blend-multiply"></div>
+<div class="absolute inset-0 p-lg flex flex-col justify-between z-10">
+<div class="self-start bg-tertiary-container text-on-tertiary-container px-sm py-xs rounded-full font-label-sm text-label-sm flex items-center gap-xs backdrop-blur-md bg-opacity-80">
+<span class="material-symbols-outlined text-[16px]">storefront</span>
+               Local Favorite
+            </div>
+<div class="flex flex-col gap-sm">
+<h3 class="font-display text-display text-on-primary drop-shadow-lg">Cocoa Art Patisserie</h3>
+<p class="font-headline-md text-headline-md text-primary-fixed drop-shadow-md">Buy 1 Get 1 Free on all Artisan Truffles</p>
+<button class="mt-sm self-start px-md py-sm bg-surface text-on-surface rounded-full font-label-md text-label-md hover:bg-surface-variant transition-colors shadow-lg">
+                 Claim Offer
+               </button>
+</div>
+</div>
+</div>
+<!-- Two Stacked Smaller Blocks -->
+<div class="flex flex-col gap-md lg:gap-lg h-full">
+<div class="flex-1 relative rounded-[2.5rem] bg-secondary-container overflow-hidden p-md flex flex-col justify-center items-center text-center group hover:bg-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-display text-secondary mb-sm group-hover:scale-110 transition-transform">diamond</span>
+<h4 class="font-headline-md text-headline-md text-on-secondary-container">Luxe Jewelers</h4>
+<p class="font-body-md text-body-md text-on-secondary-container mt-xs">Free engraving on watches</p>
+</div>
+<div class="flex-1 relative rounded-[2.5rem] bg-tertiary-container overflow-hidden p-md flex flex-col justify-center items-center text-center group hover:bg-tertiary-fixed transition-colors">
+<span class="material-symbols-outlined text-display text-tertiary mb-sm group-hover:scale-110 transition-transform">spa</span>
+<h4 class="font-headline-md text-headline-md text-on-tertiary-container">Zen Botanica</h4>
+<p class="font-body-md text-body-md text-on-tertiary-container mt-xs">20% off indoor plants</p>
+</div>
+</div>
+</div>
+</section>
+</div></main><footer class="w-full bg-surface-container-low py-lg mt-xl"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center gap-md"><span class="font-headline-md text-primary opacity-50">Bazaar</span><div class="flex gap-lg text-on-surface-variant font-label-md"><a class="hover:text-primary" href="#">Privacy</a><a class="hover:text-primary" href="#">Terms</a><a class="hover:text-primary" href="#">Help</a></div><p class="text-on-surface-variant font-label-sm opacity-60">© 2024 Bazaar Customer Platform. Premium Discovery.</p></div></footer></body></html>

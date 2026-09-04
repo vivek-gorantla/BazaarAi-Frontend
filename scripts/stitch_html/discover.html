@@ -1,0 +1,235 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-tertiary":"#ffffff","on-secondary":"#ffffff","on-primary-fixed":"#2c112d","on-primary-container":"#d7aed3","surface-container-highest":"#e8e0e4","error":"#ba1a1a","tertiary-container":"#3c503a","on-error-container":"#93000a","secondary":"#625e58","inverse-surface":"#332f32","secondary-fixed":"#e8e1da","surface-tint":"#755373","surface-bright":"#fff7fb","primary-container":"#60405f","outline-variant":"#d0c3cb","on-secondary-container":"#66625c","surface-variant":"#e8e0e4","on-tertiary-fixed":"#0d200d","secondary-container":"#e5dfd7","tertiary-fixed":"#d1e9cb","inverse-on-surface":"#f6eff3","on-primary-fixed-variant":"#5c3c5b","outline":"#7e747c","error-container":"#ffdad6","on-tertiary-container":"#aac1a5","inverse-primary":"#e3badf","on-secondary-fixed-variant":"#4a4641","surface":"#fff7fb","on-surface":"#1d1b1e","on-surface-variant":"#4d444b","on-error":"#ffffff","tertiary-fixed-dim":"#b6cdb0","primary-fixed":"#ffd6fa","surface-container-lowest":"#ffffff","on-background":"#1d1b1e","secondary-fixed-dim":"#ccc6be","tertiary":"#263925","primary-fixed-dim":"#e3badf","surface-container-high":"#ede6ea","primary":"#472a47","surface-container-low":"#f9f2f6","surface-container":"#f3ecf0","on-primary":"#ffffff","surface-dim":"#dfd8dc","on-secondary-fixed":"#1e1b17","on-tertiary-fixed-variant":"#384c36","background":"#fff7fb"},"borderRadius":{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},"spacing":{"margin-mobile":"20px","gutter":"20px","margin-desktop":"120px","xl":"80px","md":"24px","base":"8px","sm":"12px","lg":"48px","xs":"4px"},"fontFamily":{"display":["Lexend"],"label-md":["Lexend"],"body-lg":["Lexend"],"headline-lg":["Lexend"],"body-md":["Lexend"],"label-sm":["Lexend"],"headline-md":["Lexend"],"headline-lg-mobile":["Lexend"]},"fontSize":{"display":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"800"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"700"}],"headline-lg-mobile":["28px",{"lineHeight":"34px","fontWeight":"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-white shadow-[0_4px_20px_rgba(96,64,95,0.05)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col"><div class="h-20 flex items-center justify-between gap-xl"><div class="flex items-center gap-md"><img alt="Bazaar Logo" class="h-10 w-10 rounded-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/><span class="font-headline-md text-headline-md text-primary tracking-tight">Bazaar</span></div><div class="flex-1 flex items-center gap-md"><div class="flex items-center gap-xs px-md py-sm bg-surface-container-low rounded-full min-w-[180px]"><span class="material-symbols-outlined text-primary text-[20px]">location_on</span><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant">Deliver to:</span><span class="font-label-md text-label-md text-on-surface truncate">Hyderabad, TS</span></div></div><div class="relative flex-1 group"><span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span><input class="w-full h-12 pl-12 pr-4 bg-surface-container-low border-none rounded-full font-body-md focus:ring-2 focus:ring-primary-container transition-all" placeholder="What are you looking for?" type="text"/></div></div><div class="flex items-center gap-md"><a class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="orders" href="#"><span class="material-symbols-outlined">receipt_long</span><span class="font-label-sm text-label-sm">Orders</span></a><a class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="wishlist" href="#"><span class="material-symbols-outlined">favorite</span><span class="font-label-sm text-label-sm">Wishlist</span></a><a class="relative flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="cart" href="#"><span class="material-symbols-outlined">shopping_bag</span><span class="absolute -top-1 -right-1 bg-primary text-on-primary text-[10px] w-4 h-4 flex items-center justify-center rounded-full">3</span><span class="font-label-sm text-label-sm">Cart</span></a><a class="ml-4 flex items-center gap-base p-xs rounded-full bg-surface-container hover:bg-surface-container-high transition-colors" data-path="account" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/><span class="material-symbols-outlined text-on-surface-variant">expand_more</span></a></div></div><nav class="h-12 flex items-center gap-xl border-t border-surface-container-highest" data-active-classes="text-primary font-bold border-b-2 border-primary"><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="home" href="#">Home</a><a aria-current="page" class="h-full flex items-center transition-colors text-primary font-bold border-b-2 border-primary" data-path="explore" href="#">Explore</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="categories" href="#">Categories</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="stores" href="#">Stores</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="offers" href="#">Offers</a></nav></div></header><main class="w-full pt-[128px] bg-background min-h-screen"><div class="flex flex-col w-full relative overflow-hidden">
+<!-- Hero / Header Section -->
+<section class="w-full relative px-6 lg:px-12 pt-lg pb-xl z-10">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-lg">
+<div class="max-w-3xl">
+<span class="block font-label-md text-label-md text-primary tracking-widest uppercase mb-sm opacity-80">Explore Bazaar</span>
+<h1 class="font-display text-display text-on-surface leading-tight tracking-tight">Discover your<br/><span class="text-primary italic font-light relative inline-block">neighborhood.
+          <svg class="absolute -bottom-2 left-0 w-full h-4 text-tertiary-container" fill="none" viewbox="0 0 200 12" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 9.5C50 -1.5 150 -1.5 198 9.5" stroke="currentColor" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+</span></h1>
+</div>
+<div class="flex items-center gap-sm bg-surface-container-low px-md py-sm rounded-full shadow-sm">
+<span class="material-symbols-outlined text-primary">my_location</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Showing trends in <strong class="text-on-surface">Hyderabad</strong></span>
+</div>
+</div>
+</section>
+<!-- Trending Nearby - Asymmetric Editorial Grid -->
+<section class="w-full relative px-6 lg:px-12 py-xl bg-surface-container-low z-20">
+<div class="absolute top-0 right-0 w-[50vw] h-[50vw] bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
+<div class="max-w-7xl mx-auto flex flex-col gap-lg relative">
+<div class="flex items-baseline justify-between">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Trending Nearby</h2>
+<a class="font-label-md text-label-md text-primary hover:text-primary-container transition-colors flex items-center gap-xs" href="#">View All <span class="material-symbols-outlined text-[18px]">arrow_forward</span></a>
+</div>
+<!-- Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Large Featured Card -->
+<article class="md:col-span-8 group relative rounded-3xl overflow-hidden shadow-lg h-[480px] cursor-pointer">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="High-end artisanal bakery interior in warm morning light, showing a rustic wooden table filled with fresh sourdough bread, flaky croissants, and a dusting of flour. The atmosphere is cozy, vibrant, and premium, utilizing Bazaar's deep plum and warm cream tones in the subtle decor elements." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCn8y_DB-m19sX4EJ6LSJEllPzhU1Gu1QGR0JlwDRLb2gmaJVoDQObvjM3GMZSt2PkdsynVtM9Li8fPxvV15814CZJ9D3giHFiEWEfURKP1BquTleHycZjCzPVTSeAwpuIrjkxTop_DhFqB739REI0V_pkGf0Mqv3g4T2--euiJdkg8_-ZZ6MWuCPNKqIsGNJgq96zSpWpsiXDzp8D8i-_afkuxLxj-P3GTe-mp7vcuKRS4_byEcbE')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/20 to-transparent"></div>
+<div class="absolute top-6 left-6 px-sm py-xs bg-tertiary text-on-tertiary rounded-full font-label-sm text-label-sm flex items-center gap-xs shadow-sm backdrop-blur-md bg-opacity-90">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed">local_fire_department</span> Hot Right Now
+          </div>
+<div class="absolute bottom-6 left-6 right-6 flex justify-between items-end">
+<div class="flex flex-col gap-xs text-on-primary">
+<span class="font-label-md text-label-md opacity-90">Artisanal Bakery</span>
+<h3 class="font-headline-md text-headline-md">The Crust &amp; Crumb</h3>
+<div class="flex items-center gap-sm mt-xs">
+<div class="flex items-center gap-xs text-secondary-fixed">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm">4.9</span>
+</div>
+<span class="w-1 h-1 rounded-full bg-on-primary/50"></span>
+<span class="font-label-sm text-label-sm opacity-80">0.8 km away</span>
+</div>
+</div>
+<button class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center group-hover:bg-primary-container transition-colors shadow-md">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Stacked Smaller Cards -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<article class="flex-1 relative rounded-3xl overflow-hidden shadow-md group cursor-pointer bg-surface">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105 opacity-80" data-alt="A curated selection of premium organic skincare products arranged elegantly on a warm cream marble surface. A single eucalyptus branch rests nearby. Soft, diffused natural light highlights the minimalist packaging, fitting a luxury lifestyle discovery vibe." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzXWYNtod1PwRZN5i5vR1zq3EA0NcT-Nea7v81EXZ4QcmFAleB-9NzlTOqbiKjEHCbSDdBIkk3ZbdQ4Dt9wF3uaK54EYdOtZg7WZZXdWeUazyIcfpC8AXYly5SIyvWk0zH72up89peF5A9j9TPJY0TuRFBKfyP1hs_P4XOF1eDgodo_G3LyKQAu8gnY2iJhgCdIf1hWE1xNcHVJM0uH9mbSMrTcvPU8n_0BWP99bQ1tgadyeDpu6k')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4 z-10 flex flex-col">
+<span class="font-label-sm text-label-sm text-primary mb-xs">Organic Beauty</span>
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Aura Botanicals</h3>
+</div>
+</article>
+<article class="flex-1 relative rounded-3xl overflow-hidden shadow-md group cursor-pointer bg-primary">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105 mix-blend-overlay opacity-60" data-alt="A vibrant, fresh bouquet of wildflowers and exotic blooms wrapped in brown paper, sitting in a modern florist shop. Rich plum shadows and soft peach highlights create a moody, romantic atmosphere." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA8XraT0fSQw6vDbqJuImwoUMfOb-QyC9JfqnLUKnebjO8RUJqYatd_icjuNi41fXUC9j5Ax5uLM_Ggd-j1zGflmKjiP_TsXa0rMTMXFEaFaQbJImBLOpO2p4Db69DCIGbAA_1BPdYXW18rCfXZIxJ-AAlcMdctXMUPOy9a7RnKNbTmXFw63vZiLdMoRDeuXM3JZLXyRVjEMteZF4saXpGQxJz7Zr8CmQN09WMdO__laMRIA0xAwYA')"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-md z-10">
+<span class="material-symbols-outlined text-on-primary text-[32px] mb-sm">celebration</span>
+<h3 class="font-headline-md text-headline-md text-on-primary mb-xs">Weekend Special</h3>
+<p class="font-body-md text-body-md text-on-primary/80">30% off all seasonal blooms at BloomBox.</p>
+</div>
+</article>
+</div>
+</div>
+</div>
+</section>
+<!-- Local Favorites - Horizontal Scroll Bento -->
+<section class="w-full px-6 lg:px-12 py-xl bg-background relative z-30">
+<div class="max-w-7xl mx-auto flex flex-col gap-lg">
+<div class="flex flex-col gap-xs">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Local Favorites</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl">Curated shops that the neighborhood can't stop talking about. Handpicked for quality and charm.</p>
+</div>
+<!-- Scrollable Container -->
+<div class="flex overflow-x-auto pb-8 -mx-6 px-6 lg:-mx-12 lg:px-12 gap-gutter snap-x snap-mandatory hide-scrollbar" id="favorites-scroll">
+<!-- Store Card 1 -->
+<div class="min-w-[300px] md:min-w-[360px] flex-shrink-0 snap-start flex flex-col gap-sm">
+<div class="w-full h-56 rounded-[2rem] overflow-hidden relative shadow-sm group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Interior of a modern specialty coffee shop. Minimalist design, warm cream walls, sleek espresso machine, and a barista expertly pouring latte art. Soft morning light streaming through a large window." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0FslyL2QqB0HmgAuRVIMwqhOY3AI3Rzwkm2qrXVXSV3U3govWhgC1c_UTlYRnKI0nm9YFZjdS1eW9yjp3g2BbP5Q5oqHCFgglPONdoagcYIZRVIoZ5_143bPZ2LjSawAiK3P-4R3M_lkfCYTbmIEYrf6r6sAWuOr9GKbQp7oWUImFOudX9CUZtZ-q5MXVCN0UqEL3UtutmGvg_0-2Mq1Z0abwtf_ZLdAFs5ue5tWXWNRHsaeWIxg')"></div>
+<div class="absolute top-4 left-4 bg-tertiary-container text-on-tertiary-container px-sm py-xs rounded-full font-label-sm text-label-sm shadow-sm backdrop-blur-md bg-opacity-90">Local Legend</div>
+</div>
+<div class="flex flex-col px-xs">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface">Brew &amp; Bean</h3>
+<div class="flex items-center gap-xs bg-surface-container-low px-sm py-xs rounded-full">
+<span class="material-symbols-outlined text-[16px] text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm text-on-surface">4.8</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Specialty Roasters &amp; Pastries</p>
+</div>
+</div>
+<!-- Store Card 2 -->
+<div class="min-w-[300px] md:min-w-[360px] flex-shrink-0 snap-start flex flex-col gap-sm">
+<div class="w-full h-56 rounded-[2rem] overflow-hidden relative shadow-sm group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A meticulously organized independent bookstore. Tall shelves filled with colorful spines, a cozy reading nook with a plush plum-colored armchair, and hanging Edison bulb lights." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBv0Z2TTsiorpe_d0_3jjl6JKWf-KOnH9QvB0H5fjceD2R7b3o26GIdLtzn_E_nWp834PEi4WNiwr6mokcvUHZpv00qnbMnMH2VLfaRfev-K-sk4y6jc7mYn1TeDOPQN-04eHr2Tklu4BcU9UzwISNtw6Mml5NPY7PRQsZYEFpGEHHMKW0D5qmzpZBKJmyN56BIyu2NyZCd91uRF9y2Wz9uqSUwEkEt168uaDcUXpLuS2vrDNxbUF0')"></div>
+</div>
+<div class="flex flex-col px-xs">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface">Chapter One</h3>
+<div class="flex items-center gap-xs bg-surface-container-low px-sm py-xs rounded-full">
+<span class="material-symbols-outlined text-[16px] text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm text-on-surface">4.9</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Independent Books &amp; Records</p>
+</div>
+</div>
+<!-- Store Card 3 -->
+<div class="min-w-[300px] md:min-w-[360px] flex-shrink-0 snap-start flex flex-col gap-sm">
+<div class="w-full h-56 rounded-[2rem] overflow-hidden relative shadow-sm group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A lush urban plant shop filled with monstera, fiddle leaf figs, and hanging pothos. Terracotta pots line wooden shelves. The atmosphere is humid, green, and vibrant, fitting a premium lifestyle aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB_XP7ld58Cb6p41_y05jOK1TdHZP9AYqQr-aLx1mZt-lByVA2rviu9FfSQtdHR56kCA4H71kIizAqCCHbKft2y-Dn9KNgZSRR1ioPF4gvDt8Z38OVzZdSfqc25HZcISTc9eWTZouFOSe8bgWgK90y2pV2QG5nZZDxQgwWR8MoA8MJjhVp4OutHHKebTArX1iYiVaShy4AbjJzvCzOtD5QKwQGauDyB7gIdsIQ-coTCRicWhYMAy1E')"></div>
+<div class="absolute top-4 left-4 bg-tertiary-container text-on-tertiary-container px-sm py-xs rounded-full font-label-sm text-label-sm shadow-sm backdrop-blur-md bg-opacity-90">Fresh Arrival</div>
+</div>
+<div class="flex flex-col px-xs">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface">Verdant Living</h3>
+<div class="flex items-center gap-xs bg-surface-container-low px-sm py-xs rounded-full">
+<span class="material-symbols-outlined text-[16px] text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm text-on-surface">4.7</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Indoor Botanicals &amp; Ceramics</p>
+</div>
+</div>
+<!-- Store Card 4 (Padding hack for scroll) -->
+<div class="w-1 flex-shrink-0"></div>
+</div>
+<!-- Custom scroll progress -->
+<div class="w-full max-w-md mx-auto h-1 bg-surface-container-highest rounded-full overflow-hidden mt-sm hidden md:block">
+<div class="h-full bg-primary w-1/3 rounded-full transition-all duration-300" id="scroll-indicator"></div>
+</div>
+</div>
+</section>
+<!-- Interactive Map / Deals Around You (Apricot/Peach Accent) -->
+<section class="w-full px-6 lg:px-12 py-xl bg-surface-container-high relative z-20 overflow-hidden">
+<!-- Organic Shape Decor -->
+<div class="absolute -top-32 -left-32 w-96 h-96 bg-[#ffd5c2]/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
+<div class="absolute bottom-0 right-0 w-1/2 h-full bg-[#ffecd2]/30 rounded-tl-[100px] z-0"></div>
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-xl relative z-10 items-center">
+<!-- Text & Deals Content -->
+<div class="flex flex-col gap-lg order-2 lg:order-1">
+<div>
+<span class="inline-block px-sm py-xs bg-[#fff0e6] text-[#c75e22] font-label-sm text-label-sm rounded-full mb-md">Live Radar</span>
+<h2 class="font-display text-[40px] leading-tight text-on-surface mb-sm">Deals dropping<br/>around you.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">We’ve pinned the best limited-time offers within a 2km radius. Grab them before they're gone.</p>
+</div>
+<div class="flex flex-col gap-md">
+<!-- Deal Item 1 -->
+<div class="flex items-center gap-md p-md bg-surface rounded-2xl shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
+<div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 relative">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A close up of a beautiful, glossy artisan chocolate truffle sitting on a dark stone slate. Luxurious vibe." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC192B2ShAy4GocS1PrjfL5snV3BzUUWfXPl9o-yaGt4JxZHb6ta1dOBtacth8cZifvIxjA4MDLLNUKpVZOK18PwtoBhD_l07sk4V6ANTy3Oq6C8ZQH0o3tIIRGJkOJSV2v-pRGCaRiQ4KOPxzKbudaG7rzt6GDvS_Bknfkz0tA4svPV7sn2kRfixUvTN_YMcEAwNIwYJe1FeQJnf9E39qzYFIDsecY-bPzrGGm1V8bXAuYyIpHfUQ')"></div>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-label-md text-label-md text-on-surface truncate">Cocoa Art</h4>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">Buy 1 Get 1 on Truffles</p>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-[#c75e22] bg-[#fff0e6] px-xs py-[2px] rounded">Exp 2h</span>
+</div>
+</div>
+<!-- Deal Item 2 -->
+<div class="flex items-center gap-md p-md bg-surface rounded-2xl shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
+<div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 relative">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A neat stack of premium linen shirts in earthy tones, resting on a wooden display table in a boutique clothing store." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB7RMrkB0rMUTJhmWddXUubZ24Ci1mo1fO30ZJDywu5xl9xeTx2bDZxahWD8xADzXonVGFoQecku20J-C2XfymsQbK4ppZQTr1YRIVFtLGB6U_4Lbmn2wV4Re1q1VFe_2jbPU_w2R3YlggxyzcznN60A2oZQgbGolHUR-fQATZegqq6oP51ywHjMNdg6ZaywEJRwZWZirmxkkA_kO6merQRG1pwQzvYkD2ERK3r1Ex3L3SBFUxDyuM')"></div>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-label-md text-label-md text-on-surface truncate">Loom &amp; Weave</h4>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">Flat 20% off Summer Linens</p>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-primary bg-primary-container/10 px-xs py-[2px] rounded">Exp 5h</span>
+</div>
+</div>
+</div>
+<button class="self-start px-lg py-sm bg-inverse-surface text-inverse-on-surface rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity shadow-lg">
+              Explore Map View
+           </button>
+</div>
+<!-- Visual Map -->
+<div class="order-1 lg:order-2 h-[400px] lg:h-[600px] w-full rounded-[3rem] overflow-hidden shadow-xl relative border-8 border-surface bg-surface-container">
+<!-- Map Placeholder using data-location -->
+<div class="w-full h-full bg-cover bg-center opacity-80" data-location="Hyderabad, Telangana, India" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDXLR9F9-qEMOoDk9bvEXwLWgttyL2O4tsuvJ9GeOrDlSz9DTn513c74nBSVXdtP3F59jtK6qaPn9ZE5cOs0AooWFm_diii7bsP9iR9On8aItRI_1F35RJrv8r85fYfTZg3N6XPYKH33DInua4wDQ27PQjsqXitOv8OR_tucqo1ecNLfpqllgkteb8zfkQCaDTbZcVyIhewTSumiI8fSepBzQzc438j1GSSJdDQLKWWKV2lmyihLck')"></div>
+<!-- Overlay UI on Map -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-[#c75e22] text-white rounded-full flex items-center justify-center shadow-lg animate-bounce">
+<span class="material-symbols-outlined">local_offer</span>
+</div>
+<!-- Decorative radar pulse -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border-2 border-[#c75e22] rounded-full animate-ping opacity-20 pointer-events-none"></div>
+</div>
+</div>
+</section>
+</div>
+<style>
+  /* Scoped styles just for scrollbar hiding in the custom horizontal scroll area if tailwind class isn't enough */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+<script>
+  // Simple scroll indicator script
+  document.addEventListener('DOMContentLoaded', () => {
+    const scrollContainer = document.getElementById('favorites-scroll');
+    const indicator = document.getElementById('scroll-indicator');
+    
+    if(scrollContainer && indicator) {
+      scrollContainer.addEventListener('scroll', () => {
+        const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+        const currentScroll = scrollContainer.scrollLeft;
+        
+        // Calculate percentage (from 33% min width to 100%)
+        if (maxScroll > 0) {
+           const scrollPercent = (currentScroll / maxScroll);
+           // base width is 33%, max is 100%
+           const newWidth = 33 + (scrollPercent * 67);
+           indicator.style.width = `${newWidth}%`;
+        }
+      });
+    }
+  });
+</script></main><footer class="w-full bg-surface-container-low py-lg mt-xl"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center gap-md"><span class="font-headline-md text-primary opacity-50">Bazaar</span><div class="flex gap-lg text-on-surface-variant font-label-md"><a class="hover:text-primary" href="#">Privacy</a><a class="hover:text-primary" href="#">Terms</a><a class="hover:text-primary" href="#">Help</a></div><p class="text-on-surface-variant font-label-sm opacity-60">© 2024 Bazaar Customer Platform. Premium Discovery.</p></div></footer></body></html>

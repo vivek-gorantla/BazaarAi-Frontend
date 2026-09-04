@@ -22,7 +22,7 @@ export default function CustomerLoginPage() {
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, role: "buyer" }),
+        body: JSON.stringify({ phone, role: "customer" }),
       });
       
       const data = await res.json();
@@ -33,8 +33,10 @@ export default function CustomerLoginPage() {
       
       localStorage.setItem("buyer_token", data.data.token);
       localStorage.setItem("buyer_user", JSON.stringify(data.data.user));
+      localStorage.setItem("bazaar_customer_token", data.data.token);
+      localStorage.setItem("bazaar_customer_user", JSON.stringify(data.data.user));
       
-      router.push("/");
+      router.push("/customer");
     } catch (err: any) {
       setError(err.message);
     } finally {

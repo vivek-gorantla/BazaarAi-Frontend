@@ -1,0 +1,158 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-tertiary":"#ffffff","on-secondary":"#ffffff","on-primary-fixed":"#2c112d","on-primary-container":"#d7aed3","surface-container-highest":"#e8e0e4","error":"#ba1a1a","tertiary-container":"#3c503a","on-error-container":"#93000a","secondary":"#625e58","inverse-surface":"#332f32","secondary-fixed":"#e8e1da","surface-tint":"#755373","surface-bright":"#fff7fb","primary-container":"#60405f","outline-variant":"#d0c3cb","on-secondary-container":"#66625c","surface-variant":"#e8e0e4","on-tertiary-fixed":"#0d200d","secondary-container":"#e5dfd7","tertiary-fixed":"#d1e9cb","inverse-on-surface":"#f6eff3","on-primary-fixed-variant":"#5c3c5b","outline":"#7e747c","error-container":"#ffdad6","on-tertiary-container":"#aac1a5","inverse-primary":"#e3badf","on-secondary-fixed-variant":"#4a4641","surface":"#fff7fb","on-surface":"#1d1b1e","on-surface-variant":"#4d444b","on-error":"#ffffff","tertiary-fixed-dim":"#b6cdb0","primary-fixed":"#ffd6fa","surface-container-lowest":"#ffffff","on-background":"#1d1b1e","secondary-fixed-dim":"#ccc6be","tertiary":"#263925","primary-fixed-dim":"#e3badf","surface-container-high":"#ede6ea","primary":"#472a47","surface-container-low":"#f9f2f6","surface-container":"#f3ecf0","on-primary":"#ffffff","surface-dim":"#dfd8dc","on-secondary-fixed":"#1e1b17","on-tertiary-fixed-variant":"#384c36","background":"#fff7fb"},"borderRadius":{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},"spacing":{"margin-mobile":"20px","gutter":"20px","margin-desktop":"120px","xl":"80px","md":"24px","base":"8px","sm":"12px","lg":"48px","xs":"4px"},"fontFamily":{"display":["Lexend"],"label-md":["Lexend"],"body-lg":["Lexend"],"headline-lg":["Lexend"],"body-md":["Lexend"],"label-sm":["Lexend"],"headline-md":["Lexend"],"headline-lg-mobile":["Lexend"]},"fontSize":{"display":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"800"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"700"}],"headline-lg-mobile":["28px",{"lineHeight":"34px","fontWeight":"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-white shadow-[0_4px_20px_rgba(96,64,95,0.05)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col"><div class="h-20 flex items-center justify-between gap-xl"><div class="flex items-center gap-md"><img alt="Bazaar Logo" class="h-10 w-10 rounded-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/><span class="font-headline-md text-headline-md text-primary tracking-tight">Bazaar</span></div><div class="flex-1 flex items-center gap-md"><div class="flex items-center gap-xs px-md py-sm bg-surface-container-low rounded-full min-w-[180px]"><span class="material-symbols-outlined text-primary text-[20px]">location_on</span><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant">Deliver to:</span><span class="font-label-md text-label-md text-on-surface truncate">Hyderabad, TS</span></div></div><div class="relative flex-1 group"><span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span><input class="w-full h-12 pl-12 pr-4 bg-surface-container-low border-none rounded-full font-body-md focus:ring-2 focus:ring-primary-container transition-all" placeholder="What are you looking for?" type="text"/></div></div><div class="flex items-center gap-md"><a class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="orders" href="#"><span class="material-symbols-outlined">receipt_long</span><span class="font-label-sm text-label-sm">Orders</span></a><a class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="wishlist" href="#"><span class="material-symbols-outlined">favorite</span><span class="font-label-sm text-label-sm">Wishlist</span></a><a class="relative flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="cart" href="#"><span class="material-symbols-outlined">shopping_bag</span><span class="absolute -top-1 -right-1 bg-primary text-on-primary text-[10px] w-4 h-4 flex items-center justify-center rounded-full">3</span><span class="font-label-sm text-label-sm">Cart</span></a><a class="ml-4 flex items-center gap-base p-xs rounded-full bg-surface-container hover:bg-surface-container-high transition-colors" data-path="account" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/><span class="material-symbols-outlined text-on-surface-variant">expand_more</span></a></div></div><nav class="h-12 flex items-center gap-xl border-t border-surface-container-highest" data-active-classes="text-primary font-bold border-b-2 border-primary"><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="home" href="#">Home</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="explore" href="#">Explore</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="categories" href="#">Categories</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="stores" href="#">Stores</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="offers" href="#">Offers</a></nav></div></header><main class="w-full pt-[128px] bg-background min-h-screen"><div class="flex flex-col w-full relative">
+<div class="w-full bg-primary text-on-primary py-margin-desktop px-6 lg:px-12 relative overflow-hidden rounded-b-xl shadow-lg -mt-8">
+<div class="absolute inset-0 z-0">
+<div class="bg-cover bg-center w-full h-full opacity-20" data-alt="A subtle, abstract geometric pattern in deep plum and warm cream tones, featuring large intersecting curves and soft gradients, creating a premium and calming atmosphere, high resolution." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBT_WUE89Kif0A_EUvRRaCcfZAdFuy42ul0g0zTjBj6YHGmHf0nPvXhdN2nBmHN8He8P1EIivuq-_SEH89io5YogNZxzTLNOsufTXIVveHuUQPN6QWQCOBUosbocfy20VSqSET1LstzgZwVFbV5sxBY9-1amJ5ur6uEkGuGM1aFOmV_W-pOU2f2l4j9cQryxNruf6vt1u0vKioq3H2b0gDItxDsDuRX_1zhiPBUF_Tx674kI6h5pAE')"></div>
+</div>
+<div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary-container/40 to-transparent z-10 pointer-events-none"></div>
+<div class="relative z-20 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-xl">
+<div class="flex-1 space-y-md">
+<h1 class="font-display text-display text-on-primary">Curated Cravings</h1>
+<p class="font-body-lg text-body-lg text-primary-fixed-dim max-w-md opacity-90">Your hand-picked selection of culinary delights and favorite local purveyors. Ready when you are.</p>
+<div class="flex items-center gap-sm mt-lg">
+<span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-on-primary text-primary shadow-sm hover:scale-105 transition-transform duration-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</span>
+<span class="font-label-md text-label-md text-primary-fixed tracking-widest uppercase">12 Items Saved</span>
+</div>
+</div>
+<div class="hidden md:block relative w-64 h-64">
+<div class="absolute inset-0 bg-primary-fixed/20 rounded-full blur-3xl animate-pulse"></div>
+<svg class="relative z-10 w-full h-full text-primary-fixed drop-shadow-xl" fill="currentColor" viewbox="0 0 100 100">
+<path d="M50 88.5c-1.8 0-3.6-.7-4.9-2-21.7-20.9-35.1-33.8-35.1-47.5 0-11 8.8-19.8 19.8-19.8 6.5 0 12.7 3.2 16.5 8.3 3.8-5.1 10-8.3 16.5-8.3 11 0 19.8 8.8 19.8 19.8 0 13.7-13.4 26.6-35.1 47.5-1.3 1.3-3.1 2-4.9 2z"></path>
+<path d="M29.8 22.2C21.6 22.2 15 28.8 15 37c0 11.8 11.9 23.4 31.7 42.5 1.7 1.6 4.4 1.6 6.1 0C72.6 60.4 84.5 48.8 84.5 37c0-8.2-6.6-14.8-14.8-14.8-5.4 0-10.4 2.9-13 7.6-1.5 2.7-5.5 2.7-7 0-2.6-4.7-7.6-7.6-13-7.6m0-3c7 0 13.5 3.5 17.5 9.1 4-5.6 10.5-9.1 17.5-9.1 12.7 0 22.8 10.1 22.8 22.8 0 14.8-13.8 28.1-36.2 49.7-2.1 2.1-5.6 2.1-7.7 0-22.4-21.6-36.2-34.9-36.2-49.7 0-12.7 10.1-22.8 22.8-22.8z" opacity="0.5"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-6 lg:px-12 py-margin-desktop w-full relative z-10 -mt-16">
+<div class="flex items-center justify-between mb-xl bg-surface/80 backdrop-blur-md p-md rounded-xl shadow-sm inline-flex">
+<div class="flex gap-md">
+<button class="px-md py-base bg-primary text-on-primary rounded-full font-label-md text-label-md shadow-md transition-transform hover:scale-105">Products (8)</button>
+<button class="px-md py-base bg-surface-container text-on-surface rounded-full font-label-md text-label-md hover:bg-surface-container-high transition-colors">Stores (4)</button>
+</div>
+<button class="flex items-center gap-xs text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+<span class="font-label-sm text-label-sm">Filter &amp; Sort</span>
+</button>
+</div>
+<div class="mb-lg">
+<div class="flex items-center gap-md mb-md">
+<span class="font-headline-lg text-headline-lg text-on-surface">Artisan Pantry</span>
+<div class="h-px flex-1 bg-gradient-to-r from-surface-container-highest to-transparent"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-xl">
+<div class="group relative flex flex-col bg-surface-container-lowest rounded-[2rem] p-sm shadow-[0_4px_20px_rgba(96,64,95,0.05)] hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] transition-all duration-500 hover:-translate-y-2">
+<div class="relative w-full aspect-square rounded-[1.5rem] overflow-hidden mb-md bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A jar of premium, golden raw honey with a honeycomb piece inside, beautifully lit on a rustic wooden table with soft morning light, surrounded by scattered lavender sprigs, highly detailed, food photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_Nzavr6KTwuUBbcGjxlEoSsEzgDZ6adQiYy_JJowjBvpwSl8ovwKM-KThIUmXX1CO2AHPRb4bKvmhLqHf_vmn0aCFQCw8ZzkJkAoAmTxdLBblHmCb8mnHll_24kkxiB33fCZNvkuBZ0FMYa7BTuVYDrLVRXeLrxFvVTTeiaRj4sh-tmNni_JILZp5_pu0a6gX1xzYoRRyTTRkftwS02gWwPyyGYrKTYZvyrHPTjiXJq5C7cnDrEc"/>
+<button class="absolute top-sm right-sm w-10 h-10 bg-surface-container-lowest/90 backdrop-blur-sm rounded-full flex items-center justify-center text-primary shadow-sm hover:bg-error hover:text-on-error transition-colors z-10">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="absolute bottom-sm left-sm px-sm py-xs bg-surface-container-lowest/90 backdrop-blur-sm rounded-full flex items-center gap-xs shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm text-on-surface">4.9</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col justify-between px-xs pb-sm">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface line-clamp-1 mb-xs">Raw Lavender Honey</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Pure, unfiltered honey infused with organic lavender fields.</p>
+</div>
+<div class="flex items-end justify-between mt-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant line-through opacity-60">$24.00</span>
+<span class="font-headline-lg text-headline-lg text-primary">$18.50</span>
+</div>
+<button class="w-12 h-12 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-md hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-surface-container-lowest rounded-[2rem] p-sm shadow-[0_4px_20px_rgba(96,64,95,0.05)] hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] transition-all duration-500 hover:-translate-y-2">
+<div class="relative w-full aspect-square rounded-[1.5rem] overflow-hidden mb-md bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A crusty sourdough boule sitting on a linen cloth next to a small dish of olive oil, warm bakery lighting, shallow depth of field, rustic and artisanal aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjSLMuQxDbI4s-NEOYKDPQwCR84yAFZH36sU7HgwrqZ7L6GgVTetvW-D0aNjZ3WihiEJQ3dSe6EEQNR7mKswI_2WzMeHcEdHcsuk4syS2E20kX1TrFiB0jbNj3HkpaaDyinfalCRAhIQefKwNYQ9EyMMzP2xnj6lAMpXz_ei-64ErX6dWO-gA0IDr0yI1I2ghC5KsNeyvGiZoadsbPi8ZpbSzgaRDUk9fmCHLPhuZ6BDZEaT4Di_M"/>
+<button class="absolute top-sm right-sm w-10 h-10 bg-surface-container-lowest/90 backdrop-blur-sm rounded-full flex items-center justify-center text-primary shadow-sm hover:bg-error hover:text-on-error transition-colors z-10">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="absolute bottom-sm left-sm px-sm py-xs bg-tertiary-container/90 backdrop-blur-sm rounded-full flex items-center gap-xs shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-on-tertiary-container">local_fire_department</span>
+<span class="font-label-sm text-label-sm text-on-tertiary-container">Trending</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col justify-between px-xs pb-sm">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface line-clamp-1 mb-xs">Heritage Sourdough</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Wild yeast culture, stone-milled ancient grains, baked daily.</p>
+</div>
+<div class="flex items-end justify-between mt-md">
+<div class="flex flex-col">
+<span class="font-headline-lg text-headline-lg text-primary">$9.00</span>
+</div>
+<button class="w-12 h-12 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-md hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mb-margin-desktop">
+<div class="flex items-center gap-md mb-xl mt-margin-desktop">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-label-md">02</div>
+<span class="font-headline-lg text-headline-lg text-on-surface uppercase tracking-widest text-sm">Favorite Stores</span>
+<div class="h-px flex-1 bg-surface-container-highest"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-xl">
+<div class="flex flex-col md:flex-row bg-surface-container-lowest rounded-[2rem] shadow-[0_4px_20px_rgba(96,64,95,0.05)] overflow-hidden group hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] transition-shadow">
+<div class="w-full md:w-1/3 h-48 md:h-auto relative">
+<div class="bg-cover bg-center w-full h-full" data-alt="A cozy, sunlit interior of an artisanal cheese shop, featuring wooden shelves stacked with various wheels of cheese, warm inviting atmosphere, high resolution." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC4TZ5Zz4B_042VAnDk2PRfPMH6UGlYXTWXSiP5ppOhXb6T7Nq6QsXGCsZs9I25JF-DdHvOmm4Yp9kINZ6jUC_Ysjtgj3wuyw6r-oryny8b6BCx_fNtr-umwdJz2f3VjWTTR_ATecgk7783z4aVrT8ZQImwrppHirzpu_biDFlLo3wgJ85XM2G_lDGA5R2EFnjLg0eIO-7ZyycERIT3E-7kB0nY8BZDR-uBbzKh99I3qUOPp8K13t8')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent md:bg-gradient-to-r md:from-transparent md:to-black/20"></div>
+<div class="absolute top-sm left-sm bg-tertiary-fixed text-on-tertiary-fixed px-sm py-xs rounded-full font-label-sm text-label-sm shadow-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">storefront</span> Local
+             </div>
+</div>
+<div class="p-lg flex-1 flex flex-col justify-center relative bg-surface-container-lowest z-10">
+<button class="absolute top-md right-md text-primary hover:text-error transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-xs">The Curds &amp; Whey Co.</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Award-winning local creamery specializing in aged cheddars and soft bries.</p>
+<div class="flex items-center gap-md mb-lg">
+<span class="flex items-center gap-xs text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-[16px]">directions_bike</span> 15 min</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="flex items-center gap-xs text-primary font-label-sm text-label-sm"><span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span> 4.8 (210)</span>
+</div>
+<button class="px-xl py-sm border-2 border-primary text-primary hover:bg-primary hover:text-on-primary rounded-full font-label-md text-label-md transition-colors self-start">Shop Store</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full bg-surface-container py-margin-desktop px-6 lg:px-12 relative overflow-hidden">
+<div class="absolute right-0 bottom-0 opacity-10 pointer-events-none transform translate-x-1/4 translate-y-1/4">
+<svg class="text-primary" fill="none" height="400" viewbox="0 0 100 100" width="400"><circle cx="50" cy="50" r="48" stroke="currentColor" stroke-dasharray="4 4" stroke-width="2"></circle></svg>
+</div>
+<div class="max-w-7xl mx-auto">
+<div class="flex items-center justify-between mb-xl">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Discover More</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Based on your saved items, you might enjoy these.</p>
+</div>
+<button class="text-primary font-label-md text-label-md hover:underline flex items-center gap-xs">
+          View All <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+<div class="group relative flex flex-col items-center p-md bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+<div class="w-24 h-24 rounded-full bg-surface-container mb-md overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform" data-alt="A small jar of artisanal fig jam, lit with natural window light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4WnxIAZT-eWd0PdQyfhMyb_YZAvKiH9OPAUXydQO4QzPrQTKUkRLaNWGhYRMKypZGotGlWuRL0h8AFUYn12lwGRXIbf-9q79YrTLDLOefVhBuTQWiFOrWmStrbwI5_DWM2yMbFfXpIC7_SuWm0hbl0uVxINtf5t-ZEjTay5inpw-nPnyVMGxAXqcCz5O5bpnM9efNlG8qz19fdbVbFNWZENArK1SMJio34CzPOwlTFy0TyFCepVs"/>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface text-center line-clamp-1">Fig &amp; Walnut Jam</h4>
+<span class="font-body-md text-body-md text-primary mt-xs">$12.00</span>
+<button class="mt-md px-lg py-xs bg-surface-container text-on-surface rounded-full font-label-sm text-label-sm hover:bg-primary hover:text-on-primary transition-colors">Add</button>
+</div>
+</div>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-low py-lg mt-xl"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center gap-md"><span class="font-headline-md text-primary opacity-50">Bazaar</span><div class="flex gap-lg text-on-surface-variant font-label-md"><a class="hover:text-primary" href="#">Privacy</a><a class="hover:text-primary" href="#">Terms</a><a class="hover:text-primary" href="#">Help</a></div><p class="text-on-surface-variant font-label-sm opacity-60">© 2024 Bazaar Customer Platform. Premium Discovery.</p></div></footer></body></html>

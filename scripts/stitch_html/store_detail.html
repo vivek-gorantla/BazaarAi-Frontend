@@ -1,0 +1,305 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-tertiary":"#ffffff","on-secondary":"#ffffff","on-primary-fixed":"#2c112d","on-primary-container":"#d7aed3","surface-container-highest":"#e8e0e4","error":"#ba1a1a","tertiary-container":"#3c503a","on-error-container":"#93000a","secondary":"#625e58","inverse-surface":"#332f32","secondary-fixed":"#e8e1da","surface-tint":"#755373","surface-bright":"#fff7fb","primary-container":"#60405f","outline-variant":"#d0c3cb","on-secondary-container":"#66625c","surface-variant":"#e8e0e4","on-tertiary-fixed":"#0d200d","secondary-container":"#e5dfd7","tertiary-fixed":"#d1e9cb","inverse-on-surface":"#f6eff3","on-primary-fixed-variant":"#5c3c5b","outline":"#7e747c","error-container":"#ffdad6","on-tertiary-container":"#aac1a5","inverse-primary":"#e3badf","on-secondary-fixed-variant":"#4a4641","surface":"#fff7fb","on-surface":"#1d1b1e","on-surface-variant":"#4d444b","on-error":"#ffffff","tertiary-fixed-dim":"#b6cdb0","primary-fixed":"#ffd6fa","surface-container-lowest":"#ffffff","on-background":"#1d1b1e","secondary-fixed-dim":"#ccc6be","tertiary":"#263925","primary-fixed-dim":"#e3badf","surface-container-high":"#ede6ea","primary":"#472a47","surface-container-low":"#f9f2f6","surface-container":"#f3ecf0","on-primary":"#ffffff","surface-dim":"#dfd8dc","on-secondary-fixed":"#1e1b17","on-tertiary-fixed-variant":"#384c36","background":"#fff7fb"},"borderRadius":{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},"spacing":{"margin-mobile":"20px","gutter":"20px","margin-desktop":"120px","xl":"80px","md":"24px","base":"8px","sm":"12px","lg":"48px","xs":"4px"},"fontFamily":{"display":["Lexend"],"label-md":["Lexend"],"body-lg":["Lexend"],"headline-lg":["Lexend"],"body-md":["Lexend"],"label-sm":["Lexend"],"headline-md":["Lexend"],"headline-lg-mobile":["Lexend"]},"fontSize":{"display":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"800"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"700"}],"headline-lg-mobile":["28px",{"lineHeight":"34px","fontWeight":"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-white shadow-[0_4px_20px_rgba(96,64,95,0.05)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col"><div class="h-20 flex items-center justify-between gap-xl"><div class="flex items-center gap-md"><img alt="Bazaar Logo" class="h-10 w-10 rounded-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/><span class="font-headline-md text-headline-md text-primary tracking-tight">Bazaar</span></div><div class="flex-1 flex items-center gap-md"><div class="flex items-center gap-xs px-md py-sm bg-surface-container-low rounded-full min-w-[180px]"><span class="material-symbols-outlined text-primary text-[20px]">location_on</span><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant">Deliver to:</span><span class="font-label-md text-label-md text-on-surface truncate">Hyderabad, TS</span></div></div><div class="relative flex-1 group"><span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span><input class="w-full h-12 pl-12 pr-4 bg-surface-container-low border-none rounded-full font-body-md focus:ring-2 focus:ring-primary-container transition-all" placeholder="What are you looking for?" type="text"/></div></div><div class="flex items-center gap-md"><a class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="orders" href="#"><span class="material-symbols-outlined">receipt_long</span><span class="font-label-sm text-label-sm">Orders</span></a><a class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="wishlist" href="#"><span class="material-symbols-outlined">favorite</span><span class="font-label-sm text-label-sm">Wishlist</span></a><a class="relative flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="cart" href="#"><span class="material-symbols-outlined">shopping_bag</span><span class="absolute -top-1 -right-1 bg-primary text-on-primary text-[10px] w-4 h-4 flex items-center justify-center rounded-full">3</span><span class="font-label-sm text-label-sm">Cart</span></a><a class="ml-4 flex items-center gap-base p-xs rounded-full bg-surface-container hover:bg-surface-container-high transition-colors" data-path="account" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/><span class="material-symbols-outlined text-on-surface-variant">expand_more</span></a></div></div><nav class="h-12 flex items-center gap-xl border-t border-surface-container-highest" data-active-classes="text-primary font-bold border-b-2 border-primary"><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="home" href="#">Home</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="explore" href="#">Explore</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="categories" href="#">Categories</a><a aria-current="page" class="h-full flex items-center transition-colors text-primary font-bold border-b-2 border-primary" data-path="stores" href="#">Stores</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="offers" href="#">Offers</a></nav></div></header><main class="w-full pt-[128px] bg-background min-h-screen"><div class="flex flex-col w-full relative">
+<!-- Store Hero / Header -->
+<section class="relative w-full h-[400px] lg:h-[500px] flex flex-col justify-end overflow-hidden -mt-[128px]">
+<!-- Ambient Background / Banner -->
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A premium, cinematic wide shot of a brightly lit, modern Indian neighborhood grocery store interior at dusk. Warm incandescent lighting highlights neatly organized shelves of fresh produce, colorful spice jars, and premium packaged goods. Soft focus, shallow depth of field, conveying high quality, cleanliness, and local charm, subtly incorporating Deep Plum and Sage accents." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBfhfiu0G_SvBXFxfch1pm2Z5t-bti10RcqxBjccg3pnHNsY6L436Ao39ENNSAoS2sisSm8lg4Sv1kYw8miU-JUWFcNoWbQ2KTgnr0W14NqKF6rlBkNTyt4xM72Lf8yexyjk1kLH_z5W0PpDliR8wSWD_QrxL-imqvm_IaKHPS4buZ6fhmBQyDJl0wpBhzgB4wqw7x44_0ZRqg_vNja124CcMm-m9IgIEd8iYDjKVT7ykVubR7vOhU')">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full pb-xl flex flex-col lg:flex-row items-end justify-between gap-lg">
+<div class="flex items-end gap-lg">
+<div class="w-32 h-32 lg:w-40 lg:h-40 rounded-full shadow-lg border-4 border-surface-container-lowest bg-surface-container-lowest overflow-hidden flex-shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="A clean, minimalist logo for 'Sri Lakshmi Stores', featuring an elegant typographic treatment and a subtle icon of wheat or a shopping basket, using a sophisticated color palette of Warm Cream and Deep Plum." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAioYvy2HcmuT68l_PBw4Tyghyyh8iy1jt8y3-a-kxwtslMPHGZQrqFZdsvO5I9eAALA0WdhlcDejiOfNxh2bCQ6nXXdHCFox2MKV5j9u7u2GpW3WIIUY6-PbpnxO8cvTmq6eO-XZHEzWYeV6VjNYG8gPFZWmrCiQI6fZxu7FLD799I2RX24TWJ-Bv5KZJJ0Zk5545zmzgzPEpJ0CXm6KFU3C72Y4v84qDBXkf-cXFihBQ5vSoVRxw"/>
+</div>
+<div class="flex flex-col pb-sm">
+<div class="flex items-center gap-sm mb-base">
+<span class="px-sm py-xs bg-tertiary-fixed text-on-tertiary-fixed font-label-sm uppercase rounded-full">Local Fresh</span>
+</div>
+<h1 class="font-display text-display text-on-surface mb-sm">Sri Lakshmi Stores</h1>
+<div class="flex flex-wrap items-center gap-md font-body-md text-on-surface-variant">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-surface-tint" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-on-surface">4.7</span>
+<span>(1.2k+ ratings)</span>
+</div>
+<span class="opacity-30">•</span>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined">directions_bike</span>
+<span>0.6 km</span>
+</div>
+<span class="opacity-30">•</span>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined">schedule</span>
+<span>20-30 min</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-md pb-sm w-full lg:w-auto">
+<button class="flex-1 lg:flex-none h-12 px-xl bg-primary text-on-primary font-label-md rounded-full shadow-md hover:bg-on-primary-fixed hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-[20px]">store</span>
+          Follow Store
+        </button>
+<button class="w-12 h-12 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Main Content Layout -->
+<div class="max-w-7xl mx-auto px-6 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-xl py-xl">
+<!-- Sidebar / Filters -->
+<aside class="hidden lg:flex lg:col-span-3 flex-col gap-xl">
+<!-- Search within store -->
+<div class="relative w-full group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full h-14 pl-12 pr-4 bg-surface-container-low border-none rounded-full font-body-md focus:ring-2 focus:ring-primary-container transition-all shadow-[0_4px_20px_rgba(96,64,95,0.02)]" placeholder="Search in store..." type="text"/>
+</div>
+<!-- Categories Menu -->
+<div class="flex flex-col gap-xs">
+<h3 class="font-label-md text-on-surface-variant uppercase tracking-widest mb-md pl-sm">Categories</h3>
+<button class="w-full flex items-center justify-between p-sm rounded-xl bg-primary text-on-primary shadow-sm transition-all">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">widgets</span>
+<span class="font-label-md">All Products</span>
+</div>
+<span class="font-label-sm opacity-80">342</span>
+</button>
+<button class="w-full flex items-center justify-between p-sm rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[20px]">nutrition</span>
+<span class="font-label-md">Groceries</span>
+</div>
+<span class="font-label-sm opacity-60">128</span>
+</button>
+<button class="w-full flex items-center justify-between p-sm rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[20px]">egg</span>
+<span class="font-label-md">Dairy &amp; Eggs</span>
+</div>
+<span class="font-label-sm opacity-60">45</span>
+</button>
+<button class="w-full flex items-center justify-between p-sm rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[20px]">icecream</span>
+<span class="font-label-md">Snacks</span>
+</div>
+<span class="font-label-sm opacity-60">89</span>
+</button>
+<button class="w-full flex items-center justify-between p-sm rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-[20px]">local_cafe</span>
+<span class="font-label-md">Beverages</span>
+</div>
+<span class="font-label-sm opacity-60">56</span>
+</button>
+</div>
+<!-- Interactive Data Viz: Popular Times -->
+<div class="p-lg bg-surface-container-low rounded-[2rem] flex flex-col gap-md shadow-[0_4px_20px_rgba(96,64,95,0.02)]">
+<h3 class="font-label-md text-on-surface-variant uppercase tracking-widest">Popular Times</h3>
+<p class="font-body-md text-on-surface">Usually not too busy.</p>
+<div class="h-32 w-full flex items-end gap-1 mt-sm">
+<!-- Animated Bar Chart -->
+<div class="flex-1 bg-surface-variant rounded-t-sm h-[20%] hover:bg-primary-container transition-colors group relative cursor-pointer">
+<div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">9AM</div>
+</div>
+<div class="flex-1 bg-surface-variant rounded-t-sm h-[35%] hover:bg-primary-container transition-colors group relative cursor-pointer">
+<div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">11AM</div>
+</div>
+<div class="flex-1 bg-primary rounded-t-sm h-[80%] shadow-[0_0_15px_rgba(96,64,95,0.3)] group relative cursor-pointer">
+<div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-xs px-2 py-1 rounded opacity-100 pointer-events-none whitespace-nowrap z-10">Now: Busy</div>
+</div>
+<div class="flex-1 bg-surface-variant rounded-t-sm h-[60%] hover:bg-primary-container transition-colors group relative cursor-pointer">
+<div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">3PM</div>
+</div>
+<div class="flex-1 bg-surface-variant rounded-t-sm h-[40%] hover:bg-primary-container transition-colors group relative cursor-pointer">
+<div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">5PM</div>
+</div>
+<div class="flex-1 bg-surface-variant rounded-t-sm h-[70%] hover:bg-primary-container transition-colors group relative cursor-pointer">
+<div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">7PM</div>
+</div>
+<div class="flex-1 bg-surface-variant rounded-t-sm h-[30%] hover:bg-primary-container transition-colors group relative cursor-pointer">
+<div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">9PM</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="col-span-1 lg:col-span-9 flex flex-col gap-xl">
+<!-- Mobile Categories (Horizontal Scroll) -->
+<div class="flex lg:hidden overflow-x-auto pb-md gap-sm snap-x -mx-6 px-6 no-scrollbar">
+<button class="snap-start flex-shrink-0 px-md py-sm rounded-full bg-primary text-on-primary font-label-md shadow-sm">All</button>
+<button class="snap-start flex-shrink-0 px-md py-sm rounded-full bg-surface-container-low text-on-surface-variant font-label-md">Groceries</button>
+<button class="snap-start flex-shrink-0 px-md py-sm rounded-full bg-surface-container-low text-on-surface-variant font-label-md">Dairy</button>
+<button class="snap-start flex-shrink-0 px-md py-sm rounded-full bg-surface-container-low text-on-surface-variant font-label-md">Snacks</button>
+<button class="snap-start flex-shrink-0 px-md py-sm rounded-full bg-surface-container-low text-on-surface-variant font-label-md">Beverages</button>
+</div>
+<!-- Price Comparison Module (Differentiator) -->
+<section class="bg-surface-container-lowest rounded-[2rem] p-lg shadow-[0_4px_20px_rgba(96,64,95,0.05)] relative overflow-hidden">
+<!-- Decorative subtle background -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary-container opacity-5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+<div class="relative z-10 flex flex-col gap-lg">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-headline-md text-on-surface mb-xs">Available near you</h2>
+<p class="font-body-md text-on-surface-variant">See how Sri Lakshmi compares for your usual items.</p>
+</div>
+<span class="material-symbols-outlined text-primary text-[32px] opacity-20">compare_arrows</span>
+</div>
+<div class="overflow-x-auto pb-sm -mx-lg px-lg no-scrollbar">
+<div class="min-w-[700px] flex flex-col gap-sm">
+<!-- Header Row -->
+<div class="grid grid-cols-4 gap-md pb-sm border-b-2 border-surface-container-highest font-label-sm text-on-surface-variant uppercase tracking-widest px-md">
+<div class="col-span-1">Top Item</div>
+<div class="col-span-1 flex items-center gap-xs text-primary"><span class="w-2 h-2 rounded-full bg-primary"></span> Sri Lakshmi Stores</div>
+<div class="col-span-1 flex items-center gap-xs"><span class="w-2 h-2 rounded-full bg-surface-variant"></span> Ravi Kirana</div>
+<div class="col-span-1 flex items-center gap-xs"><span class="w-2 h-2 rounded-full bg-surface-variant"></span> Local Mart</div>
+</div>
+<!-- Item Row 1 -->
+<div class="grid grid-cols-4 gap-md items-center py-sm px-md rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="col-span-1 flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A small product image of a premium 1kg bag of Aashirvaad Whole Wheat Atta on a white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTMKFUvGLRCMoETQbaz3KZUdmm0p2nfB17bq-Zv_BargdlT4rxPdu6MWXkw97RwPZckcmrScB8Y_U0Acm8-44DhBTCcA3EPQnG_AsyGBfDJNvMsIQtGNMkWgodcdsmSpq5bsW_Co_e_VhtLKhUrpEiOAQxjQR7w2exAkdfzdQxP9IGCSx24ZzBOv-gnxHQOCdDmu1MbTsBIpwH8mqxLz2o87_u1BzDFME-G9e6O58bISWGmBhMxbY"/>
+</div>
+<span class="font-label-md text-on-surface truncate">Whole Wheat Atta 1kg</span>
+</div>
+<div class="col-span-1 font-headline-md text-on-surface">₹55</div>
+<div class="col-span-1 font-body-lg text-on-surface-variant">₹58</div>
+<div class="col-span-1 font-body-lg text-on-surface-variant">₹60</div>
+</div>
+<!-- Item Row 2 -->
+<div class="grid grid-cols-4 gap-md items-center py-sm px-md rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="col-span-1 flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A small product image of a 500ml pouch of fresh Amul Taaza cow milk." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcbgmH7XC2zM6ABs8tywhtK4ajqR-O-dBMWi1ruNzi-D4SNRYaY0ES5YpiV4JyhAqh1NMX-foKDhL2QO10vQGvkl_dShPX9LAIsTEntAiJ2x79S8oJIkd1IdHtwWWDHrIfOKhCiTvUvHHqxQvS2QWkYuFafGCnGqbl-GUnacGlsMdSHqH45HrHUfJmjtW3Fd_krUWJmr12SpEV-KlytAEkRxNL-qh5FRy1HZk31XPRLRCl-3VtCd8"/>
+</div>
+<span class="font-label-md text-on-surface truncate">Fresh Milk 500ml</span>
+</div>
+<div class="col-span-1 font-headline-md text-on-surface">₹26</div>
+<div class="col-span-1 font-body-lg text-on-surface-variant">₹26</div>
+<div class="col-span-1 font-body-lg text-on-surface-variant">₹28 <span class="text-xs text-error ml-1 opacity-70">Low Stock</span></div>
+</div>
+<!-- Item Row 3 -->
+<div class="grid grid-cols-4 gap-md items-center py-sm px-md rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="col-span-1 flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A small product image of a packet of Maggi 2-Minute Noodles 140g." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGQ5MP3hIKoAxHXPXqy0DiBn7KtcM5X7WTMD6tqv94cThKBwEWFLl1GpSUupsFk1YfMXAW-s_MVeBBCIUGGXzKnbNz0VWZNu6Y8yzi5j1dEbQOpaIbZzI0E8riteIGb1P9IYb0ofH--X5C66X0Q_C9EqX850Tyq8Xq628bNPQXng-81h5IPSYiexVvqe3mbAq8t6Gcs9BljReBVJHUPDC3dONEHMbgavrLnSUlqKKoXxH37IAXwsI"/>
+</div>
+<span class="font-label-md text-on-surface truncate">Instant Noodles 140g</span>
+</div>
+<div class="col-span-1 font-headline-md text-primary">₹24 <span class="text-xs ml-1 px-1.5 py-0.5 bg-primary-container text-on-primary-container rounded">Deal</span></div>
+<div class="col-span-1 font-body-lg text-on-surface-variant">₹28</div>
+<div class="col-span-1 font-body-lg text-on-surface-variant">₹28</div>
+</div>
+</div>
+</div>
+<!-- Delivery Speed Comparison -->
+<div class="flex flex-col sm:flex-row items-center gap-md pt-md border-t border-surface-container-highest">
+<div class="flex items-center gap-sm font-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">two_wheeler</span>
+              Avg. Delivery Speed:
+            </div>
+<div class="flex-1 w-full flex items-center h-2 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[30%]" title="Sri Lakshmi: 20m"></div>
+<div class="h-full bg-surface-tint w-[10%] opacity-50" title="Ravi Kirana: 25m"></div>
+</div>
+<div class="font-label-md text-primary">Sri Lakshmi is fastest (20m)</div>
+</div>
+</div>
+</section>
+<!-- Section Title -->
+<div class="flex items-end justify-between mt-xl mb-md">
+<h2 class="font-headline-lg text-on-surface">Trending in Groceries</h2>
+<a class="font-label-md text-primary hover:underline hidden sm:block" href="#">View all</a>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-md lg:gap-lg">
+<!-- Product Card 1 -->
+<article class="bg-surface-container-lowest rounded-2xl p-sm shadow-[0_4px_20px_rgba(96,64,95,0.05)] hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col group relative">
+<div class="absolute top-md left-md z-10 px-sm py-xs bg-error text-on-error font-label-sm rounded-full text-[10px]">20% OFF</div>
+<div class="w-full aspect-square rounded-xl bg-surface-container overflow-hidden mb-md relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A highly detailed, professional product shot of organic basmati rice in premium packaging. The lighting is soft and natural, emphasizing the texture of the grains visible through a window in the packaging, set against a clean, warm cream background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgegSvKOURRe87xkuPuAK3h64nJthuv4-HN8iE4Pb9lqdOZ4RHGQHFZ4uCwtoGiZhrzEkKFa69xJlCsAFrMhfex5RjRG_6dpI6MJrrucx_8sLPyDxpnWjI5Zy6h5zdcKz6p6kbrtKd6qQJy9ol3iKgonkb1Pu5W1RCXtSogHjP2sr-vghb8sqWVmZxU0h79tVN6pLXURXPrJ_budVwNNJ59tKWvEmRjKBa3y4njSGOZC0OcvaQgOE"/>
+</div>
+<div class="flex flex-col flex-1">
+<h3 class="font-label-md text-on-surface line-clamp-2 min-h-[40px]">Organic Premium Basmati Rice - 5kg</h3>
+<span class="font-label-sm text-on-surface-variant mt-xs mb-sm">5 kg</span>
+<div class="mt-auto flex items-end justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface-variant line-through opacity-70">₹850</span>
+<span class="font-headline-md text-primary">₹680</span>
+</div>
+<button class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-primary-container">
+<span class="material-symbols-outlined font-bold text-[24px]">add</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 2 -->
+<article class="bg-surface-container-lowest rounded-2xl p-sm shadow-[0_4px_20px_rgba(96,64,95,0.05)] hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col group relative">
+<div class="w-full aspect-square rounded-xl bg-surface-container overflow-hidden mb-md relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A stylized, editorial product photo of a vibrant yellow bottle of cold-pressed mustard oil. The bottle sits on a minimalist surface with deep, soft shadows and a sprig of fresh mustard greens next to it, set against a warm cream background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJQIEWn8P4suR-8ObEN8xaAHJkj632fJvGpVfDbquQU2NxVg-eN3ZkzxwyUA0Wna89I8z1kqjzFJcnrsuobabF_Abeqb7N6K3ELQj2N7eEZWHxAoVQvM8l18AwbtykrdRjmYvdc5zbj9W7QQJhyEdLo74UYAeqZt_kaTkaxcpYUKYCOpzF79-QElyARcNfHQuFJi37jmOR4BHo9jc_fI396RM97N7cp-zDwPb8RFGV8rtVWMVitCw"/>
+</div>
+<div class="flex flex-col flex-1">
+<h3 class="font-label-md text-on-surface line-clamp-2 min-h-[40px]">Cold Pressed Yellow Mustard Oil</h3>
+<span class="font-label-sm text-on-surface-variant mt-xs mb-sm">1 Ltr</span>
+<div class="mt-auto flex items-end justify-between">
+<div class="flex flex-col">
+<span class="font-headline-md text-primary">₹220</span>
+</div>
+<!-- Active Add Button State Example -->
+<div class="h-12 bg-surface-container-high rounded-full flex items-center overflow-hidden shadow-inner w-full max-w-[120px] transition-all justify-between border border-surface-container-highest">
+<button class="w-10 h-full flex items-center justify-center text-on-surface hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">remove</span></button>
+<span class="font-label-md text-on-surface">1</span>
+<button class="w-10 h-full flex items-center justify-center text-on-surface hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">add</span></button>
+</div>
+</div>
+</div>
+</article>
+<!-- Product Card 3 -->
+<article class="bg-surface-container-lowest rounded-2xl p-sm shadow-[0_4px_20px_rgba(96,64,95,0.05)] hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col group relative">
+<div class="w-full aspect-square rounded-xl bg-surface-container overflow-hidden mb-md relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A beautifully lit macro shot of a clear glass jar filled with rich, golden organic honey. A wooden honey dipper rests beside it on a textured linen cloth, conveying natural purity and premium quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwv3AV7f-o2FrrH8YXmZA8Qjxot2KZmpdoJVwUvodynZuYghPockkbUjVmTEQm16NFUZNJHHhr33GMW-VHr_ZrZ9omEEOTDVx5Vu4yE_-ZNhFq4ydFmSmhqTsJum1Rv97tnx5k372tOAsuy_Jfu984kxxe8GAIlu6G9BrQubbAYcG5EhOSdcvE3qjCXdBfke_Lc57b8SQ_hzMnS03XiUXkmvDIlYCv6dADXiSOy8w048bfj8x1U_E"/>
+</div>
+<div class="flex flex-col flex-1">
+<h3 class="font-label-md text-on-surface line-clamp-2 min-h-[40px]">Pure Wild Forest Honey - Raw</h3>
+<span class="font-label-sm text-on-surface-variant mt-xs mb-sm">500 g</span>
+<div class="mt-auto flex items-end justify-between">
+<div class="flex flex-col">
+<span class="font-headline-md text-primary">₹399</span>
+</div>
+<button class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-primary-container">
+<span class="material-symbols-outlined font-bold text-[24px]">add</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 4 -->
+<article class="bg-surface-container-lowest rounded-2xl p-sm shadow-[0_4px_20px_rgba(96,64,95,0.05)] hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col group relative">
+<div class="w-full aspect-square rounded-xl bg-surface-container overflow-hidden mb-md relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A clean, appetizing product image of a block of fresh artisan paneer, partially sliced, resting on a dark slate board with subtle green herbs scattered around. High contrast, premium editorial food photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaqa9nsGqcy2P1TzDsjmW-59X3OXzWW07gND9f0rbxZDP2Nx15DXXzaHxZBV1Xj2jg1GTxR_RVOvTZiCenGk2HKnhUHuUZ2z-pRylh8r1Lrr2Pk9Apu48AHCRrfKEGj7E-rg7CkUWqJdgwTdLYqJqp4B6CwKB4wnUDa02W44_44N4nEn6isAzczDii76IAqFL8SmAMfZwfYykRbJ6gAWnkz6gNP4e--Ecr6StDV2uzAQwaDeXiLCI"/>
+</div>
+<div class="flex flex-col flex-1">
+<h3 class="font-label-md text-on-surface line-clamp-2 min-h-[40px]">Fresh Farm Malai Paneer</h3>
+<span class="font-label-sm text-on-surface-variant mt-xs mb-sm">200 g</span>
+<div class="mt-auto flex items-end justify-between">
+<div class="flex flex-col">
+<span class="font-headline-md text-primary">₹95</span>
+</div>
+<button class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-primary-container">
+<span class="material-symbols-outlined font-bold text-[24px]">add</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+<!-- Load More / Decor -->
+<div class="w-full py-xl flex flex-col items-center justify-center relative mt-lg">
+<div class="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-surface-container-highest to-transparent"></div>
+<button class="relative z-10 px-lg py-sm bg-surface-container-lowest text-primary font-label-md rounded-full shadow-sm border border-surface-container-highest hover:bg-surface-container-low transition-colors">
+          View all 128 items in Groceries
+        </button>
+</div>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-low py-lg mt-xl"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center gap-md"><span class="font-headline-md text-primary opacity-50">Bazaar</span><div class="flex gap-lg text-on-surface-variant font-label-md"><a class="hover:text-primary" href="#">Privacy</a><a class="hover:text-primary" href="#">Terms</a><a class="hover:text-primary" href="#">Help</a></div><p class="text-on-surface-variant font-label-sm opacity-60">© 2024 Bazaar Customer Platform. Premium Discovery.</p></div></footer></body></html>

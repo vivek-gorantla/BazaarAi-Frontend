@@ -9,6 +9,8 @@ import { AgentInput } from "../../../../agent/components/AgentInput";
 import { AgentSelect } from "../../../../agent/components/AgentSelect";
 import { AgentTextarea } from "../../../../agent/components/AgentTextarea";
 import { AgentUIRegistry } from "../../../../agent/registry";
+import { MerchantImageAgent } from "../../../../agent/components/MerchantImageAgent";
+import { SmartRestockModal } from "../../../../components/SmartRestockModal";
 
 type Product = {
   id: string;
@@ -30,6 +32,8 @@ export default function ProductCatalogPage() {
 
   // Modal State
   const [showManualModal, setShowManualModal] = useState(false);
+  const [smartRestockOpen, setSmartRestockOpen] = useState(false);
+  const [smartRestockTab, setSmartRestockTab] = useState<"voice" | "csv" | "text" | "camera">("voice");
 
   // Form State
   const [formData, setFormData] = useState({
@@ -41,6 +45,9 @@ export default function ProductCatalogPage() {
     unit: "piece",
     description: "",
   });
+
+  // Agent partial-fill: tracks which fields were left empty after image analysis
+  const [agentEmptyFields, setAgentEmptyFields] = useState<string[]>([]);
 
   useEffect(() => {
     const id = localStorage.getItem("merchant_store_id");
@@ -140,6 +147,23 @@ export default function ProductCatalogPage() {
     alert(t('merchant_onboarding.catalog.alert_ingestion').replace('{type}', type));
   };
 
+  // Called by MerchantImageAgent after it finishes filling the form
+  const handleAgentFilled = (fills: { fieldId: string; value: string }[], partial: boolean) => {
+    if (partial) {
+      // Collect IDs of fields that were NOT filled
+      const filledIds = new Set(fills.map(f => f.fieldId));
+      const allFields = AgentUIRegistry.getFields();
+      const empty = allFields
+        .filter(f => !filledIds.has(f.id))
+        .map(f => f.id);
+      setAgentEmptyFields(empty);
+    } else {
+      setAgentEmptyFields([]);
+    }
+    // Open the manual modal so user can review / complete
+    setShowManualModal(true);
+  };
+
   const steps = [
     { name: t('merchant_onboarding.steps.business_details'), active: false },
     { name: t('merchant_onboarding.steps.store_identity'), active: false },
@@ -150,20 +174,20 @@ export default function ProductCatalogPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F2F7F2] font-sans pb-20">
+    <div className="min-h-screen bg-[#141A15] font-sans pb-20 text-white">
       {/* Top Navbar */}
       <nav className="flex items-center justify-between px-8 py-4 bg-transparent">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-black flex items-center justify-center rounded-sm">
-            <div className="w-4 h-0.5 bg-white" />
+          <div className="w-8 h-8 bg-white flex items-center justify-center rounded-sm">
+            <div className="w-4 h-0.5 bg-black" />
           </div>
-          <span className="text-[10px] font-bold tracking-widest uppercase text-gray-800">
+          <span className="text-[10px] font-bold tracking-widest uppercase text-white/90">
             {t('merchant_onboarding.title')}
           </span>
         </div>
-        <div className="flex items-center gap-4 text-sm font-medium text-gray-600">
+        <div className="flex items-center gap-4 text-sm font-medium text-white/70">
           <span>{t('merchant_onboarding.help')}</span>
-          <div className="w-8 h-8 rounded-full bg-[#496246] flex items-center justify-center text-white text-xs">
+          <div className="w-8 h-8 rounded-full bg-[#496246] flex items-center justify-center text-white text-xs font-bold">
             A
           </div>
         </div>
@@ -171,14 +195,14 @@ export default function ProductCatalogPage() {
 
       {/* Stepper */}
       <div className="max-w-6xl mx-auto px-6 mt-4">
-        <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-[11px] sm:text-xs font-bold uppercase tracking-widest text-gray-400">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-[11px] sm:text-xs font-bold uppercase tracking-widest text-white/40">
           {steps.map((step, index) => (
             <div key={step.name} className="flex items-center gap-2 sm:gap-4">
-              <span className={step.active ? "text-[#496246]" : ""}>
+              <span className={step.active ? "text-[#F3B58C]" : ""}>
                 {step.name}
               </span>
               {index < steps.length - 1 && (
-                <span className="text-gray-300">&gt;</span>
+                <span className="text-white/20">&gt;</span>
               )}
             </div>
           ))}
@@ -189,8 +213,8 @@ export default function ProductCatalogPage() {
         {/* Left Column: Ingestion Options */}
         <div className="flex-1 max-w-lg">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <h1 className="text-4xl font-black text-gray-900 mb-4 tracking-tight">{t('merchant_onboarding.catalog.title')}</h1>
-            <p className="text-gray-600 mb-10 leading-relaxed max-w-sm">
+            <h1 className="text-4xl font-black text-white mb-4 tracking-tight">{t('merchant_onboarding.catalog.title')}</h1>
+            <p className="text-[#C2D6C0] mb-10 leading-relaxed max-w-sm">
               {t('merchant_onboarding.catalog.subtitle')}
             </p>
           </motion.div>
@@ -198,57 +222,56 @@ export default function ProductCatalogPage() {
           <div className="grid grid-cols-2 gap-4">
             {/* Speak Option */}
             <button
-              onClick={() => simulateIngestion("Voice")}
-              className="bg-white hover:bg-[#EAF3EA] group rounded-[32px] p-6 text-left shadow-sm transition-all border border-transparent hover:border-[#496246]/20 flex flex-col items-start gap-4 h-48"
+              onClick={() => {
+                setSmartRestockTab("voice");
+                setSmartRestockOpen(true);
+              }}
+              className="bg-[#1A231C] hover:bg-[#243026] group rounded-[32px] p-6 text-left shadow-xl transition-all border border-[#2E3D30] hover:border-[#8C5A3B]/40 flex flex-col items-start gap-4 h-48"
             >
-              <div className="w-12 h-12 rounded-full bg-[#E8F0E7] group-hover:bg-[#496246] text-[#496246] group-hover:text-white flex items-center justify-center transition-colors">
+              <div className="w-12 h-12 rounded-full bg-[#243026] group-hover:bg-[#8C5A3B] text-[#F3B58C] group-hover:text-white flex items-center justify-center transition-colors">
                 <Mic size={20} />
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-1">{t('merchant_onboarding.catalog.voice_title')}</h3>
-                <p className="text-xs text-gray-500 font-medium">{t('merchant_onboarding.catalog.voice_desc')}</p>
+                <h3 className="font-bold text-white mb-1">{t('merchant_onboarding.catalog.voice_title')}</h3>
+                <p className="text-xs text-[#C2D6C0]/80 font-medium">{t('merchant_onboarding.catalog.voice_desc')}</p>
               </div>
             </button>
 
-            {/* Snap Option */}
-            <button
-              onClick={() => simulateIngestion("Image")}
-              className="bg-white hover:bg-[#EAF3EA] group rounded-[32px] p-6 text-left shadow-sm transition-all border border-transparent hover:border-[#496246]/20 flex flex-col items-start gap-4 h-48"
-            >
-              <div className="w-12 h-12 rounded-full bg-[#E8F0E7] group-hover:bg-[#496246] text-[#496246] group-hover:text-white flex items-center justify-center transition-colors">
-                <Camera size={20} />
-              </div>
-              <div>
-                <h3 className="font-bold text-gray-900 mb-1">{t('merchant_onboarding.catalog.snap_title')}</h3>
-                <p className="text-xs text-gray-500 font-medium">{t('merchant_onboarding.catalog.snap_desc')}</p>
-              </div>
-            </button>
+            {/* Snap Option — wired to MerchantImageAgent */}
+            <MerchantImageAgent
+              onFilled={handleAgentFilled}
+              label={t('merchant_onboarding.catalog.snap_title')}
+              className="bg-[#1A231C] hover:bg-[#243026] group rounded-[32px] p-6 text-left shadow-xl transition-all border border-[#2E3D30] hover:border-[#8C5A3B]/40 flex flex-col items-start gap-4 h-48 w-full text-white"
+            />
 
             {/* CSV Option */}
             <button
-              onClick={() => simulateIngestion("CSV")}
-              className="bg-white hover:bg-[#EAF3EA] group rounded-[32px] p-6 text-left shadow-sm transition-all border border-transparent hover:border-[#496246]/20 flex flex-col items-start gap-4 h-48"
+              onClick={() => {
+                setSmartRestockTab("csv");
+                setSmartRestockOpen(true);
+              }}
+              className="bg-[#1A231C] hover:bg-[#243026] group rounded-[32px] p-6 text-left shadow-xl transition-all border border-[#2E3D30] hover:border-[#8C5A3B]/40 flex flex-col items-start gap-4 h-48"
             >
-              <div className="w-12 h-12 rounded-full bg-[#E8F0E7] group-hover:bg-[#496246] text-[#496246] group-hover:text-white flex items-center justify-center transition-colors">
+              <div className="w-12 h-12 rounded-full bg-[#243026] group-hover:bg-[#8C5A3B] text-[#F3B58C] group-hover:text-white flex items-center justify-center transition-colors">
                 <FileSpreadsheet size={20} />
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-1">{t('merchant_onboarding.catalog.csv_title')}</h3>
-                <p className="text-xs text-gray-500 font-medium">{t('merchant_onboarding.catalog.csv_desc')}</p>
+                <h3 className="font-bold text-white mb-1">{t('merchant_onboarding.catalog.csv_title')}</h3>
+                <p className="text-xs text-[#C2D6C0]/80 font-medium">{t('merchant_onboarding.catalog.csv_desc')}</p>
               </div>
             </button>
 
             {/* Manual Option */}
             <button
               onClick={() => setShowManualModal(true)}
-              className="bg-[#496246] hover:bg-[#3A4E38] group rounded-[32px] p-6 text-left shadow-md transition-all flex flex-col items-start gap-4 h-48"
+              className="bg-[#8C5A3B] hover:bg-[#784B2E] group rounded-[32px] p-6 text-left shadow-xl transition-all flex flex-col items-start gap-4 h-48 border border-[#F3B58C]/20"
             >
               <div className="w-12 h-12 rounded-full bg-white/20 text-white flex items-center justify-center backdrop-blur-sm">
                 <Plus size={20} />
               </div>
               <div>
                 <h3 className="font-bold text-white mb-1">{t('merchant_onboarding.catalog.manual_title')}</h3>
-                <p className="text-xs text-white/80 font-medium">{t('merchant_onboarding.catalog.manual_desc')}</p>
+                <p className="text-xs text-white/90 font-medium">{t('merchant_onboarding.catalog.manual_desc')}</p>
               </div>
             </button>
           </div>
@@ -256,20 +279,20 @@ export default function ProductCatalogPage() {
           <div className="mt-12 flex items-center justify-between">
             <button
               onClick={() => router.back()}
-              className="flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-gray-900 transition-colors uppercase tracking-widest"
+              className="flex items-center gap-2 text-xs font-bold text-white/50 hover:text-white transition-colors uppercase tracking-widest"
             >
               {t('merchant_onboarding.catalog.back')}
             </button>
             <div className="flex items-center gap-4">
               <button
                 onClick={() => router.push("/merchant/merchant-onboarding/payments-bank")}
-                className="px-6 py-4 text-[#496246] font-bold text-sm tracking-wide hover:bg-[#496246]/10 rounded-xl transition-all"
+                className="px-6 py-4 text-[#F3B58C] font-bold text-sm tracking-wide hover:bg-[#8C5A3B]/20 rounded-xl transition-all"
               >
                 SKIP FOR NOW
               </button>
               <button
                 onClick={() => router.push("/merchant/merchant-onboarding/payments-bank")}
-                className="px-8 py-4 bg-[#496246] hover:bg-[#3A4E38] text-white rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all shadow-md transform hover:-translate-y-0.5"
+                className="px-8 py-4 bg-[#8C5A3B] hover:bg-[#784B2E] text-white rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all shadow-[0_8px_20px_rgba(140,90,59,0.4)] transform hover:-translate-y-0.5"
               >
                 {t('merchant_onboarding.catalog.next')}
                 <ArrowRight size={16} />
@@ -279,28 +302,28 @@ export default function ProductCatalogPage() {
         </div>
 
         {/* Right Column: Live Catalog */}
-        <div className="flex-1 w-full lg:max-w-md h-[700px] bg-white rounded-[40px] shadow-sm border border-gray-100 flex flex-col overflow-hidden relative">
-          <div className="p-8 pb-4 border-b border-gray-100 flex items-center justify-between bg-white z-10">
+        <div className="flex-1 w-full lg:max-w-md h-[700px] bg-[#1A231C] rounded-[40px] shadow-2xl border border-[#2E3D30] flex flex-col overflow-hidden relative">
+          <div className="p-8 pb-4 border-b border-[#2E3D30] flex items-center justify-between bg-[#1A231C] z-10">
             <div>
-              <h3 className="font-black text-gray-900 text-xl">{t('merchant_onboarding.catalog.live_title')}</h3>
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mt-1">{products.length} {t('merchant_onboarding.catalog.items_indexed')}</p>
+              <h3 className="font-black text-white text-xl">{t('merchant_onboarding.catalog.live_title')}</h3>
+              <p className="text-xs font-bold text-[#C2D6C0]/60 uppercase tracking-wider mt-1">{products.length} {t('merchant_onboarding.catalog.items_indexed')}</p>
             </div>
-            <div className="w-12 h-12 rounded-full bg-[#F2F7F2] flex items-center justify-center">
-              <Package size={20} className="text-[#496246]" />
+            <div className="w-12 h-12 rounded-full bg-[#243026] flex items-center justify-center">
+              <Package size={20} className="text-[#F3B58C]" />
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 bg-[#fafbfa]">
+          <div className="flex-1 overflow-y-auto p-4 bg-[#141A15]">
             {fetching ? (
-              <div className="flex flex-col items-center justify-center h-full text-gray-400">
-                <div className="w-8 h-8 border-4 border-[#DCE8DC] border-t-[#496246] rounded-full animate-spin mb-4"></div>
+              <div className="flex flex-col items-center justify-center h-full text-white/50">
+                <div className="w-8 h-8 border-4 border-[#2E3D30] border-t-[#8C5A3B] rounded-full animate-spin mb-4"></div>
                 <p className="text-sm font-bold">{t('merchant_onboarding.catalog.syncing')}</p>
               </div>
             ) : products.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center px-8 opacity-50">
-                <Package size={48} className="text-gray-300 mb-4" />
-                <h4 className="font-bold text-gray-600 mb-2">{t('merchant_onboarding.catalog.empty_title')}</h4>
-                <p className="text-sm text-gray-500">{t('merchant_onboarding.catalog.empty_desc')}</p>
+                <Package size={48} className="text-white/40 mb-4" />
+                <h4 className="font-bold text-white mb-2">{t('merchant_onboarding.catalog.empty_title')}</h4>
+                <p className="text-sm text-[#C2D6C0]">{t('merchant_onboarding.catalog.empty_desc')}</p>
               </div>
             ) : (
               <div className="space-y-3">
@@ -311,20 +334,20 @@ export default function ProductCatalogPage() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95 }}
-                      className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4 group"
+                      className="bg-[#1A231C] p-4 rounded-2xl shadow-md border border-[#2E3D30] flex items-center gap-4 group"
                     >
-                      <div className="w-16 h-16 rounded-xl bg-[#F2F7F2] flex-shrink-0 flex items-center justify-center overflow-hidden border border-gray-50">
+                      <div className="w-16 h-16 rounded-xl bg-[#243026] flex-shrink-0 flex items-center justify-center overflow-hidden border border-white/5">
                         {product.imageUrl ? (
                           <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
                         ) : (
-                          <Package size={24} className="text-gray-300" />
+                          <Package size={24} className="text-[#F3B58C]" />
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-bold text-gray-900 truncate">{product.name}</h4>
+                        <h4 className="font-bold text-white truncate">{product.name}</h4>
                         <div className="flex items-center gap-3 mt-1">
-                          <span className="text-sm font-black text-[#496246]">₹{Number(product.price).toFixed(2)}</span>
-                          <span className="text-xs font-medium text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">{Number(product.stockQty)} {product.unit}s</span>
+                          <span className="text-sm font-black text-[#F3B58C]">₹{Number(product.price).toFixed(2)}</span>
+                          <span className="text-xs font-medium text-[#C2D6C0] bg-[#243026] px-2 py-0.5 rounded-full">{Number(product.stockQty)} {product.unit}s</span>
                         </div>
                       </div>
                       <button
@@ -385,8 +408,15 @@ export default function ProductCatalogPage() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder={t('merchant_onboarding.catalog.modal_name_ph')}
-                      className="w-full px-4 py-3 bg-[#F2F7F2]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all"
+                      className={`w-full px-4 py-3 bg-[#E8F0E7]/50 rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all ${
+                        agentEmptyFields.includes('name')
+                          ? 'border-amber-400 ring-2 ring-amber-200 bg-amber-50/50'
+                          : 'border-transparent focus:border-[#496246]/30'
+                      }`}
                     />
+                    {agentEmptyFields.includes('name') && (
+                      <p className="mt-1 text-xs text-amber-600 font-medium">⚠ Please fill this field manually</p>
+                    )}
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
@@ -400,8 +430,15 @@ export default function ProductCatalogPage() {
                         value={formData.category}
                         onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                         placeholder={t('merchant_onboarding.catalog.modal_cat_ph')}
-                        className="w-full px-4 py-3 bg-[#F2F7F2]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all"
+                        className={`w-full px-4 py-3 bg-[#E8F0E7]/50 rounded-xl border focus:outline-none focus:ring-2 text-sm font-medium transition-all ${
+                          agentEmptyFields.includes('category')
+                            ? 'border-amber-400 ring-2 ring-amber-200 bg-amber-50/50'
+                            : 'border-transparent focus:border-[#496246]/30 focus:ring-[#496246]/10'
+                        }`}
                       />
+                      {agentEmptyFields.includes('category') && (
+                        <p className="mt-1 text-xs text-amber-600 font-medium">⚠ Please fill this field manually</p>
+                      )}
                     </div>
                     <div>
                       <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.catalog.modal_price')}</label>
@@ -417,8 +454,15 @@ export default function ProductCatalogPage() {
                         value={formData.price}
                         onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                         placeholder="0.00"
-                        className="w-full px-4 py-3 bg-[#F2F7F2]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all"
+                        className={`w-full px-4 py-3 bg-[#E8F0E7]/50 rounded-xl border focus:outline-none focus:ring-2 text-sm font-medium transition-all ${
+                          agentEmptyFields.includes('price')
+                            ? 'border-amber-400 ring-2 ring-amber-200 bg-amber-50/50'
+                            : 'border-transparent focus:border-[#496246]/30 focus:ring-[#496246]/10'
+                        }`}
                       />
+                      {agentEmptyFields.includes('price') && (
+                        <p className="mt-1 text-xs text-amber-600 font-medium">⚠ Price needed — agent couldn't detect it</p>
+                      )}
                     </div>
                   </div>
 
@@ -435,8 +479,15 @@ export default function ProductCatalogPage() {
                         value={formData.stockQty}
                         onChange={(e) => setFormData({ ...formData, stockQty: e.target.value })}
                         placeholder="0"
-                        className="w-full px-4 py-3 bg-[#F2F7F2]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all"
+                        className={`w-full px-4 py-3 bg-[#E8F0E7]/50 rounded-xl border focus:outline-none focus:ring-2 text-sm font-medium transition-all ${
+                          agentEmptyFields.includes('stockQty')
+                            ? 'border-amber-400 ring-2 ring-amber-200 bg-amber-50/50'
+                            : 'border-transparent focus:border-[#496246]/30 focus:ring-[#496246]/10'
+                        }`}
                       />
+                      {agentEmptyFields.includes('stockQty') && (
+                        <p className="mt-1 text-xs text-amber-600 font-medium">⚠ Enter stock quantity</p>
+                      )}
                     </div>
                     <div>
                       <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.catalog.modal_unit')}</label>
@@ -446,7 +497,7 @@ export default function ProductCatalogPage() {
                         name="unit"
                         value={formData.unit}
                         onChange={(e) => setFormData({ ...formData, unit: e.target.value })}
-                        className="w-full px-4 py-3 bg-[#F2F7F2]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all appearance-none"
+                        className="w-full px-4 py-3 bg-[#E8F0E7]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all appearance-none"
                       >
                         {['piece', 'kg', 'gram', 'litre', 'ml', 'pack', 'box', 'dozen', 'other'].map(u => (
                           <option key={u} value={u}>{u}</option>
@@ -465,9 +516,20 @@ export default function ProductCatalogPage() {
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                       placeholder={t('merchant_onboarding.catalog.modal_desc_ph')}
                       rows={3}
-                      className="w-full px-4 py-3 bg-[#F2F7F2]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all resize-none"
+                      className="w-full px-4 py-3 bg-[#E8F0E7]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all resize-none"
                     />
                   </div>
+
+                  {/* Partial-fill summary banner */}
+                  {agentEmptyFields.length > 0 && (
+                    <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 flex items-start gap-2">
+                      <span className="text-amber-500 text-lg leading-none">⚠</span>
+                      <div>
+                        <p className="text-xs font-bold text-amber-800">Agent filled what it could — please complete the highlighted fields above.</p>
+                        <p className="text-xs text-amber-600 mt-0.5">Missing: {agentEmptyFields.join(', ')}</p>
+                      </div>
+                    </div>
+                  )}
                 </form>
               </div>
 
@@ -492,6 +554,15 @@ export default function ProductCatalogPage() {
           </div>
         )}
       </AnimatePresence>
+      {/* Smart Restock Agent Modal for Voice & CSV Ingestion */}
+      <SmartRestockModal
+        isOpen={smartRestockOpen}
+        onClose={() => {
+          setSmartRestockOpen(false);
+          if (storeId) fetchCatalog(storeId);
+        }}
+        initialTab={smartRestockTab}
+      />
     </div>
   );
 }

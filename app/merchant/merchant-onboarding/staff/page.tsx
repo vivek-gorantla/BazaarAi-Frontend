@@ -128,20 +128,20 @@ export default function StaffPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F2F7F2] font-sans pb-20">
+    <div className="min-h-screen bg-[#141A15] font-sans pb-20 text-white">
       {/* Top Navbar */}
       <nav className="flex items-center justify-between px-8 py-4 bg-transparent">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-black flex items-center justify-center rounded-sm">
-            <div className="w-4 h-0.5 bg-white" />
+          <div className="w-8 h-8 bg-white flex items-center justify-center rounded-sm">
+            <div className="w-4 h-0.5 bg-black" />
           </div>
-          <span className="text-[10px] font-bold tracking-widest uppercase text-gray-800">
+          <span className="text-[10px] font-bold tracking-widest uppercase text-white/90">
             {t('merchant_onboarding.title')}
           </span>
         </div>
-        <div className="flex items-center gap-4 text-sm font-medium text-gray-600">
+        <div className="flex items-center gap-4 text-sm font-medium text-white/70">
           <span>{t('merchant_onboarding.help')}</span>
-          <div className="w-8 h-8 rounded-full bg-[#496246] flex items-center justify-center text-white text-xs">
+          <div className="w-8 h-8 rounded-full bg-[#496246] flex items-center justify-center text-white text-xs font-bold">
             A
           </div>
         </div>
@@ -149,14 +149,14 @@ export default function StaffPage() {
 
       {/* Stepper */}
       <div className="max-w-6xl mx-auto px-6 mt-4">
-        <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-[11px] sm:text-xs font-bold uppercase tracking-widest text-gray-400">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-[11px] sm:text-xs font-bold uppercase tracking-widest text-white/40">
           {steps.map((step, index) => (
             <div key={step.name} className="flex items-center gap-2 sm:gap-4">
-              <span className={step.active ? "text-[#496246]" : ""}>
+              <span className={step.active ? "text-[#F3B58C]" : ""}>
                 {step.name}
               </span>
               {index < steps.length - 1 && (
-                <span className="text-gray-300">&gt;</span>
+                <span className="text-white/20">&gt;</span>
               )}
             </div>
           ))}
@@ -167,23 +167,23 @@ export default function StaffPage() {
         {/* Left Column: Form */}
         <div className="flex-1 max-w-lg">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <h1 className="text-4xl font-black text-gray-900 mb-4 tracking-tight">{t('merchant_onboarding.staff.title')}</h1>
-            <p className="text-gray-600 mb-10 leading-relaxed max-w-sm">
+            <h1 className="text-4xl font-black text-white mb-4 tracking-tight">{t('merchant_onboarding.staff.title')}</h1>
+            <p className="text-[#C2D6C0] mb-10 leading-relaxed max-w-sm">
               {t('merchant_onboarding.staff.subtitle')}
             </p>
           </motion.div>
 
-          <form onSubmit={handleInvite} className="bg-white rounded-[32px] p-8 shadow-sm border border-gray-100 mb-10">
+          <form onSubmit={handleInvite} className="bg-[#1A231C] rounded-[32px] p-8 shadow-2xl border border-[#2E3D30] mb-10">
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-12 h-12 rounded-full bg-[#EAF3EA] flex items-center justify-center text-[#496246]">
+              <div className="w-12 h-12 rounded-full bg-[#243026] flex items-center justify-center text-[#F3B58C]">
                 <UserPlus size={20} />
               </div>
-              <h3 className="font-bold text-gray-900 text-lg">{t('merchant_onboarding.staff.invite_title')}</h3>
+              <h3 className="font-bold text-white text-lg">{t('merchant_onboarding.staff.invite_title')}</h3>
             </div>
 
             <div className="space-y-5">
               <div>
-                <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.staff.name')}</label>
+                <label className="block text-[11px] font-bold text-[#C2D6C0]/80 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.staff.name')}</label>
                 <AgentInput
                   agentId="name"
                   agentLabel="Staff Name"
@@ -191,15 +191,15 @@ export default function StaffPage() {
                   value={formData.name}
                   onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
                   placeholder={t('merchant_onboarding.staff.name_ph')}
-                  className="w-full px-4 py-3 bg-[#F2F7F2]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all"
+                  className="w-full px-4 py-3 bg-[#141A15] rounded-xl border border-[#2E3D30] focus:border-[#F3B58C]/40 focus:outline-none focus:ring-2 focus:ring-[#F3B58C]/20 text-sm font-medium transition-all text-white placeholder-[#7A9378]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.staff.phone')}</label>
+                  <label className="block text-[11px] font-bold text-[#C2D6C0]/80 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.staff.phone')}</label>
                   <div className="relative">
-                    <span className="absolute left-4 top-3.5 text-sm font-bold text-gray-400">+91</span>
+                    <span className="absolute left-4 top-3.5 text-sm font-bold text-[#7A9378]">+91</span>
                     <AgentInput
                       agentId="phone"
                       agentLabel="Phone Number"
@@ -208,23 +208,23 @@ export default function StaffPage() {
                       value={formData.phone}
                       onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
                       placeholder="9876543210"
-                      className="w-full pl-12 pr-4 py-3 bg-[#F2F7F2]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all"
+                      className="w-full pl-12 pr-4 py-3 bg-[#141A15] rounded-xl border border-[#2E3D30] focus:border-[#F3B58C]/40 focus:outline-none focus:ring-2 focus:ring-[#F3B58C]/20 text-sm font-medium transition-all text-white placeholder-[#7A9378]"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.staff.role')}</label>
+                  <label className="block text-[11px] font-bold text-[#C2D6C0]/80 uppercase tracking-widest mb-1.5">{t('merchant_onboarding.staff.role')}</label>
                   <AgentSelect
                     agentId="role"
                     agentLabel="Role"
                     value={formData.role}
                     onChange={(e) => setFormData((prev) => ({ ...prev, role: e.target.value }))}
-                    className="w-full px-4 py-3 bg-[#F2F7F2]/50 rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all appearance-none"
+                    className="w-full px-4 py-3 bg-[#141A15] rounded-xl border border-[#2E3D30] focus:border-[#F3B58C]/40 focus:outline-none focus:ring-2 focus:ring-[#F3B58C]/20 text-sm font-medium transition-all appearance-none text-white"
                   >
-                    <option value="manager">{t('merchant_onboarding.staff.role_manager')}</option>
-                    <option value="cashier">{t('merchant_onboarding.staff.role_cashier')}</option>
-                    <option value="inventory">{t('merchant_onboarding.staff.role_inventory')}</option>
-                    <option value="delivery">{t('merchant_onboarding.staff.role_delivery')}</option>
+                    <option value="manager" className="bg-[#141A15]">{t('merchant_onboarding.staff.role_manager')}</option>
+                    <option value="cashier" className="bg-[#141A15]">{t('merchant_onboarding.staff.role_cashier')}</option>
+                    <option value="inventory" className="bg-[#141A15]">{t('merchant_onboarding.staff.role_inventory')}</option>
+                    <option value="delivery" className="bg-[#141A15]">{t('merchant_onboarding.staff.role_delivery')}</option>
                   </AgentSelect>
                 </div>
               </div>
@@ -232,7 +232,7 @@ export default function StaffPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 mt-2 bg-[#496246] hover:bg-[#3A4E38] text-white rounded-xl font-bold text-sm tracking-wide transition-all shadow-md disabled:opacity-50"
+                className="w-full py-4 mt-2 bg-[#8C5A3B] hover:bg-[#784B2E] text-white rounded-xl font-bold text-sm tracking-wide transition-all shadow-[0_8px_20px_rgba(140,90,59,0.4)] disabled:opacity-50"
               >
                 {loading ? t('merchant_onboarding.staff.inviting') : t('merchant_onboarding.staff.send_btn')}
               </button>
@@ -240,25 +240,25 @@ export default function StaffPage() {
           </form>
 
           {/* Final Finish Button */}
-          <div className="flex flex-col items-center justify-center mt-12 pt-8 border-t border-gray-200">
+          <div className="flex flex-col items-center justify-center mt-12 pt-8 border-t border-[#2E3D30]">
             <div className="flex flex-col sm:flex-row w-full gap-4">
               <button
                 onClick={() => router.push("/merchant/dashboard")}
-                className="flex-1 py-5 bg-white text-[#496246] border border-[#496246] rounded-2xl font-black text-lg tracking-wide flex items-center justify-center gap-3 transition-all hover:bg-[#496246]/5 w-full"
+                className="flex-1 py-5 bg-[#1A231C] text-[#F3B58C] border border-[#8C5A3B]/40 rounded-2xl font-black text-lg tracking-wide flex items-center justify-center gap-3 transition-all hover:bg-[#243026] w-full"
               >
                 SKIP FOR NOW
               </button>
               <button
                 onClick={() => router.push("/merchant/dashboard")}
-                className="flex-1 py-5 bg-gradient-to-r from-[#2D3A2C] to-[#1A231A] text-white rounded-2xl font-black text-lg tracking-wide flex items-center justify-center gap-3 transition-all shadow-2xl transform hover:-translate-y-1 hover:shadow-[#496246]/30 w-full"
+                className="flex-1 py-5 bg-gradient-to-r from-[#8C5A3B] to-[#496246] text-white rounded-2xl font-black text-lg tracking-wide flex items-center justify-center gap-3 transition-all shadow-[0_10px_25px_rgba(140,90,59,0.5)] transform hover:-translate-y-1 w-full border border-white/10"
               >
                 {t('merchant_onboarding.staff.finish')}
-                <Rocket size={20} className="text-[#D68C5E]" />
+                <Rocket size={20} className="text-[#F3B58C]" />
               </button>
             </div>
             <button
               onClick={() => router.back()}
-              className="mt-6 flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-gray-900 transition-colors uppercase tracking-widest"
+              className="mt-6 flex items-center gap-2 text-xs font-bold text-white/50 hover:text-white transition-colors uppercase tracking-widest"
             >
               {t('merchant_onboarding.staff.back')}
             </button>
@@ -266,28 +266,28 @@ export default function StaffPage() {
         </div>
 
         {/* Right Column: Team Roster */}
-        <div className="flex-1 w-full lg:max-w-md h-[700px] bg-white rounded-[40px] shadow-sm border border-gray-100 flex flex-col overflow-hidden relative">
-          <div className="p-8 pb-4 border-b border-gray-100 flex items-center justify-between bg-white z-10">
+        <div className="flex-1 w-full lg:max-w-md h-[700px] bg-[#1A231C] rounded-[40px] shadow-2xl border border-[#2E3D30] flex flex-col overflow-hidden relative">
+          <div className="p-8 pb-4 border-b border-[#2E3D30] flex items-center justify-between bg-[#1A231C] z-10">
             <div>
-              <h3 className="font-black text-gray-900 text-xl">{t('merchant_onboarding.staff.roster_title')}</h3>
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mt-1">{staff.length} {t('merchant_onboarding.staff.roster_status')}</p>
+              <h3 className="font-black text-white text-xl">{t('merchant_onboarding.staff.roster_title')}</h3>
+              <p className="text-xs font-bold text-[#C2D6C0]/60 uppercase tracking-wider mt-1">{staff.length} {t('merchant_onboarding.staff.roster_status')}</p>
             </div>
-            <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center">
-              <UserCircle size={20} className="text-blue-600" />
+            <div className="w-12 h-12 rounded-full bg-[#243026] flex items-center justify-center">
+              <UserCircle size={20} className="text-[#F3B58C]" />
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 bg-[#fafbfa]">
+          <div className="flex-1 overflow-y-auto p-4 bg-[#141A15]">
             {fetching ? (
-              <div className="flex flex-col items-center justify-center h-full text-gray-400">
-                <div className="w-8 h-8 border-4 border-[#DCE8DC] border-t-[#496246] rounded-full animate-spin mb-4"></div>
+              <div className="flex flex-col items-center justify-center h-full text-white/50">
+                <div className="w-8 h-8 border-4 border-[#2E3D30] border-t-[#8C5A3B] rounded-full animate-spin mb-4"></div>
                 <p className="text-sm font-bold">{t('merchant_onboarding.staff.loading')}</p>
               </div>
             ) : staff.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center px-8 opacity-50">
-                <UserPlus size={48} className="text-gray-300 mb-4" />
-                <h4 className="font-bold text-gray-600 mb-2">{t('merchant_onboarding.staff.empty_title')}</h4>
-                <p className="text-sm text-gray-500">{t('merchant_onboarding.staff.empty_desc')}</p>
+                <UserPlus size={48} className="text-white/40 mb-4" />
+                <h4 className="font-bold text-white mb-2">{t('merchant_onboarding.staff.empty_title')}</h4>
+                <p className="text-sm text-[#C2D6C0]">{t('merchant_onboarding.staff.empty_desc')}</p>
               </div>
             ) : (
               <div className="space-y-3">
@@ -298,29 +298,29 @@ export default function StaffPage() {
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, scale: 0.95 }}
-                      className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4 group"
+                      className="bg-[#1A231C] p-4 rounded-2xl shadow-md border border-[#2E3D30] flex items-center gap-4 group"
                     >
-                      <div className="w-12 h-12 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center overflow-hidden border border-gray-200">
-                        <UserCircle size={24} className="text-gray-400" />
+                      <div className="w-12 h-12 rounded-full bg-[#243026] flex-shrink-0 flex items-center justify-center overflow-hidden border border-white/5">
+                        <UserCircle size={24} className="text-[#F3B58C]" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
-                          <h4 className="font-bold text-gray-900 truncate">{member.name}</h4>
+                          <h4 className="font-bold text-white truncate">{member.name}</h4>
                           {member.status === 'pending' ? (
-                            <span className="text-[9px] font-black uppercase tracking-widest text-yellow-600 bg-yellow-100 px-2 py-0.5 rounded-full">{t('merchant_onboarding.staff.pending')}</span>
+                            <span className="text-[9px] font-black uppercase tracking-widest text-[#F3B58C] bg-[#3D2618] px-2 py-0.5 rounded-full border border-[#8C5A3B]/40">{t('merchant_onboarding.staff.pending')}</span>
                           ) : (
-                            <CheckCircle2 size={14} className="text-green-500" />
+                            <CheckCircle2 size={14} className="text-emerald-400" />
                           )}
                         </div>
                         <div className="flex items-center gap-3 mt-1">
-                          <span className="text-xs font-bold text-gray-500 capitalize">{member.role}</span>
-                          <span className="text-xs text-gray-400">•</span>
-                          <span className="text-xs font-mono text-gray-400">+91 {member.phone}</span>
+                          <span className="text-xs font-bold text-[#C2D6C0] capitalize">{member.role}</span>
+                          <span className="text-xs text-white/20">•</span>
+                          <span className="text-xs font-mono text-[#C2D6C0]/70">+91 {member.phone}</span>
                         </div>
                       </div>
                       <button
                         onClick={() => handleDelete(member.id)}
-                        className="w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
+                        className="w-10 h-10 rounded-full flex items-center justify-center text-white/40 hover:text-rose-400 hover:bg-rose-950/40 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
                         title="Remove staff"
                       >
                         <Trash2 size={16} />

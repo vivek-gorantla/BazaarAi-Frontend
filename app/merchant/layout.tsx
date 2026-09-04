@@ -65,7 +65,7 @@ export default function MerchantLayout({
 
   if (isOnboarding) {
     return (
-      <div className="min-h-screen bg-[#F2F7F2] font-sans relative">
+      <div className="min-h-screen bg-[#141A15] font-sans relative text-white">
         <OnboardingVoiceAgent />
         {children}
       </div>

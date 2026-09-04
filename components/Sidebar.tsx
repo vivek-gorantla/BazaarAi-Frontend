@@ -163,7 +163,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               <Store size={20} className="text-white" />
             </motion.div>
             {!isCollapsed && (
-              <span className="text-2xl font-black premium-gradient tracking-tight whitespace-nowrap">
+              <span className="text-2xl font-black text-on-surface tracking-tight whitespace-nowrap">
                 BAZAAR
               </span>
             )}
@@ -254,7 +254,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                           group relative flex items-center ${isCollapsed ? 'justify-center p-3' : 'justify-between px-3 py-3'} rounded-2xl text-sm font-medium transition-all duration-300
                           ${
                             isActive
-                              ? "bg-primary text-on-primary premium-shadow"
+                              ? "bg-primary-container text-on-primary-container shadow-sm"
                               : "text-on-surface-variant hover:bg-surface-container-high/50 hover:text-on-surface"
                           }
                         `}
@@ -262,7 +262,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                         <div className={`flex items-center relative z-10 ${isCollapsed ? 'justify-center w-full' : 'gap-3 w-full'}`} title={isCollapsed ? item.name : undefined}>
                           <item.icon
                             size={20}
-                            className={`shrink-0 transition-colors duration-300 ${isActive ? "text-on-primary" : "text-outline group-hover:text-primary"}`}
+                            className={`shrink-0 transition-colors duration-300 ${isActive ? "text-primary" : "text-outline group-hover:text-primary"}`}
                           />
                           {!isCollapsed && (
                             <span className="font-body-md whitespace-nowrap">{item.name}</span>
@@ -273,7 +273,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                             layoutId="activeIndicator"
                             className="absolute right-3"
                           >
-                            <ChevronRight size={18} className="text-on-primary/70" />
+                            <ChevronRight size={18} className="text-primary" />
                           </motion.div>
                         )}
                         {!isActive && !isCollapsed && (

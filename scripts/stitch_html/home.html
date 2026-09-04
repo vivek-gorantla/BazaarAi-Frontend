@@ -1,0 +1,279 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-tertiary":"#ffffff","on-secondary":"#ffffff","on-primary-fixed":"#2c112d","on-primary-container":"#d7aed3","surface-container-highest":"#e8e0e4","error":"#ba1a1a","tertiary-container":"#3c503a","on-error-container":"#93000a","secondary":"#625e58","inverse-surface":"#332f32","secondary-fixed":"#e8e1da","surface-tint":"#755373","surface-bright":"#fff7fb","primary-container":"#60405f","outline-variant":"#d0c3cb","on-secondary-container":"#66625c","surface-variant":"#e8e0e4","on-tertiary-fixed":"#0d200d","secondary-container":"#e5dfd7","tertiary-fixed":"#d1e9cb","inverse-on-surface":"#f6eff3","on-primary-fixed-variant":"#5c3c5b","outline":"#7e747c","error-container":"#ffdad6","on-tertiary-container":"#aac1a5","inverse-primary":"#e3badf","on-secondary-fixed-variant":"#4a4641","surface":"#fff7fb","on-surface":"#1d1b1e","on-surface-variant":"#4d444b","on-error":"#ffffff","tertiary-fixed-dim":"#b6cdb0","primary-fixed":"#ffd6fa","surface-container-lowest":"#ffffff","on-background":"#1d1b1e","secondary-fixed-dim":"#ccc6be","tertiary":"#263925","primary-fixed-dim":"#e3badf","surface-container-high":"#ede6ea","primary":"#472a47","surface-container-low":"#f9f2f6","surface-container":"#f3ecf0","on-primary":"#ffffff","surface-dim":"#dfd8dc","on-secondary-fixed":"#1e1b17","on-tertiary-fixed-variant":"#384c36","background":"#fff7fb"},"borderRadius":{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},"spacing":{"margin-mobile":"20px","gutter":"20px","margin-desktop":"120px","xl":"80px","md":"24px","base":"8px","sm":"12px","lg":"48px","xs":"4px"},"fontFamily":{"display":["Lexend"],"label-md":["Lexend"],"body-lg":["Lexend"],"headline-lg":["Lexend"],"body-md":["Lexend"],"label-sm":["Lexend"],"headline-md":["Lexend"],"headline-lg-mobile":["Lexend"]},"fontSize":{"display":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"800"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"700"}],"headline-lg-mobile":["28px",{"lineHeight":"34px","fontWeight":"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-white shadow-[0_4px_20px_rgba(96,64,95,0.05)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col"><div class="h-20 flex items-center justify-between gap-xl"><div class="flex items-center gap-md"><img alt="Bazaar Logo" class="h-10 w-10 rounded-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/><span class="font-headline-md text-headline-md text-primary tracking-tight">Bazaar</span></div><div class="flex-1 flex items-center gap-md"><div class="flex items-center gap-xs px-md py-sm bg-surface-container-low rounded-full min-w-[180px]"><span class="material-symbols-outlined text-primary text-[20px]">location_on</span><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant">Deliver to:</span><span class="font-label-md text-label-md text-on-surface truncate">Hyderabad, TS</span></div></div><div class="relative flex-1 group"><span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span><input class="w-full h-12 pl-12 pr-4 bg-surface-container-low border-none rounded-full font-body-md focus:ring-2 focus:ring-primary-container transition-all" placeholder="What are you looking for?" type="text"/></div></div><div class="flex items-center gap-md"><a class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="orders" href="#"><span class="material-symbols-outlined">receipt_long</span><span class="font-label-sm text-label-sm">Orders</span></a><a class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="wishlist" href="#"><span class="material-symbols-outlined">favorite</span><span class="font-label-sm text-label-sm">Wishlist</span></a><a class="relative flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="cart" href="#"><span class="material-symbols-outlined">shopping_bag</span><span class="absolute -top-1 -right-1 bg-primary text-on-primary text-[10px] w-4 h-4 flex items-center justify-center rounded-full">3</span><span class="font-label-sm text-label-sm">Cart</span></a><a class="ml-4 flex items-center gap-base p-xs rounded-full bg-surface-container hover:bg-surface-container-high transition-colors" data-path="account" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/><span class="material-symbols-outlined text-on-surface-variant">expand_more</span></a></div></div><nav class="h-12 flex items-center gap-xl border-t border-surface-container-highest" data-active-classes="text-primary font-bold border-b-2 border-primary"><a aria-current="page" class="h-full flex items-center transition-colors text-primary font-bold border-b-2 border-primary" data-path="home" href="#">Home</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="explore" href="#">Explore</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="categories" href="#">Categories</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="stores" href="#">Stores</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="offers" href="#">Offers</a></nav></div></header><main class="w-full pt-[128px] bg-background min-h-screen"><div class="flex flex-col w-full">
+<!-- Hero Section -->
+<section class="relative w-full overflow-hidden mb-margin-desktop bg-surface-container-lowest">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-16 lg:py-32 flex flex-col lg:flex-row items-center gap-xl relative z-10">
+<div class="flex-1 flex flex-col items-start gap-md z-20">
+<h1 class="font-display text-display text-primary leading-tight max-w-2xl">
+          Shop your neighborhood.
+        </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mb-sm">
+          Everything you need from stores you already know. Premium curation meets local convenience.
+        </p>
+<button class="bg-primary text-on-primary px-8 py-4 rounded-full font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-all shadow-[0_4px_20px_rgba(96,64,95,0.05)] hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)]">
+          Explore nearby
+        </button>
+</div>
+<div class="flex-1 relative w-full h-[400px] lg:h-[600px] rounded-[48px] overflow-hidden shadow-[0_12px_40px_rgba(96,64,95,0.12)] bg-surface-container">
+<div class="absolute inset-0 bg-cover bg-center w-full h-full mix-blend-multiply" data-alt="High-end editorial illustration of a friendly local street scene in India, featuring a charming Kirana store with fresh produce out front, a sleek delivery rider on a scooter, and stylized shopping bags. The style should be modern, tactile, and minimalist, utilizing the brand palette of warm cream, deep plum, soft peach, and sage green, with soft ambient shadows and organic shapes." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDnEnDG9WQvpu8RWDmm8S-U09KwCWGhWoDhm530ChqdifVM9FWds_r2XQX4o4kjImz8heUaENu796em9QQsGiAlQ9Ih7dGTMKunsC4RdXfXLDx6WSFo8VRJ6ZvgrLKz9Ipmhzn-4bceUBKewwrNvweM34y980OuecwDYOIC1oJDkXTcYC5wcW0BUXYs91UvC4euubClXwjjjWn-1vDuJIfzh9K449rmWFkNoTrqlA4_AJZITIpET9I')"></div>
+</div>
+</div>
+<!-- Decorative Ambient Blur -->
+<div class="absolute top-0 right-0 w-[800px] h-[800px] bg-primary-fixed-dim/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4 pointer-events-none z-0"></div>
+<div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-tertiary-fixed-dim/20 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 pointer-events-none z-0"></div>
+</section>
+<!-- Categories Section -->
+<section class="max-w-[1440px] mx-auto px-6 lg:px-12 mb-margin-desktop w-full relative">
+<div class="flex items-center justify-between mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-4">
+        Shop by category
+        <span class="w-12 h-[2px] bg-primary/20 rounded-full"></span>
+</h2>
+<div class="flex gap-4">
+<button class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors shadow-[0_4px_20px_rgba(96,64,95,0.05)]" id="cat-scroll-left">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors shadow-[0_4px_20px_rgba(96,64,95,0.05)]" id="cat-scroll-right">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="flex gap-xl overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar" id="category-container">
+<!-- Category Item -->
+<a class="group flex flex-col items-center gap-sm min-w-[140px] snap-start" href="#">
+<div class="w-32 h-32 rounded-full bg-surface-container flex items-center justify-center relative overflow-hidden group-hover:-translate-y-2 transition-transform duration-300 shadow-[0_4px_20px_rgba(96,64,95,0.05)] group-hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)]">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-fixed/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-[48px] text-primary relative z-10">shopping_basket</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-primary transition-colors">Groceries</span>
+</a>
+<a class="group flex flex-col items-center gap-sm min-w-[140px] snap-start" href="#">
+<div class="w-32 h-32 rounded-full bg-surface-container flex items-center justify-center relative overflow-hidden group-hover:-translate-y-2 transition-transform duration-300 shadow-[0_4px_20px_rgba(96,64,95,0.05)] group-hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)]">
+<div class="absolute inset-0 bg-gradient-to-br from-tertiary-fixed/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-[48px] text-tertiary relative z-10">nutrition</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-tertiary transition-colors">Fresh Produce</span>
+</a>
+<a class="group flex flex-col items-center gap-sm min-w-[140px] snap-start" href="#">
+<div class="w-32 h-32 rounded-full bg-surface-container flex items-center justify-center relative overflow-hidden group-hover:-translate-y-2 transition-transform duration-300 shadow-[0_4px_20px_rgba(96,64,95,0.05)] group-hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)]">
+<div class="absolute inset-0 bg-gradient-to-br from-secondary-fixed/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-[48px] text-secondary relative z-10">water_drop</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-secondary transition-colors">Dairy</span>
+</a>
+<a class="group flex flex-col items-center gap-sm min-w-[140px] snap-start" href="#">
+<div class="w-32 h-32 rounded-full bg-surface-container flex items-center justify-center relative overflow-hidden group-hover:-translate-y-2 transition-transform duration-300 shadow-[0_4px_20px_rgba(96,64,95,0.05)] group-hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)]">
+<div class="absolute inset-0 bg-gradient-to-br from-error-container/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-[48px] text-on-error-container relative z-10">cookie</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-on-error-container transition-colors">Snacks</span>
+</a>
+<a class="group flex flex-col items-center gap-sm min-w-[140px] snap-start" href="#">
+<div class="w-32 h-32 rounded-full bg-surface-container flex items-center justify-center relative overflow-hidden group-hover:-translate-y-2 transition-transform duration-300 shadow-[0_4px_20px_rgba(96,64,95,0.05)] group-hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)]">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-fixed/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-[48px] text-primary relative z-10">local_cafe</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-primary transition-colors">Beverages</span>
+</a>
+<a class="group flex flex-col items-center gap-sm min-w-[140px] snap-start" href="#">
+<div class="w-32 h-32 rounded-full bg-surface-container flex items-center justify-center relative overflow-hidden group-hover:-translate-y-2 transition-transform duration-300 shadow-[0_4px_20px_rgba(96,64,95,0.05)] group-hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)]">
+<div class="absolute inset-0 bg-gradient-to-br from-tertiary-fixed/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-[48px] text-tertiary relative z-10">spa</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-tertiary transition-colors">Personal Care</span>
+</a>
+<a class="group flex flex-col items-center gap-sm min-w-[140px] snap-start" href="#">
+<div class="w-32 h-32 rounded-full bg-surface-container-high flex items-center justify-center relative overflow-hidden group-hover:-translate-y-2 transition-transform duration-300 shadow-[0_4px_20px_rgba(96,64,95,0.05)] group-hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)]">
+<span class="material-symbols-outlined text-[32px] text-on-surface-variant">arrow_forward</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-primary transition-colors">View All</span>
+</a>
+</div>
+</section>
+<!-- Nearby Stores Bento Grid -->
+<section class="max-w-[1440px] mx-auto px-6 lg:px-12 mb-margin-desktop w-full relative">
+<div class="flex items-end justify-between mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-4">
+        Stores near you
+      </h2>
+<a class="font-label-md text-label-md text-primary hover:text-primary-container transition-colors" href="#">See all stores</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Large Feature Store -->
+<a class="col-span-1 md:col-span-2 lg:col-span-2 row-span-2 group block" href="#">
+<div class="relative w-full h-full min-h-[400px] bg-surface-container rounded-[32px] overflow-hidden shadow-[0_4px_20px_rgba(96,64,95,0.05)] group-hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] transition-shadow">
+<div class="absolute inset-0 bg-cover bg-center w-full h-full transform group-hover:scale-105 transition-transform duration-700" data-alt="High quality photography of a beautiful, well-lit modern Indian grocery store front. Warm lighting, neatly stacked fresh produce, premium aesthetic, shallow depth of field." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA7uIp0Y8FFNEYeqJQgEGrstb-4C6nivm-4V2BhOU58H2R-TW6GbbHxzV4x3yOkZcIEJi8g0pM3PpjzYP4jv6xSeAPuTj3FkoVyEDxGZ4DLdT1adt0IdPvBGYcV-aVA7UfSS76ShigZlLAQ2o5ADl2kZ304Chx3SF_RhTEbQmFpIFfycOfGYBuDURv-WjgucjaztdtaJBYNxxwrjgdjuz7pahl7LLBfZgM7y04hAmq61Q0YTY5_AR0')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent"></div>
+<div class="absolute top-6 left-6 bg-tertiary/90 backdrop-blur text-on-tertiary px-4 py-2 rounded-full font-label-md text-label-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+            Local Favorite
+          </div>
+<div class="absolute bottom-8 left-8 right-8 flex justify-between items-end">
+<div class="flex flex-col gap-2">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Sri Lakshmi Stores</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">location_on</span> 0.6 km away
+              </p>
+</div>
+<div class="flex items-center gap-2 bg-surface px-4 py-2 rounded-full shadow-[0_4px_20px_rgba(96,64,95,0.05)]">
+<span class="material-symbols-outlined text-[#F9A826]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md text-on-surface">4.8</span>
+</div>
+</div>
+</div>
+</a>
+<!-- Store Card 2 -->
+<a class="col-span-1 group block" href="#">
+<div class="relative w-full h-[300px] bg-surface-container rounded-[32px] overflow-hidden shadow-[0_4px_20px_rgba(96,64,95,0.05)] group-hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] transition-shadow">
+<div class="absolute inset-0 bg-cover bg-center w-full h-full transform group-hover:scale-105 transition-transform duration-700" data-alt="Tactile, editorial shot of organic vegetables in woven baskets inside a small boutique mart, warm sunlight filtering through." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAuyPhhaVPCxg9ckGA7lC-5xKb_1wBLCkikqaFBsaSMEBlK6Mbk0M6dymW1LtRMrmsOfSd8sYUv_b2eaARvPZtFkTq_MuqBVixYgGAIX8BYz_olydyutn_kcWpyzG41OQKJqhcDijsHl30T10lLofr4no8C3faqlmINNrSB41zDWBbsuUhxsfDOI6ueh-0sKc737uPDU4o0hbLZq1cX_ijAm1bC2YkV7PWD2r1G0Et6Zzc8to1B8X8')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Ravi Kirana</h3>
+<div class="flex items-center justify-between">
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]">location_on</span> 1.2 km away
+              </p>
+<div class="flex items-center gap-1 bg-surface/80 backdrop-blur px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-[#F9A826] text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm text-on-surface">4.5</span>
+</div>
+</div>
+</div>
+</div>
+</a>
+<!-- Store Card 3 -->
+<a class="col-span-1 group block" href="#">
+<div class="relative w-full h-[300px] bg-surface-container rounded-[32px] overflow-hidden shadow-[0_4px_20px_rgba(96,64,95,0.05)] group-hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] transition-shadow flex flex-col justify-end p-6">
+<div class="absolute inset-0 bg-surface-container-high mix-blend-multiply opacity-50"></div>
+<div class="absolute inset-0 bg-cover bg-center w-full h-full opacity-40" data-alt="Abstract map visualization showing neighborhood streets with a glowing pin icon, modern minimal style in brand colors." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAvDj9jOkGn1pBnrGqjKQRN194mfZO_OSn2JZns_V7qxlZ_xRyBnh7lbpomrUmvxdoO-DyvLJKCpfP_UZwE7-45DCswnrc47dWBmVlVrG8OgdouKuefwoAO4Tb116xuBbHKE8lB-5qrYVbW2Q5W0MI2_OrEMOx5cORmpVxxpNXoBmxIsstpMdtdDEVwy--BG2ydbeigKujqqRqQTnFOsQnZizg77wICBYLe10tqdXQR92mA35ttxqs')"></div>
+<div class="relative z-10">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Local Mart</h3>
+<div class="flex items-center justify-between">
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]">location_on</span> 2.0 km away
+              </p>
+<div class="flex items-center gap-1 bg-surface/80 backdrop-blur px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-[#F9A826] text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm text-on-surface">4.2</span>
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+</section>
+<!-- Product Discovery / Fresh Finds -->
+<section class="max-w-[1440px] mx-auto px-6 lg:px-12 mb-margin-desktop w-full relative">
+<div class="flex flex-col items-center justify-center text-center mb-xl">
+<span class="font-label-md text-label-md text-primary tracking-widest uppercase mb-4">Curated For You</span>
+<h2 class="font-display text-[40px] text-on-surface">Fresh finds near you</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-lg">
+<!-- Product 1 -->
+<div class="bg-surface-container-lowest rounded-[32px] p-4 flex flex-col shadow-[0_4px_20px_rgba(96,64,95,0.05)] hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] transition-all group relative">
+<div class="absolute top-6 left-6 bg-error-container text-on-error-container px-3 py-1 rounded-full font-label-sm text-label-sm z-10">
+          8% OFF
+        </div>
+<div class="w-full aspect-square rounded-[24px] bg-surface-container mb-6 overflow-hidden relative">
+<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="High-resolution product photography of a carton of Amul Taaza Milk on a pristine clean background with soft dramatic shadows, premium feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ66YUs7ANW8J-5LDJ8Jie7SPA41ywcd0GZntYoG6Ph0zAetQYpOAPCO8LtMzzwMSosgwtNN-Mm8CD7cf-lZC0j3EqcwR-WY4tJT33oSJy1q0EKCiTcTA1CU8fPng4qrALSkHL1cpRJs0_75b7aTLKfXANcWvRN38QhOTEHWrjAM322r7g3VXZ3DsVS1LD3HhxkLjVIRRmCLv9tBOtKfr3e9PYiKr1wmZogcatt9Y9zTQvElZrCL4"/>
+</div>
+<div class="flex flex-col flex-1 px-2">
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold mb-1 truncate">Amul Taaza Milk</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-4">500ml</p>
+<div class="flex items-end justify-between mt-auto pt-4 relative">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant line-through opacity-60">₹70</span>
+<span class="font-headline-md text-headline-md text-primary">₹64</span>
+</div>
+<button class="w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-md absolute right-0 bottom-0 translate-y-2 translate-x-2">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="bg-surface-container-lowest rounded-[32px] p-4 flex flex-col shadow-[0_4px_20px_rgba(96,64,95,0.05)] hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] transition-all group relative">
+<div class="w-full aspect-square rounded-[24px] bg-surface-container mb-6 overflow-hidden relative">
+<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="Close up high-end photography of vibrant fresh organic tomatoes with water droplets, soft natural lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx7kQmefZl8H151begW5ERzoW7CLXh0vjCFhqI-YTbd3UO5ofYHCW2igquv5nQshzqubRY1aV9Y3EpmqW_4wCplLmZe98enJFEf6Lo8fH5cri7eWPI_GazC0H3Tt9PrBkGTnIWokPuGOXlhAD8CtLL_fFGpWX_yadhS6Glx9fGCCXrkz8e6Z7M2gckwphgu6XRruTkpLJRUDnhgRhuQUxyj6t2wtPc0S2IUIcYuKIue6q2YJcl6_E"/>
+</div>
+<div class="flex flex-col flex-1 px-2">
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold mb-1 truncate">Fresh Organic Tomatoes</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-4">1 kg • Locally Sourced</p>
+<div class="flex items-end justify-between mt-auto pt-4 relative">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary">₹120</span>
+</div>
+<button class="w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-md absolute right-0 bottom-0 translate-y-2 translate-x-2">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="bg-surface-container-lowest rounded-[32px] p-4 flex flex-col shadow-[0_4px_20px_rgba(96,64,95,0.05)] hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] transition-all group relative">
+<div class="w-full aspect-square rounded-[24px] bg-surface-container mb-6 overflow-hidden relative">
+<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="Rustic artisan sourdough bread loaf sliced on a wooden board, moody premium bakery lighting, macro shot." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFUscaHnh-xMNSkg5rjywum7WTgyy2_sb0M3fdkQp5Rrx4QZy5kQPrCp-sZV_buZNtMxDIuV7jM8Sdx5_tamwhGvNZz9LiIPa6WbH8JVh8YPbF2neab7qC_OGirTuCyJKGtO9cl8L6vMKXv9FI6rGKNJQhQTDms3g9A2uf-ehTenDEJrEPafUj-KyqvukeMQivgleNxdRXfWfi9BhhiaguwkdCMbR8m6Au4kLFoOkyKtW6tW4eYxo"/>
+</div>
+<div class="flex flex-col flex-1 px-2">
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold mb-1 truncate">Artisan Sourdough Bread</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-4">400g • Freshly Baked</p>
+<div class="flex items-end justify-between mt-auto pt-4 relative">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary">₹185</span>
+</div>
+<button class="w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-md absolute right-0 bottom-0 translate-y-2 translate-x-2">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="bg-surface-container-lowest rounded-[32px] p-4 flex flex-col shadow-[0_4px_20px_rgba(96,64,95,0.05)] hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] transition-all group relative">
+<div class="w-full aspect-square rounded-[24px] bg-surface-container mb-6 overflow-hidden relative flex items-center justify-center bg-surface-container-highest">
+<span class="font-headline-md text-primary">More Finds</span>
+</div>
+<div class="flex flex-col flex-1 px-2 items-center text-center justify-center">
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold mb-2">Explore 500+ items</h4>
+<button class="text-primary font-label-md hover:underline decoration-2 underline-offset-4">Browse All</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Support Local Banner -->
+<section class="max-w-[1440px] mx-auto px-6 lg:px-12 w-full">
+<div class="w-full bg-tertiary text-on-tertiary rounded-[32px] p-8 lg:p-12 relative overflow-hidden shadow-[0_4px_20px_rgba(96,64,95,0.05)]">
+<!-- Decorative Elements -->
+<div class="absolute -right-12 -top-12 w-64 h-64 bg-tertiary-fixed-dim/20 rounded-full blur-2xl"></div>
+<div class="absolute right-32 bottom-0 w-32 h-32 bg-primary-fixed-dim/20 rounded-full blur-xl"></div>
+<div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="flex flex-col gap-4 max-w-xl text-center md:text-left">
+<h2 class="font-headline-lg text-headline-lg text-on-tertiary">Loved by your neighborhood.</h2>
+<p class="font-body-lg text-body-lg opacity-90">Support local businesses and get the freshest items delivered straight to your door. The bazaar experience, digitized.</p>
+</div>
+<div class="flex-shrink-0">
+<div class="w-24 h-24 rounded-full bg-surface-container-lowest flex items-center justify-center -mt-8 -ml-8 md:mt-0 md:ml-0 rotate-12 shadow-xl">
+<span class="material-symbols-outlined text-[48px] text-tertiary" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<script>
+  // Simple horizontal scroll for categories
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('category-container');
+    const leftBtn = document.getElementById('cat-scroll-left');
+    const rightBtn = document.getElementById('cat-scroll-right');
+
+    const scrollAmount = 300;
+
+    leftBtn.addEventListener('click', () => {
+      container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    rightBtn.addEventListener('click', () => {
+      container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+  });
+</script></main><footer class="w-full bg-surface-container-low py-lg mt-xl"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center gap-md"><span class="font-headline-md text-primary opacity-50">Bazaar</span><div class="flex gap-lg text-on-surface-variant font-label-md"><a class="hover:text-primary" href="#">Privacy</a><a class="hover:text-primary" href="#">Terms</a><a class="hover:text-primary" href="#">Help</a></div><p class="text-on-surface-variant font-label-sm opacity-60">© 2024 Bazaar Customer Platform. Premium Discovery.</p></div></footer></body></html>

@@ -40,7 +40,7 @@ export default function CustomerSignupPage() {
         body: JSON.stringify({ 
           name, 
           phone, 
-          role: "buyer",
+          role: "customer",
           preferredLanguage: selectedLang,
           translateContent 
         }),
@@ -54,8 +54,10 @@ export default function CustomerSignupPage() {
       
       localStorage.setItem("buyer_token", data.data.token);
       localStorage.setItem("buyer_user", JSON.stringify(data.data.user));
+      localStorage.setItem("bazaar_customer_token", data.data.token);
+      localStorage.setItem("bazaar_customer_user", JSON.stringify(data.data.user));
       
-      router.push("/");
+      router.push("/customer");
     } catch (err: any) {
       setError(err.message);
     } finally {

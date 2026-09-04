@@ -9,11 +9,11 @@ import { AgentTextarea } from "../../../../agent/components/AgentTextarea";
 import { AgentUIRegistry } from "../../../../agent/registry";
 
 const THEME_COLORS = [
-  { name: "Green", hex: "#496246" },
-  { name: "Brown", hex: "#8C5A3B" },
-  { name: "Blue", hex: "#2B536C" },
-  { name: "Red", hex: "#943A3A" },
-  { name: "Purple", hex: "#5C466A" },
+  { name: "Sage Green", hex: "#748F70" },
+  { name: "Forest Dark", hex: "#496246" },
+  { name: "Terracotta", hex: "#F3B58C" },
+  { name: "Warm Tan", hex: "#8C5A3B" },
+  { name: "Charcoal", hex: "#1F2923" },
 ];
 
 export default function StoreIdentityPage() {
@@ -112,20 +112,20 @@ export default function StoreIdentityPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F2F7F2] font-sans pb-20">
+    <div className="min-h-screen bg-[#141A15] font-sans pb-20 text-white">
       {/* Top Navbar */}
       <nav className="flex items-center justify-between px-8 py-4 bg-transparent">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-black flex items-center justify-center rounded-sm">
-            <div className="w-4 h-0.5 bg-white" />
+          <div className="w-8 h-8 bg-white flex items-center justify-center rounded-sm">
+            <div className="w-4 h-0.5 bg-black" />
           </div>
-          <span className="text-[10px] font-bold tracking-widest uppercase text-gray-800">
+          <span className="text-[10px] font-bold tracking-widest uppercase text-white/90">
             {t('merchant_onboarding.title')}
           </span>
         </div>
-        <div className="flex items-center gap-4 text-sm font-medium text-gray-600">
+        <div className="flex items-center gap-4 text-sm font-medium text-white/70">
           <span>{t('merchant_onboarding.help')}</span>
-          <div className="w-8 h-8 rounded-full bg-[#496246] flex items-center justify-center text-white text-xs">
+          <div className="w-8 h-8 rounded-full bg-[#496246] flex items-center justify-center text-white text-xs font-bold">
             A
           </div>
         </div>
@@ -133,14 +133,14 @@ export default function StoreIdentityPage() {
 
       {/* Stepper */}
       <div className="max-w-6xl mx-auto px-6 mt-4">
-        <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-[11px] sm:text-xs font-bold uppercase tracking-widest text-gray-400">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-[11px] sm:text-xs font-bold uppercase tracking-widest text-white/40">
           {steps.map((step, index) => (
             <div key={step.name} className="flex items-center gap-2 sm:gap-4">
-              <span className={step.active ? "text-[#496246]" : ""}>
+              <span className={step.active ? "text-[#F3B58C]" : ""}>
                 {step.name}
               </span>
               {index < steps.length - 1 && (
-                <span className="text-gray-300">&gt;</span>
+                <span className="text-white/20">&gt;</span>
               )}
             </div>
           ))}
@@ -151,68 +151,68 @@ export default function StoreIdentityPage() {
         {/* Left Column: Form */}
         <div className="flex-1 max-w-xl">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <h1 className="text-4xl font-black text-gray-900 mb-4">{t('merchant_onboarding.identity.title')}</h1>
-            <p className="text-gray-600 mb-8 max-w-md">
+            <h1 className="text-4xl font-black text-white mb-4">{t('merchant_onboarding.identity.title')}</h1>
+            <p className="text-[#C2D6C0] mb-8 max-w-md">
               {t('merchant_onboarding.identity.subtitle')}
             </p>
           </motion.div>
 
           <div className="space-y-6">
             {/* Store Banner */}
-            <div className="bg-white rounded-[24px] p-6 shadow-sm">
-              <h3 className="font-bold text-gray-900 mb-1">{t('merchant_onboarding.identity.banner_title')}</h3>
-              <p className="text-xs text-gray-500 mb-4">{t('merchant_onboarding.identity.banner_desc')}</p>
+            <div className="bg-[#1A231C] rounded-[24px] p-6 shadow-xl border border-[#2E3D30]">
+              <h3 className="font-bold text-white mb-1">{t('merchant_onboarding.identity.banner_title')}</h3>
+              <p className="text-xs text-[#C2D6C0]/80 mb-4">{t('merchant_onboarding.identity.banner_desc')}</p>
 
               <div
                 onClick={() => handleSimulatedUpload("bannerUrl")}
-                className="w-full h-32 bg-[#F2F7F2] rounded-xl border-2 border-dashed border-[#B0D1B0] flex flex-col items-center justify-center cursor-pointer hover:bg-[#E8F0E7] transition-colors relative overflow-hidden"
+                className="w-full h-32 bg-[#243026] rounded-xl border-2 border-dashed border-[#496246]/50 flex flex-col items-center justify-center cursor-pointer hover:bg-[#2A382C] transition-colors relative overflow-hidden"
               >
                 {formData.bannerUrl ? (
                   <img src={formData.bannerUrl} alt="Banner" className="absolute inset-0 w-full h-full object-cover" />
                 ) : (
                   <>
-                    <div className="w-10 h-10 rounded-full bg-[#DCE8DC] flex items-center justify-center text-[#496246] mb-2">
+                    <div className="w-10 h-10 rounded-full bg-[#496246] flex items-center justify-center text-white mb-2">
                       <ImageIcon size={18} />
                     </div>
-                    <span className="text-xs font-bold text-[#496246]">{t('merchant_onboarding.identity.upload_prompt')}</span>
+                    <span className="text-xs font-bold text-[#F3B58C]">{t('merchant_onboarding.identity.upload_prompt')}</span>
                   </>
                 )}
               </div>
             </div>
 
             {/* Store Logo */}
-            <div className="bg-white rounded-[24px] p-6 shadow-sm flex items-center justify-between">
+            <div className="bg-[#1A231C] rounded-[24px] p-6 shadow-xl border border-[#2E3D30] flex items-center justify-between">
               <div>
-                <h3 className="font-bold text-gray-900 mb-1">{t('merchant_onboarding.identity.logo_title')}</h3>
-                <p className="text-xs text-gray-500 mb-4 max-w-[200px]">{t('merchant_onboarding.identity.logo_desc')}</p>
+                <h3 className="font-bold text-white mb-1">{t('merchant_onboarding.identity.logo_title')}</h3>
+                <p className="text-xs text-[#C2D6C0]/80 mb-4 max-w-[200px]">{t('merchant_onboarding.identity.logo_desc')}</p>
                 <button
                   onClick={() => handleSimulatedUpload("logoUrl")}
-                  className="px-4 py-2 bg-[#F2F7F2] text-[#496246] font-bold text-xs rounded-lg flex items-center gap-2 hover:bg-[#E8F0E7] transition-colors"
+                  className="px-4 py-2 bg-[#496246] text-white font-bold text-xs rounded-lg flex items-center gap-2 hover:bg-[#3A4E38] transition-colors"
                 >
                   <ImageIcon size={14} />
                   Upload Logo
                 </button>
               </div>
-              <div className="w-24 h-24 rounded-full border-2 border-dashed border-[#B0D1B0] bg-[#F2F7F2] flex items-center justify-center relative overflow-hidden flex-shrink-0">
+              <div className="w-24 h-24 rounded-full border-2 border-dashed border-[#496246]/50 bg-[#243026] flex items-center justify-center relative overflow-hidden flex-shrink-0">
                 {formData.logoUrl ? (
                   <img src={formData.logoUrl} alt="Logo" className="w-full h-full object-cover" />
                 ) : (
-                  <Store size={24} className="text-[#496246]" />
+                  <Store size={24} className="text-[#F3B58C]" />
                 )}
               </div>
             </div>
 
             {/* Brand Theme */}
-            <div className="bg-white rounded-[24px] p-6 shadow-sm">
-              <h3 className="font-bold text-gray-900 mb-1">{t('merchant_onboarding.identity.theme_title')}</h3>
-              <p className="text-xs text-gray-500 mb-4">{t('merchant_onboarding.identity.theme_desc')}</p>
+            <div className="bg-[#1A231C] rounded-[24px] p-6 shadow-xl border border-[#2E3D30]">
+              <h3 className="font-bold text-white mb-1">{t('merchant_onboarding.identity.theme_title')}</h3>
+              <p className="text-xs text-[#C2D6C0]/80 mb-4">{t('merchant_onboarding.identity.theme_desc')}</p>
 
               <div className="flex items-center gap-3">
                 {THEME_COLORS.map(color => (
                   <button
                     key={color.hex}
                     onClick={() => setFormData({ ...formData, themeColor: color.hex })}
-                    className="w-10 h-10 rounded-full flex items-center justify-center transition-transform hover:scale-110 relative"
+                    className="w-10 h-10 rounded-full flex items-center justify-center transition-transform hover:scale-110 relative border border-white/20"
                     style={{ backgroundColor: color.hex }}
                   >
                     {formData.themeColor === color.hex && (
@@ -220,17 +220,17 @@ export default function StoreIdentityPage() {
                     )}
                   </button>
                 ))}
-                <div className="w-px h-8 bg-gray-200 mx-2" />
-                <button className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200">
+                <div className="w-px h-8 bg-white/10 mx-2" />
+                <button className="w-10 h-10 rounded-full bg-[#243026] flex items-center justify-center text-white/80 hover:bg-[#2A382C]">
                   <Edit2 size={16} />
                 </button>
               </div>
             </div>
 
             {/* Store Description */}
-            <div className="bg-white rounded-[24px] p-6 shadow-sm">
-              <h3 className="font-bold text-gray-900 mb-1">{t('merchant_onboarding.identity.desc_title')}</h3>
-              <p className="text-xs text-gray-500 mb-4">{t('merchant_onboarding.identity.desc_subtitle')}</p>
+            <div className="bg-[#1A231C] rounded-[24px] p-6 shadow-xl border border-[#2E3D30]">
+              <h3 className="font-bold text-white mb-1">{t('merchant_onboarding.identity.desc_title')}</h3>
+              <p className="text-xs text-[#C2D6C0]/80 mb-4">{t('merchant_onboarding.identity.desc_subtitle')}</p>
 
               <div className="relative">
                 <AgentTextarea
@@ -244,9 +244,9 @@ export default function StoreIdentityPage() {
                     }
                   }}
                   placeholder={t('merchant_onboarding.identity.desc_placeholder')}
-                  className="w-full h-32 px-4 py-3 bg-[#F2F7F2] rounded-xl border-none focus:ring-2 focus:ring-[#496246]/20 transition-all text-sm resize-none text-gray-700 placeholder-gray-400"
+                  className="w-full h-32 px-4 py-3 bg-[#141A15] rounded-xl border border-[#2E3D30] focus:ring-2 focus:ring-[#F3B58C]/40 transition-all text-sm resize-none text-white placeholder-[#7A9378]"
                 />
-                <span className="absolute bottom-3 right-4 text-xs font-bold text-gray-400">
+                <span className="absolute bottom-3 right-4 text-xs font-bold text-white/40">
                   {formData.description.length}/500
                 </span>
               </div>
@@ -257,14 +257,14 @@ export default function StoreIdentityPage() {
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => router.back()}
-                  className="px-6 py-4 bg-[#E8F0E7] text-[#496246] rounded-xl font-bold text-sm tracking-wide hover:bg-[#DCE8DC] transition-colors"
+                  className="px-6 py-4 bg-[#243026] text-white rounded-xl font-bold text-sm tracking-wide hover:bg-[#2A382C] transition-colors border border-[#3A4E38]"
                 >
                   Back
                 </button>
                 <button
                   onClick={() => handleSave(true)}
                   disabled={loading}
-                  className="px-6 py-4 bg-white text-gray-700 rounded-xl font-bold text-sm tracking-wide shadow-sm hover:shadow-md transition-shadow disabled:opacity-50"
+                  className="px-6 py-4 bg-[#1A231C] text-white/90 rounded-xl font-bold text-sm tracking-wide border border-[#2E3D30] hover:bg-[#243026] transition-all disabled:opacity-50"
                 >
                   Save Draft
                 </button>
@@ -273,14 +273,14 @@ export default function StoreIdentityPage() {
               <div className="flex items-center gap-4">
                 <button
                   onClick={() => router.push("/merchant/merchant-onboarding/location-delivery")}
-                  className="px-6 py-4 text-[#496246] font-bold text-sm tracking-wide hover:bg-[#496246]/10 rounded-xl transition-all"
+                  className="px-6 py-4 text-[#F3B58C] font-bold text-sm tracking-wide hover:bg-[#8C5A3B]/20 rounded-xl transition-all"
                 >
                   SKIP FOR NOW
                 </button>
                 <button
                   onClick={() => handleSave(false)}
                   disabled={loading}
-                  className="px-8 py-4 bg-[#496246] hover:bg-[#3A4E38] text-white rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all shadow-[0_8px_16px_rgba(73,98,70,0.2)] hover:-translate-y-0.5 disabled:opacity-50"
+                  className="px-8 py-4 bg-[#8C5A3B] hover:bg-[#784B2E] text-white rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all shadow-[0_8px_20px_rgba(140,90,59,0.4)] hover:-translate-y-0.5 disabled:opacity-50"
                 >
                   {loading ? t('merchant_onboarding.identity.saving') : t('merchant_onboarding.identity.next')}
                   <ArrowRight size={16} />
@@ -292,50 +292,50 @@ export default function StoreIdentityPage() {
 
         {/* Right Column: Live Preview */}
         <div className="w-full lg:w-[400px]">
-          <div className="flex items-center gap-2 text-[#D68C5E] font-bold text-xs uppercase tracking-widest mb-6">
-            <div className="w-6 h-6 rounded-full bg-[#FFF0E5] flex items-center justify-center">
+          <div className="flex items-center gap-2 text-[#F3B58C] font-bold text-xs uppercase tracking-widest mb-6">
+            <div className="w-6 h-6 rounded-full bg-[#8C5A3B]/30 flex items-center justify-center">
               <span className="material-symbols-outlined text-[14px]">visibility</span>
             </div>
             {t('merchant_onboarding.identity.preview_title')}
           </div>
 
-          <div className="bg-white rounded-[40px] shadow-2xl p-2 border-[8px] border-gray-100 overflow-hidden relative min-h-[600px]">
+          <div className="bg-[#1A231C] rounded-[40px] shadow-2xl p-2 border-[8px] border-[#2E3D30] overflow-hidden relative min-h-[600px]">
             {/* Phone Header Mock */}
-            <div className="w-32 h-6 bg-gray-100 rounded-b-3xl mx-auto absolute top-0 inset-x-0 z-20" />
+            <div className="w-32 h-6 bg-[#0F1410] rounded-b-3xl mx-auto absolute top-0 inset-x-0 z-20" />
 
-            <div className="w-full h-full bg-gray-50 rounded-[32px] overflow-hidden relative">
+            <div className="w-full h-full bg-[#141A15] rounded-[32px] overflow-hidden relative">
               {/* Banner */}
-              <div className="h-40 bg-gray-300 relative">
+              <div className="h-40 bg-[#243026] relative">
                 {formData.bannerUrl ? (
                   <img src={formData.bannerUrl} alt="Banner" className="w-full h-full object-cover" />
                 ) : (
-                  <div className="absolute inset-0 bg-gradient-to-b from-gray-400 to-gray-500 opacity-20" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#8C5A3B]/30 to-[#141A15]" />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#141A15] to-transparent" />
               </div>
 
               {/* Store Content */}
               <div className="px-6 pb-6 relative">
                 <div className="flex justify-between items-end -mt-10 mb-4 relative z-10">
-                  <div className="w-20 h-20 rounded-full border-4 border-white bg-gray-100 flex items-center justify-center overflow-hidden">
+                  <div className="w-20 h-20 rounded-full border-4 border-[#141A15] bg-[#243026] flex items-center justify-center overflow-hidden">
                     {formData.logoUrl ? (
                       <img src={formData.logoUrl} alt="Logo" className="w-full h-full object-cover" />
                     ) : (
-                      <Store size={24} className="text-gray-400" />
+                      <Store size={24} className="text-[#F3B58C]" />
                     )}
                   </div>
                   <div
-                    className="px-3 py-1 rounded-full text-white text-[10px] font-bold tracking-wider mb-2"
+                    className="px-3 py-1 rounded-full text-white text-[10px] font-bold tracking-wider mb-2 shadow-md"
                     style={{ backgroundColor: formData.themeColor }}
                   >
                     {t('merchant_onboarding.identity.open_now')}
                   </div>
                 </div>
 
-                <h2 className="text-2xl font-black text-gray-900 mb-1">{storeName}</h2>
-                <p className="text-xs text-gray-500 font-medium mb-6">{t('merchant_onboarding.identity.preview_cat')}</p>
+                <h2 className="text-2xl font-black text-white mb-1">{storeName}</h2>
+                <p className="text-xs text-[#C2D6C0] font-medium mb-6">{t('merchant_onboarding.identity.preview_cat')}</p>
 
-                <p className="text-sm text-gray-600 leading-relaxed mb-8">
+                <p className="text-sm text-[#C2D6C0]/90 leading-relaxed mb-8">
                   {formData.description || "{t('merchant_onboarding.identity.preview_desc_placeholder')}"}
                 </p>
 
@@ -346,14 +346,14 @@ export default function StoreIdentityPage() {
                   >
                     Order Now
                   </button>
-                  <button className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center text-gray-600">
+                  <button className="w-12 h-12 rounded-xl bg-[#243026] flex items-center justify-center text-white">
                     <Heart size={20} />
                   </button>
                 </div>
               </div>
             </div>
           </div>
-          <p className="text-center text-xs text-gray-500 mt-6 font-medium px-4">
+          <p className="text-center text-xs text-[#C2D6C0]/60 mt-6 font-medium px-4">
             {t('merchant_onboarding.identity.preview_footer')}
           </p>
         </div>

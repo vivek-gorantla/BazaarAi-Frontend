@@ -1,0 +1,309 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-tertiary":"#ffffff","on-secondary":"#ffffff","on-primary-fixed":"#2c112d","on-primary-container":"#d7aed3","surface-container-highest":"#e8e0e4","error":"#ba1a1a","tertiary-container":"#3c503a","on-error-container":"#93000a","secondary":"#625e58","inverse-surface":"#332f32","secondary-fixed":"#e8e1da","surface-tint":"#755373","surface-bright":"#fff7fb","primary-container":"#60405f","outline-variant":"#d0c3cb","on-secondary-container":"#66625c","surface-variant":"#e8e0e4","on-tertiary-fixed":"#0d200d","secondary-container":"#e5dfd7","tertiary-fixed":"#d1e9cb","inverse-on-surface":"#f6eff3","on-primary-fixed-variant":"#5c3c5b","outline":"#7e747c","error-container":"#ffdad6","on-tertiary-container":"#aac1a5","inverse-primary":"#e3badf","on-secondary-fixed-variant":"#4a4641","surface":"#fff7fb","on-surface":"#1d1b1e","on-surface-variant":"#4d444b","on-error":"#ffffff","tertiary-fixed-dim":"#b6cdb0","primary-fixed":"#ffd6fa","surface-container-lowest":"#ffffff","on-background":"#1d1b1e","secondary-fixed-dim":"#ccc6be","tertiary":"#263925","primary-fixed-dim":"#e3badf","surface-container-high":"#ede6ea","primary":"#472a47","surface-container-low":"#f9f2f6","surface-container":"#f3ecf0","on-primary":"#ffffff","surface-dim":"#dfd8dc","on-secondary-fixed":"#1e1b17","on-tertiary-fixed-variant":"#384c36","background":"#fff7fb"},"borderRadius":{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},"spacing":{"margin-mobile":"20px","gutter":"20px","margin-desktop":"120px","xl":"80px","md":"24px","base":"8px","sm":"12px","lg":"48px","xs":"4px"},"fontFamily":{"display":["Lexend"],"label-md":["Lexend"],"body-lg":["Lexend"],"headline-lg":["Lexend"],"body-md":["Lexend"],"label-sm":["Lexend"],"headline-md":["Lexend"],"headline-lg-mobile":["Lexend"]},"fontSize":{"display":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"800"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"700"}],"headline-lg-mobile":["28px",{"lineHeight":"34px","fontWeight":"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-white shadow-[0_4px_20px_rgba(96,64,95,0.05)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col"><div class="h-20 flex items-center justify-between gap-xl"><div class="flex items-center gap-md"><img alt="Bazaar Logo" class="h-10 w-10 rounded-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/><span class="font-headline-md text-headline-md text-primary tracking-tight">Bazaar</span></div><div class="flex-1 flex items-center gap-md"><div class="flex items-center gap-xs px-md py-sm bg-surface-container-low rounded-full min-w-[180px]"><span class="material-symbols-outlined text-primary text-[20px]">location_on</span><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant">Deliver to:</span><span class="font-label-md text-label-md text-on-surface truncate">Hyderabad, TS</span></div></div><div class="relative flex-1 group"><span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span><input class="w-full h-12 pl-12 pr-4 bg-surface-container-low border-none rounded-full font-body-md focus:ring-2 focus:ring-primary-container transition-all" data-path="search" placeholder="What are you looking for?" type="text"/></div></div><div class="flex items-center gap-md"><a class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="orders" href="#"><span class="material-symbols-outlined">receipt_long</span><span class="font-label-sm text-label-sm">Orders</span></a><a class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="wishlist" href="#"><span class="material-symbols-outlined">favorite</span><span class="font-label-sm text-label-sm">Wishlist</span></a><a class="relative flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="cart" href="#"><span class="material-symbols-outlined">shopping_bag</span><span class="absolute -top-1 -right-1 bg-primary text-on-primary text-[10px] w-4 h-4 flex items-center justify-center rounded-full">3</span><span class="font-label-sm text-label-sm">Cart</span></a><a class="ml-4 flex items-center gap-base p-xs rounded-full bg-surface-container hover:bg-surface-container-high transition-colors" data-path="account" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/><span class="material-symbols-outlined text-on-surface-variant">expand_more</span></a></div></div><nav class="h-12 flex items-center gap-xl border-t border-surface-container-highest" data-active-classes="text-primary font-bold border-b-2 border-primary"><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="home" href="#">Home</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="explore" href="#">Explore</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="categories" href="#">Categories</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="stores" href="#">Stores</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="offers" href="#">Offers</a></nav></div></header><main class="w-full pt-[128px] bg-background min-h-screen"><div class="flex flex-col w-full px-6 lg:px-12 pb-24">
+<!-- Top Action Bar -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between mt-12 gap-6 relative z-20">
+<div>
+<h1 class="font-display text-display text-on-surface">Explore</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2 max-w-2xl">Discover curated products, local artisans, and premium stores in your area.</p>
+</div>
+<div class="flex items-center gap-sm">
+<button class="flex items-center justify-center w-12 h-12 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface">
+<span class="material-symbols-outlined">map</span>
+</button>
+<button class="flex items-center justify-center w-12 h-12 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</div>
+</div>
+<!-- Main Layout Grid -->
+<div class="grid grid-cols-12 gap-lg mt-12">
+<!-- Sidebar Filters -->
+<aside class="col-span-12 lg:col-span-3 flex flex-col gap-xl">
+<!-- Active Filters -->
+<div class="flex flex-col gap-md">
+<h3 class="font-label-md text-label-md text-on-surface uppercase tracking-widest opacity-60">Active Filters</h3>
+<div class="flex flex-wrap gap-sm">
+<button class="flex items-center gap-xs px-4 py-2 bg-primary-container text-on-primary-container rounded-full hover:bg-primary-fixed transition-colors group">
+<span class="font-label-sm text-label-sm">Rating: 4.0+</span>
+<span class="material-symbols-outlined text-[16px] group-hover:opacity-70 transition-opacity">close</span>
+</button>
+<button class="flex items-center gap-xs px-4 py-2 bg-primary-container text-on-primary-container rounded-full hover:bg-primary-fixed transition-colors group">
+<span class="font-label-sm text-label-sm">In Stock</span>
+<span class="material-symbols-outlined text-[16px] group-hover:opacity-70 transition-opacity">close</span>
+</button>
+<button class="font-label-sm text-label-sm text-primary hover:text-primary-fixed-dim transition-colors ml-2 underline underline-offset-4 decoration-primary/30">Clear all</button>
+</div>
+</div>
+<!-- Price Range -->
+<div class="flex flex-col gap-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface">Price Range</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-3 py-1 rounded-full">$10 - $500+</span>
+</div>
+<div class="relative w-full h-12 pt-4">
+<div class="absolute w-full h-1 bg-surface-container-highest rounded-full top-6"></div>
+<div class="absolute h-1 bg-primary rounded-full top-6" style="left: 20%; right: 30%;"></div>
+<div class="absolute w-6 h-6 bg-white shadow-md rounded-full top-3.5 flex items-center justify-center cursor-pointer hover:scale-110 transition-transform z-10" style="left: 20%; transform: translateX(-50%);">
+<div class="w-2 h-2 bg-primary rounded-full"></div>
+</div>
+<div class="absolute w-6 h-6 bg-white shadow-md rounded-full top-3.5 flex items-center justify-center cursor-pointer hover:scale-110 transition-transform z-10" style="right: 30%; transform: translateX(50%);">
+<div class="w-2 h-2 bg-primary rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Distance -->
+<div class="flex flex-col gap-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface">Distance</h3>
+<span class="font-label-sm text-label-sm text-primary bg-primary/10 px-3 py-1 rounded-full">Within 5km</span>
+</div>
+<div class="flex flex-col gap-xs mt-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="relative flex items-center justify-center w-6 h-6 rounded-full border-2 border-primary">
+<div class="w-3 h-3 bg-primary rounded-full opacity-100 transition-opacity"></div>
+</div>
+<span class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">0 - 5 km</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="relative flex items-center justify-center w-6 h-6 rounded-full border-2 border-outline-variant group-hover:border-primary transition-colors">
+<div class="w-3 h-3 bg-primary rounded-full opacity-0 transition-opacity"></div>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">5 - 15 km</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="relative flex items-center justify-center w-6 h-6 rounded-full border-2 border-outline-variant group-hover:border-primary transition-colors">
+<div class="w-3 h-3 bg-primary rounded-full opacity-0 transition-opacity"></div>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">15+ km</span>
+</label>
+</div>
+</div>
+<!-- Categories -->
+<div class="flex flex-col gap-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Categories</h3>
+<div class="flex flex-col gap-sm">
+<label class="flex items-center justify-between cursor-pointer group p-2 -mx-2 rounded-xl hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-white" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-semibold">Artisanal Food</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">24</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group p-2 -mx-2 rounded-xl hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded border-2 border-outline-variant group-hover:border-primary transition-colors flex items-center justify-center">
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">Home &amp; Living</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">18</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group p-2 -mx-2 rounded-xl hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded border-2 border-outline-variant group-hover:border-primary transition-colors flex items-center justify-center">
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">Wellness</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">42</span>
+</label>
+</div>
+</div>
+<!-- Offers Banner -->
+<div class="relative overflow-hidden rounded-2xl bg-surface-container-high p-6 group cursor-pointer shadow-sm hover:shadow-md transition-shadow mt-8">
+<div class="absolute -right-12 -top-12 w-32 h-32 bg-primary-container rounded-full blur-2xl opacity-50 group-hover:opacity-80 transition-opacity"></div>
+<div class="relative z-10 flex flex-col gap-4">
+<span class="material-symbols-outlined text-primary text-[32px]">local_offer</span>
+<h4 class="font-headline-md text-headline-md text-on-surface">Special Offers</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Up to 40% off on premium local goods.</p>
+<button class="self-start mt-2 px-6 py-2 bg-primary text-on-primary rounded-full font-label-md text-label-md hover:bg-primary-fixed-variant hover:text-white transition-colors">View Deals</button>
+</div>
+</div>
+</aside>
+<!-- Results Area -->
+<main class="col-span-12 lg:col-span-9 flex flex-col gap-xl">
+<!-- Results Header -->
+<div class="flex items-center justify-between border-b border-surface-container-highest pb-4">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Showing 24 Results</h2>
+<div class="flex items-center gap-4 relative">
+<span class="font-label-md text-label-md text-on-surface-variant">Sort by:</span>
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container rounded-full font-label-md text-label-md text-on-surface hover:bg-surface-container-high transition-colors">
+                        Relevance
+                        <span class="material-symbols-outlined text-[20px]">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Stores Section -->
+<section class="flex flex-col gap-lg">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">storefront</span>
+                        Featured Stores
+                    </h3>
+<a class="font-label-md text-label-md text-primary hover:underline underline-offset-4" href="#">View all</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Store Card 1 -->
+<div class="group relative rounded-[2rem] bg-surface-container-lowest p-2 shadow-[0_4px_20px_rgba(96,64,95,0.05)] hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] transition-shadow duration-300 cursor-pointer overflow-hidden flex flex-col h-full">
+<div class="absolute top-6 left-6 z-10 px-3 py-1 bg-tertiary text-on-tertiary rounded-full font-label-sm text-label-sm shadow-md flex items-center gap-1 backdrop-blur-md">
+<span class="material-symbols-outlined text-[14px]">eco</span> Fresh Local
+                        </div>
+<div class="w-full h-40 rounded-[1.5rem] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Warm, inviting interior of a modern artisanal bakery and coffee shop, soft sunlight streaming through large windows illuminating rustic wooden tables and shelves filled with freshly baked bread, high-end photography, rich earth tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1qnUg1ppRiss1MsAwoTRhyoH6iAQxW-sepLaNSeSHbbU-QlQzOlk3T-AXt-vNE9RKBQ9ddMrEUh52JEjI420yK3MYCSPg7wVwG1JH4Xk6LqC_ahAr79zWjHozjmISPvIKy-vsKqYgGqDyGxk3i8lk3EJpoR9eYplWs5V5XLFBI6dvRB7qyno7CRRuccczP5hBs45I31-fPuVCk3oMubS_iw9iDSyBNelMlmmtRaIWTxef62lQSnE"/>
+</div>
+<div class="p-5 flex flex-col gap-2 flex-grow">
+<div class="flex items-center justify-between">
+<h4 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">The Rustic Crumb</h4>
+<div class="flex items-center gap-1 bg-secondary-container px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[#fca311] text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm text-on-surface">4.9</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Artisanal sourdough, pastries, and locally roasted organic coffee.</p>
+<div class="mt-auto pt-4 flex items-center gap-3">
+<span class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">location_on</span> 1.2km away</span>
+<span class="w-1 h-1 bg-outline-variant rounded-full"></span>
+<span class="font-label-sm text-label-sm text-tertiary">Closes at 8 PM</span>
+</div>
+</div>
+</div>
+<!-- Store Card 2 -->
+<div class="group relative rounded-[2rem] bg-surface-container-lowest p-2 shadow-[0_4px_20px_rgba(96,64,95,0.05)] hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] transition-shadow duration-300 cursor-pointer overflow-hidden flex flex-col h-full">
+<div class="w-full h-40 rounded-[1.5rem] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Elegant display of handmade ceramics and home decor items in a brightly lit, minimalist boutique, soft natural lighting highlighting the textures of pottery and linen, sophisticated neutral color palette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD08uip_BTs2PPnI7oTzYIaligYe9nu1dchiTohZjpStD4BNS0QcieVtrvNmGj3C3LUOC1-SZAf5AL7dpXicLDWa-B06jfn1D4zOXBtZaaPdpljeCOK3WW7vS4OgsbLzPTUiRk2xpg-bNDGSaNQL9reeeVmBIDAmfWS-UqeZQ4pQ73pogkb8QYLYXjU4ROOtxi4UY3Z3bhykIkAZUa_1sh9KMDtg9FiZZ3PS_Zo3aYc3P_IEspp0Ok"/>
+</div>
+<div class="p-5 flex flex-col gap-2 flex-grow">
+<div class="flex items-center justify-between">
+<h4 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Kinship Ceramics</h4>
+<div class="flex items-center gap-1 bg-secondary-container px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[#fca311] text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm text-on-surface">4.7</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Hand-thrown pottery, bespoke homewares, and curated living pieces.</p>
+<div class="mt-auto pt-4 flex items-center gap-3">
+<span class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">location_on</span> 3.5km away</span>
+</div>
+</div>
+</div>
+<!-- Store Card 3 (Hidden on smaller screens to keep grid balanced) -->
+<div class="hidden xl:flex group relative rounded-[2rem] bg-surface-container-lowest p-2 shadow-[0_4px_20px_rgba(96,64,95,0.05)] hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] transition-shadow duration-300 cursor-pointer overflow-hidden flex-col h-full">
+<div class="absolute top-6 left-6 z-10 px-3 py-1 bg-error-container text-on-error-container rounded-full font-label-sm text-label-sm shadow-md flex items-center gap-1 backdrop-blur-md">
+<span class="material-symbols-outlined text-[14px]">local_fire_department</span> Trending
+                        </div>
+<div class="w-full h-40 rounded-[1.5rem] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Lush indoor plant shop with diverse greenery hanging from the ceiling and sitting on wooden benches, warm glowing pendant lights, urban jungle aesthetic, deep green and warm cream colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDAIwsiJgTHJB6N4Slfy-wAgpf1ZdwglrY0ADh-lem6Wf31xOA9YZF9evmnU7Zsoo5rWsMhbc6DK-ItWdOOXXN90-P-z1YJ-QyI3uk3WHUyAxcdKsZESKQ2tJo6uN0BI7oXdweuPxNq3mGXPasALpI8TCCscK-iHJLgRpZWACo6am2h4oGwsP8F4QW7cKuKFQjjuoBUkz629Pbm_IPYl1cEGKhpBq1-YR_l2vL10vRMQVAWN972Ic"/>
+</div>
+<div class="p-5 flex flex-col gap-2 flex-grow">
+<div class="flex items-center justify-between">
+<h4 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Verdant Grove</h4>
+<div class="flex items-center gap-1 bg-secondary-container px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[#fca311] text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm text-on-surface">4.8</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Rare indoor plants, organic soils, and beautiful planters.</p>
+<div class="mt-auto pt-4 flex items-center gap-3">
+<span class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">location_on</span> 2.1km away</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Products Section -->
+<section class="flex flex-col gap-lg mt-8">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+                    Products
+                </h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Product 1 -->
+<div class="group relative rounded-3xl bg-surface-container-lowest p-3 shadow-[0_4px_20px_rgba(96,64,95,0.05)] hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] transition-all duration-300 flex flex-col h-full -mt-2">
+<button class="absolute top-6 right-6 z-10 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-on-surface-variant hover:text-error transition-colors shadow-sm">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<div class="w-full aspect-square rounded-[1.5rem] overflow-hidden bg-surface-container relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="A beautifully crafted ceramic matcha bowl resting on a bamboo mat, soft natural lighting highlighting the textured white glaze, elegant minimalist composition, premium lifestyle product photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdAzCoLm-yvGXaWhq8qf1lorJq00UQeG0XSPS-w99HC1v5okOIZ9HCNGvIrpqowIxEhagM0FtB-lm0C4mCgsJK3pNfn4D4D5g3W19RXMD7ASrBNiwwDj2YE7pJCNC0Zb9dPEqlJq1c6dlxAsaTC3V51uSFHciaG3bI4fPny992thrTjvnNcTL-14ZnW4XakhhaKQpADXuUR1IZPHQFH5gXytyoQjn-XmRTjzAAYXWpF8ymUyL4x3o"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="pt-5 pb-3 px-2 flex flex-col gap-1 flex-grow">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Kinship Ceramics</span>
+<h4 class="font-headline-sm text-body-lg text-on-surface font-semibold leading-tight mt-1 line-clamp-2 min-h-[56px]">Hand-Thrown Matcha Bowl</h4>
+<div class="mt-auto pt-4 flex items-center justify-between">
+<span class="font-display text-headline-lg text-primary tracking-tight">$45</span>
+<button class="w-12 h-12 bg-primary text-on-primary rounded-full flex items-center justify-center hover:bg-primary-fixed-variant hover:scale-105 transition-all shadow-md">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="group relative rounded-3xl bg-surface-container-lowest p-3 shadow-[0_4px_20px_rgba(96,64,95,0.05)] hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] transition-all duration-300 flex flex-col h-full">
+<button class="absolute top-6 right-6 z-10 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-on-surface-variant hover:text-error transition-colors shadow-sm">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<div class="w-full aspect-square rounded-[1.5rem] overflow-hidden bg-surface-container relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Freshly baked crusty sourdough bread loaf sliced on a thick wooden cutting board, rustic linen cloth, moody dramatic lighting, high contrast food photography, appetizing golden crust" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg8MsVEUrWkvFlILJD2EiTGzdm_RsKWtN-GaDCXq9lSm_XjH0eBXBb9doB6zH0sF9PRQvn9L76SDFMTqOYVOvP0URcON1H8KoqnEpBEWz7M6Q5C_Fp_gwFn7-wAyDdz5kDuY65uwygriIneQBcLc-cYSPguw7uRfFmGVIdAdKxQ7KBt7a3p_0LjO949ltCKmnAhbWzkaE78iRafWi4ne1mYuwS_tW3ee10-gCaUY8kneKO8CQgpfU"/>
+</div>
+<div class="pt-5 pb-3 px-2 flex flex-col gap-1 flex-grow">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">The Rustic Crumb</span>
+<h4 class="font-headline-sm text-body-lg text-on-surface font-semibold leading-tight mt-1 line-clamp-2 min-h-[56px]">Signature Sourdough Loaf</h4>
+<div class="mt-auto pt-4 flex items-center justify-between">
+<span class="font-display text-headline-lg text-primary tracking-tight">$12</span>
+<button class="w-12 h-12 bg-primary text-on-primary rounded-full flex items-center justify-center hover:bg-primary-fixed-variant hover:scale-105 transition-all shadow-md">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="group relative rounded-3xl bg-surface-container-lowest p-3 shadow-[0_4px_20px_rgba(96,64,95,0.05)] hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] transition-all duration-300 flex flex-col h-full -mt-4">
+<button class="absolute top-6 right-6 z-10 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-on-surface-variant hover:text-error transition-colors shadow-sm">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<div class="absolute top-6 left-6 z-10 px-3 py-1 bg-primary-container text-on-primary-container rounded-full font-label-sm text-label-sm shadow-md">Bestseller</div>
+<div class="w-full aspect-square rounded-[1.5rem] overflow-hidden bg-surface-container relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="A lush, healthy Monstera Deliciosa plant in a modern terracotta pot, placed on a chic white pedestal against a dark plum accent wall, architectural lighting, luxury interior style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7T3Syp8udXIvwyX41rNyaW1YVDVhw9Isu5iXBxUOzDxRjWAQeIth0gyKg-zsQ6KUOjU3Olq3T5yaC_AhwIuxB1eapGn2tj6BQeSNHDl5RW2K-y6VK_fDcL7_JRJ4Sw-9HdhHIalWOL0L656a2I0dR6rYDuK5l-Dx1ncXr6oFWPl759ruZbHMr-99BfYyHPZyXcT-3okuipWG7xHpmU68snG3xGrCSQWNzvtkP5OJ-VIIe-M1GYGQ"/>
+</div>
+<div class="pt-5 pb-3 px-2 flex flex-col gap-1 flex-grow">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Verdant Grove</span>
+<h4 class="font-headline-sm text-body-lg text-on-surface font-semibold leading-tight mt-1 line-clamp-2 min-h-[56px]">Monstera Deliciosa (Medium)</h4>
+<div class="mt-auto pt-4 flex items-center justify-between">
+<span class="font-display text-headline-lg text-primary tracking-tight">$65</span>
+<button class="w-12 h-12 bg-primary text-on-primary rounded-full flex items-center justify-center hover:bg-primary-fixed-variant hover:scale-105 transition-all shadow-md">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="group relative rounded-3xl bg-surface-container-lowest p-3 shadow-[0_4px_20px_rgba(96,64,95,0.05)] hover:shadow-[0_12px_40px_rgba(96,64,95,0.12)] transition-all duration-300 flex flex-col h-full mt-2">
+<button class="absolute top-6 right-6 z-10 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-on-surface-variant hover:text-error transition-colors shadow-sm">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<div class="w-full aspect-square rounded-[1.5rem] overflow-hidden bg-surface-container relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="A bag of premium roasted coffee beans next to a stylish pour-over setup, rich dark background with wisps of steam, sophisticated mood, focused on texture and quality" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqjyvqV9LnqSYkfog-3yl3WbmpJyc2j1Hu3NMv5oxoqVVINqYAh1Ai1NNOQRGcPJ7PapM7nP2Rkd483wgBXgpYR7asm0HxOdD3Ui_fHj_7Wo8cJ-EccX8-9KWaP3ZoBWazkF916w-F0YnnQs0jtpoeMtbfro6Mpc5Wq0BEP7EjAiIoMpaVgo6b9jdJcAqeCUuTeGS9smhGFBQmFI3gx25y2p0T6JT-cEVulkvPUNZfYbTT9K5flO8"/>
+</div>
+<div class="pt-5 pb-3 px-2 flex flex-col gap-1 flex-grow">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">The Rustic Crumb</span>
+<h4 class="font-headline-sm text-body-lg text-on-surface font-semibold leading-tight mt-1 line-clamp-2 min-h-[56px]">Ethiopian Yirgacheffe Roast</h4>
+<div class="mt-auto pt-4 flex items-center justify-between">
+<span class="font-display text-headline-lg text-primary tracking-tight">$24</span>
+<button class="w-12 h-12 bg-primary text-on-primary rounded-full flex items-center justify-center hover:bg-primary-fixed-variant hover:scale-105 transition-all shadow-md">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination/Load More -->
+<div class="flex justify-center mt-12">
+<button class="px-8 py-4 bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md rounded-full transition-colors flex items-center gap-2">
+                        Load More Results
+                        <span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</section>
+</main>
+</div>
+</div></main><footer class="w-full bg-surface-container-low py-lg mt-xl"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center gap-md"><span class="font-headline-md text-primary opacity-50">Bazaar</span><div class="flex gap-lg text-on-surface-variant font-label-md"><a class="hover:text-primary" href="#">Privacy</a><a class="hover:text-primary" href="#">Terms</a><a class="hover:text-primary" href="#">Help</a></div><p class="text-on-surface-variant font-label-sm opacity-60">© 2024 Bazaar Customer Platform. Premium Discovery.</p></div></footer></body></html>

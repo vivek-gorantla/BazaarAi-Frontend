@@ -1,0 +1,195 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-tertiary":"#ffffff","on-secondary":"#ffffff","on-primary-fixed":"#2c112d","on-primary-container":"#d7aed3","surface-container-highest":"#e8e0e4","error":"#ba1a1a","tertiary-container":"#3c503a","on-error-container":"#93000a","secondary":"#625e58","inverse-surface":"#332f32","secondary-fixed":"#e8e1da","surface-tint":"#755373","surface-bright":"#fff7fb","primary-container":"#60405f","outline-variant":"#d0c3cb","on-secondary-container":"#66625c","surface-variant":"#e8e0e4","on-tertiary-fixed":"#0d200d","secondary-container":"#e5dfd7","tertiary-fixed":"#d1e9cb","inverse-on-surface":"#f6eff3","on-primary-fixed-variant":"#5c3c5b","outline":"#7e747c","error-container":"#ffdad6","on-tertiary-container":"#aac1a5","inverse-primary":"#e3badf","on-secondary-fixed-variant":"#4a4641","surface":"#fff7fb","on-surface":"#1d1b1e","on-surface-variant":"#4d444b","on-error":"#ffffff","tertiary-fixed-dim":"#b6cdb0","primary-fixed":"#ffd6fa","surface-container-lowest":"#ffffff","on-background":"#1d1b1e","secondary-fixed-dim":"#ccc6be","tertiary":"#263925","primary-fixed-dim":"#e3badf","surface-container-high":"#ede6ea","primary":"#472a47","surface-container-low":"#f9f2f6","surface-container":"#f3ecf0","on-primary":"#ffffff","surface-dim":"#dfd8dc","on-secondary-fixed":"#1e1b17","on-tertiary-fixed-variant":"#384c36","background":"#fff7fb"},"borderRadius":{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},"spacing":{"margin-mobile":"20px","gutter":"20px","margin-desktop":"120px","xl":"80px","md":"24px","base":"8px","sm":"12px","lg":"48px","xs":"4px"},"fontFamily":{"display":["Lexend"],"label-md":["Lexend"],"body-lg":["Lexend"],"headline-lg":["Lexend"],"body-md":["Lexend"],"label-sm":["Lexend"],"headline-md":["Lexend"],"headline-lg-mobile":["Lexend"]},"fontSize":{"display":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"800"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"700"}],"headline-lg-mobile":["28px",{"lineHeight":"34px","fontWeight":"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-white shadow-[0_4px_20px_rgba(96,64,95,0.05)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col"><div class="h-20 flex items-center justify-between gap-xl"><div class="flex items-center gap-md"><img alt="Bazaar Logo" class="h-10 w-10 rounded-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/><span class="font-headline-md text-headline-md text-primary tracking-tight">Bazaar</span></div><div class="flex-1 flex items-center gap-md"><div class="flex items-center gap-xs px-md py-sm bg-surface-container-low rounded-full min-w-[180px]"><span class="material-symbols-outlined text-primary text-[20px]">location_on</span><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant">Deliver to:</span><span class="font-label-md text-label-md text-on-surface truncate">Hyderabad, TS</span></div></div><div class="relative flex-1 group"><span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span><input class="w-full h-12 pl-12 pr-4 bg-surface-container-low border-none rounded-full font-body-md focus:ring-2 focus:ring-primary-container transition-all" placeholder="What are you looking for?" type="text"/></div></div><div class="flex items-center gap-md"><a class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="orders" href="#"><span class="material-symbols-outlined">receipt_long</span><span class="font-label-sm text-label-sm">Orders</span></a><a class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="wishlist" href="#"><span class="material-symbols-outlined">favorite</span><span class="font-label-sm text-label-sm">Wishlist</span></a><a class="relative flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="cart" href="#"><span class="material-symbols-outlined">shopping_bag</span><span class="absolute -top-1 -right-1 bg-primary text-on-primary text-[10px] w-4 h-4 flex items-center justify-center rounded-full">3</span><span class="font-label-sm text-label-sm">Cart</span></a><a class="ml-4 flex items-center gap-base p-xs rounded-full bg-surface-container hover:bg-surface-container-high transition-colors" data-path="account" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/><span class="material-symbols-outlined text-on-surface-variant">expand_more</span></a></div></div><nav class="h-12 flex items-center gap-xl border-t border-surface-container-highest" data-active-classes="text-primary font-bold border-b-2 border-primary"><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="home" href="#">Home</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="explore" href="#">Explore</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="categories" href="#">Categories</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="stores" href="#">Stores</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="offers" href="#">Offers</a></nav></div></header><main class="w-full pt-[128px] bg-background min-h-screen"><div class="flex flex-col w-full relative">
+<!-- Stepper -->
+<div class="px-6 lg:px-12 py-lg w-full max-w-7xl mx-auto flex items-center justify-between relative">
+<div class="absolute top-1/2 left-[10%] right-[10%] h-[2px] bg-surface-container-highest -translate-y-1/2 z-0"></div>
+<div class="absolute top-1/2 left-[10%] right-[50%] h-[2px] bg-primary -translate-y-1/2 z-0"></div>
+<div class="flex flex-col items-center gap-base relative z-10">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md shadow-sm">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface">Address</span>
+</div>
+<div class="flex flex-col items-center gap-base relative z-10">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md shadow-sm">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface">Delivery</span>
+</div>
+<div class="flex flex-col items-center gap-base relative z-10">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md shadow-md shadow-primary/20 scale-110 transition-transform">
+<span class="material-symbols-outlined text-[20px]">payment</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">Payment</span>
+</div>
+<div class="flex flex-col items-center gap-base relative z-10">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-label-md">
+        4
+      </div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Review</span>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-6 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-xl pb-margin-desktop">
+<!-- Left Column: Checkout Details -->
+<div class="lg:col-span-7 flex flex-col gap-lg">
+<div class="flex items-center gap-md">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Checkout</h1>
+</div>
+<!-- Address Snapshot -->
+<div class="bg-surface-container-low rounded-3xl p-md flex flex-col gap-md shadow-[0_4px_20px_rgba(96,64,95,0.02)]">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">home</span>
+<span class="font-label-md text-label-md text-on-surface">Delivery Address</span>
+</div>
+<button class="text-primary font-label-sm text-label-sm hover:underline">Change</button>
+</div>
+<div class="flex flex-col gap-xs pl-[36px]">
+<span class="font-label-md text-label-md text-on-surface">Home</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Flat 402, Sunshine Apartments, Hitec City, Hyderabad, TS 500081</span>
+</div>
+</div>
+<!-- Order Summary Snapshot -->
+<div class="bg-surface-container-low rounded-3xl p-md flex flex-col gap-md shadow-[0_4px_20px_rgba(96,64,95,0.02)]">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">storefront</span>
+<span class="font-label-md text-label-md text-on-surface">Sri Lakshmi Stores</span>
+</div>
+<button class="text-primary font-label-sm text-label-sm hover:underline">Edit Cart</button>
+</div>
+<div class="flex gap-md pl-[36px] overflow-x-auto pb-sm scrollbar-hide">
+<img class="w-16 h-16 rounded-xl object-cover shadow-sm shrink-0" data-alt="Close up of organic fresh mangos in a woven basket, vibrant orange and yellow colors, natural soft morning light, premium grocery photography, warm cream background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_68JFUzK31br_APQBBnUyWRJ3jx2WQggA5p3Xj171F2lYiGWeaSvdgXTRlVZI_pSuhploIllFUfTok1ByuiH2vXnXe22QxpnK7TGPJ7EsyQvhRIWhduoNFMQ27pdWjIgPEfYUebpNSGAbswmQLP3eijVStg78JFYViXYewbfsh_TDnpmtN7cj2vL57j-sHeI6SLo1raUAlDPTgDdWT48CmHb73mvijj1vNji8B-IaLJDHt-FlGHA"/>
+<img class="w-16 h-16 rounded-xl object-cover shadow-sm shrink-0" data-alt="A jar of premium cold pressed coconut oil with a minimalist label, sitting on a wooden countertop, soft natural light, shallow depth of field, premium quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9gCNAOZ9bV4QuGvTT--u2iv6RxpgDkeXzJmC0-Wwv6oYQdVQqhpsUNnW7AuLcGXZPyVsC-2yLF5fL0YDTo6FkWgu5ZbWeicdkvRTYjPGs0ErOxPh2YotT1gMnPB6hBFHJakTNy7zrCz-PDafpl3S1sGwjzRvAS07QvDyiy-d0EpQFb7DcC_iEmnspLpYsZ65sDej64dfJZgQoAH6SDxJxYbXhlYud0bhMl5mODXM5W4lPjbgZeR8"/>
+<div class="w-16 h-16 rounded-xl bg-surface-container-high flex items-center justify-center font-label-md text-label-md text-on-surface-variant shrink-0">
+             +3
+           </div>
+</div>
+</div>
+<!-- Payment Methods -->
+<div class="flex flex-col gap-md pt-md">
+<h2 class="font-headline-md text-headline-md text-on-surface">Payment Method</h2>
+<!-- UPI Options -->
+<div class="flex flex-col gap-sm">
+<label class="group relative cursor-pointer flex items-center p-md rounded-2xl bg-surface-container-low hover:bg-surface-container transition-colors shadow-[0_4px_20px_rgba(96,64,95,0.02)] border-2 border-transparent focus-within:border-primary">
+<input checked="" class="peer sr-only" name="payment" type="radio"/>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:border-primary peer-checked:bg-primary transition-all">
+<div class="w-2.5 h-2.5 rounded-full bg-on-primary scale-0 peer-checked:scale-100 transition-transform"></div>
+</div>
+<div class="ml-md flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Google Pay UPI</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Fast, secure payments</span>
+</div>
+<img class="ml-auto h-6 w-auto mix-blend-multiply opacity-70" data-alt="Google Pay logo minimal vector graphic isolated on white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHTTKNv9zyTMLQE6M4Cfz-PnwYGwjI37DlhrYrl7fT8R6mw8L9VdOzj0Yh8oyhgxDlIffCgzIRIyzBzCVfKkPHOdYs4_KE0flMA1WoZt_LYR123kd-4OwbNoANiH1tg6Ph70e6sMuJNz95r23IAT2fq4v9ztokuyJPe06jJGPinl_GH2BXSIjv_HmUf501dtyFdpgIkNCb9hKK4hem__YMip5omX2XI0Qer7SUbqXIMdayfU7VYRE"/>
+</label>
+<label class="group relative cursor-pointer flex items-center p-md rounded-2xl bg-surface-container-low hover:bg-surface-container transition-colors shadow-[0_4px_20px_rgba(96,64,95,0.02)] border-2 border-transparent focus-within:border-primary">
+<input class="peer sr-only" name="payment" type="radio"/>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:border-primary peer-checked:bg-primary transition-all">
+<div class="w-2.5 h-2.5 rounded-full bg-on-primary scale-0 peer-checked:scale-100 transition-transform"></div>
+</div>
+<div class="ml-md flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">PhonePe UPI</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pay via any UPI app</span>
+</div>
+<img class="ml-auto h-6 w-auto mix-blend-multiply opacity-70" data-alt="PhonePe logo minimal vector graphic isolated on white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKOqeTguUaL5ougXLfrOG6OB_QqboO5g5OPGTzoNKW14x6wy3qDzCoNlxG1zPie2_Msp-e-MS01CRDQl-01pS_5XblEWACD5GqTRTw5IPrdb1aIP7C4o4hkv6L2u5IZWkGpS0n-YQgC-VqE_wDdkbj1NKFFUR9wftFVkmTFcWAH29kfhFaUnBprpiL-wm9GiP4IoG9BR-oMbMP1dcDWzRQMWeY2hRKrTxXMRgQ-9pgZkMY_nqlW7M"/>
+</label>
+</div>
+<!-- Cards -->
+<label class="group relative cursor-pointer flex flex-col p-md rounded-2xl bg-surface-container-low hover:bg-surface-container transition-colors shadow-[0_4px_20px_rgba(96,64,95,0.02)] border-2 border-transparent focus-within:border-primary mt-sm">
+<div class="flex items-center">
+<input class="peer sr-only" id="card-radio" name="payment" type="radio"/>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:border-primary peer-checked:bg-primary transition-all">
+<div class="w-2.5 h-2.5 rounded-full bg-on-primary scale-0 peer-checked:scale-100 transition-transform"></div>
+</div>
+<div class="ml-md flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Credit / Debit Card</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Visa, Mastercard, RuPay</span>
+</div>
+<div class="ml-auto flex gap-xs">
+<span class="material-symbols-outlined text-on-surface-variant opacity-70">credit_card</span>
+</div>
+</div>
+<!-- Expandable Card Details (Simulated via JS/CSS) -->
+<div class="hidden flex-col gap-md mt-md pt-md border-t border-surface-container-highest" id="card-details-form">
+<input class="w-full h-12 px-4 bg-surface rounded-xl font-body-md focus:ring-2 focus:ring-primary-container outline-none transition-all" placeholder="Card Number" type="text"/>
+<div class="flex gap-md">
+<input class="w-1/2 h-12 px-4 bg-surface rounded-xl font-body-md focus:ring-2 focus:ring-primary-container outline-none transition-all" placeholder="MM/YY" type="text"/>
+<input class="w-1/2 h-12 px-4 bg-surface rounded-xl font-body-md focus:ring-2 focus:ring-primary-container outline-none transition-all" placeholder="CVV" type="text"/>
+</div>
+</div>
+</label>
+<!-- COD -->
+<label class="group relative cursor-pointer flex items-center p-md rounded-2xl bg-surface-container-low hover:bg-surface-container transition-colors shadow-[0_4px_20px_rgba(96,64,95,0.02)] border-2 border-transparent focus-within:border-primary mt-sm">
+<input class="peer sr-only" name="payment" type="radio"/>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:border-primary peer-checked:bg-primary transition-all">
+<div class="w-2.5 h-2.5 rounded-full bg-on-primary scale-0 peer-checked:scale-100 transition-transform"></div>
+</div>
+<div class="ml-md flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Cash on Delivery</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pay when you receive the order</span>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-surface-variant opacity-70">payments</span>
+</label>
+</div>
+</div>
+<!-- Right Column: Price Details & CTA -->
+<div class="lg:col-span-5 relative">
+<div class="sticky top-[120px] bg-surface-container-lowest rounded-[32px] p-xl shadow-[0_12px_40px_rgba(96,64,95,0.05)] flex flex-col gap-lg z-20">
+<h3 class="font-headline-md text-headline-md text-on-surface">Price Details</h3>
+<div class="flex flex-col gap-sm font-body-md text-body-md text-on-surface-variant">
+<div class="flex justify-between items-center">
+<span>Subtotal (5 items)</span>
+<span class="font-label-md text-label-md text-on-surface">₹1,450.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span>Delivery Fee</span>
+<span class="font-label-md text-label-md text-on-surface">₹40.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span>Platform Fee</span>
+<span class="font-label-md text-label-md text-on-surface">₹5.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span>Taxes</span>
+<span class="font-label-md text-label-md text-on-surface">₹112.50</span>
+</div>
+</div>
+<div class="h-[1px] w-full bg-surface-container-highest"></div>
+<div class="flex justify-between items-end">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Total to Pay</span>
+<span class="font-display text-display text-primary mt-xs">₹1,607.50</span>
+</div>
+</div>
+<button class="w-full py-4 rounded-full bg-primary text-on-primary font-label-md text-label-md hover:scale-[1.02] active:scale-[0.98] transition-transform shadow-[0_8px_20px_rgba(71,42,71,0.2)] flex items-center justify-center gap-sm mt-sm">
+<span>Pay &amp; Place Order</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<div class="flex items-center justify-center gap-xs text-on-surface-variant opacity-60 mt-xs">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span class="font-label-sm text-label-sm">Secure checkout</span>
+</div>
+</div>
+<!-- Decorative background blur -->
+<div class="absolute -top-10 -right-10 w-64 h-64 bg-primary-fixed/20 rounded-full blur-[80px] -z-10 pointer-events-none"></div>
+</div>
+</div>
+</div>
+<script>
+  // Simple interaction to toggle card details visibility when "Credit / Debit Card" is selected
+  const cardRadio = document.getElementById('card-radio');
+  const cardDetails = document.getElementById('card-details-form');
+  const allRadios = document.querySelectorAll('input[name="payment"]');
+
+  allRadios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      if (cardRadio.checked) {
+        cardDetails.classList.remove('hidden');
+        cardDetails.classList.add('flex');
+      } else {
+        cardDetails.classList.add('hidden');
+        cardDetails.classList.remove('flex');
+      }
+    });
+  });
+</script></main><footer class="w-full bg-surface-container-low py-lg mt-xl"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center gap-md"><span class="font-headline-md text-primary opacity-50">Bazaar</span><div class="flex gap-lg text-on-surface-variant font-label-md"><a class="hover:text-primary" href="#">Privacy</a><a class="hover:text-primary" href="#">Terms</a><a class="hover:text-primary" href="#">Help</a></div><p class="text-on-surface-variant font-label-sm opacity-60">© 2024 Bazaar Customer Platform. Premium Discovery.</p></div></footer></body></html>

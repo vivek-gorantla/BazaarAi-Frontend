@@ -83,20 +83,20 @@ export default function BusinessDetailsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F2F7F2] font-sans">
+    <div className="min-h-screen bg-[#141A15] font-sans pb-20 text-white">
       {/* Top Navbar */}
       <nav className="flex items-center justify-between px-8 py-4 bg-transparent">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-black flex items-center justify-center rounded-sm">
-            <div className="w-4 h-0.5 bg-white" />
+          <div className="w-8 h-8 bg-white flex items-center justify-center rounded-sm">
+            <div className="w-4 h-0.5 bg-black" />
           </div>
-          <span className="text-[10px] font-bold tracking-widest uppercase text-gray-800">
+          <span className="text-[10px] font-bold tracking-widest uppercase text-white/90">
             {t('merchant_onboarding.title')}
           </span>
         </div>
-        <div className="flex items-center gap-4 text-sm font-medium text-gray-600">
+        <div className="flex items-center gap-4 text-sm font-medium text-white/70">
           <span>{t('merchant_onboarding.help')}</span>
-          <div className="w-8 h-8 rounded-full bg-[#496246] flex items-center justify-center text-white text-xs">
+          <div className="w-8 h-8 rounded-full bg-[#496246] flex items-center justify-center text-white text-xs font-bold">
             A
           </div>
         </div>
@@ -107,11 +107,11 @@ export default function BusinessDetailsPage() {
         <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm font-medium">
           {steps.map((step, index) => (
             <div key={step.name} className="flex items-center gap-2 sm:gap-4">
-              <span className={step.active ? "text-[#496246] font-bold" : "text-gray-400"}>
+              <span className={step.active ? "text-[#F3B58C] font-bold" : "text-white/40"}>
                 {step.name}
               </span>
               {index < steps.length - 1 && (
-                <span className="text-gray-300">&gt;</span>
+                <span className="text-white/20">&gt;</span>
               )}
             </div>
           ))}
@@ -119,33 +119,33 @@ export default function BusinessDetailsPage() {
       </div>
 
       <div className="max-w-5xl mx-auto px-6 py-12 flex flex-col lg:flex-row gap-12 lg:gap-24 relative">
-        {/* Background rounded shape like in design */}
-        <div className="absolute top-0 right-0 bottom-0 left-1/3 bg-gradient-to-b from-[#E8F0E7] to-transparent rounded-tl-[100px] -z-10" />
+        {/* Background ambient glow */}
+        <div className="absolute top-0 right-0 bottom-0 left-1/3 bg-gradient-to-b from-[#8C5A3B]/20 via-[#496246]/10 to-transparent rounded-tl-[100px] -z-10 blur-xl" />
 
         {/* Left Column: Form */}
         <div className="flex-1 max-w-xl">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <h1 className="text-4xl sm:text-5xl font-black text-gray-900 mb-4 leading-tight tracking-tight">
+            <h1 className="text-4xl sm:text-5xl font-black text-white mb-4 leading-tight tracking-tight">
               {t('merchant_onboarding.business.header_title').split('<br />').map((line, i) => <span key={i}>{line}<br /></span>)}
             </h1>
-            <p className="text-gray-600 text-lg mb-8 leading-relaxed max-w-md">
+            <p className="text-[#C2D6C0] text-lg mb-8 leading-relaxed max-w-md">
               {t('merchant_onboarding.business.header_desc')}
             </p>
           </motion.div>
 
-          <form onSubmit={handleSubmit} className="bg-white rounded-[32px] p-8 shadow-[0_20px_40px_rgba(0,0,0,0.04)] relative z-10">
+          <form onSubmit={handleSubmit} className="bg-[#1A231C] rounded-[32px] p-8 shadow-2xl border border-[#2E3D30] relative z-10">
             {/* Store Identity Section */}
             <div className="mb-8">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-full bg-[#E8F0E7] flex items-center justify-center text-[#496246]">
+                <div className="w-10 h-10 rounded-full bg-[#243026] flex items-center justify-center text-[#F3B58C]">
                   <Store size={20} />
                 </div>
-                <h2 className="text-xl font-bold text-gray-900">{t('merchant_onboarding.steps.store_identity')}</h2>
+                <h2 className="text-xl font-bold text-white">{t('merchant_onboarding.steps.store_identity')}</h2>
               </div>
 
               <div className="space-y-5">
                 <div>
-                  <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-2">
+                  <label className="block text-[11px] font-bold text-[#C2D6C0]/80 uppercase tracking-widest mb-2">
                     {t('merchant_onboarding.business.legal_name')}
                   </label>
                   <AgentInput
@@ -156,11 +156,11 @@ export default function BusinessDetailsPage() {
                     onChange={handleChange}
                     placeholder={t('merchant_onboarding.business.legal_name_ph')}
                     required
-                    className="w-full px-4 py-3.5 bg-gray-50/50 rounded-xl border border-gray-100 focus:outline-none focus:ring-2 focus:ring-[#496246]/20 focus:bg-white transition-all text-sm font-medium"
+                    className="w-full px-4 py-3.5 bg-[#141A15] rounded-xl border border-[#2E3D30] focus:outline-none focus:ring-2 focus:ring-[#F3B58C]/40 transition-all text-sm font-medium text-white placeholder-[#7A9378]"
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-2">
+                  <label className="block text-[11px] font-bold text-[#C2D6C0]/80 uppercase tracking-widest mb-2">
                     {t('merchant_onboarding.business.trading_name')}
                   </label>
                   <AgentInput
@@ -170,7 +170,7 @@ export default function BusinessDetailsPage() {
                     value={formData.tradingName}
                     onChange={handleChange}
                     placeholder={t('merchant_onboarding.business.trading_name_ph')}
-                    className="w-full px-4 py-3.5 bg-gray-50/50 rounded-xl border border-gray-100 focus:outline-none focus:ring-2 focus:ring-[#496246]/20 focus:bg-white transition-all text-sm font-medium"
+                    className="w-full px-4 py-3.5 bg-[#141A15] rounded-xl border border-[#2E3D30] focus:outline-none focus:ring-2 focus:ring-[#F3B58C]/40 transition-all text-sm font-medium text-white placeholder-[#7A9378]"
                   />
                 </div>
               </div>
@@ -179,15 +179,15 @@ export default function BusinessDetailsPage() {
             {/* Tax & Registration Section */}
             <div className="mb-8">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-full bg-[#FFF0E5] flex items-center justify-center text-[#D68C5E]">
+                <div className="w-10 h-10 rounded-full bg-[#3D2618] flex items-center justify-center text-[#F3B58C]">
                   <FileText size={20} />
                 </div>
-                <h2 className="text-xl font-bold text-gray-900">{t('merchant_onboarding.business.tax_title')}</h2>
+                <h2 className="text-xl font-bold text-white">{t('merchant_onboarding.business.tax_title')}</h2>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-2">
+                  <label className="block text-[11px] font-bold text-[#C2D6C0]/80 uppercase tracking-widest mb-2">
                     {t('merchant_onboarding.business.tax_id')}
                   </label>
                   <AgentInput
@@ -198,11 +198,11 @@ export default function BusinessDetailsPage() {
                     onChange={handleChange}
                     placeholder={t('merchant_onboarding.business.tax_id_ph')}
                     required
-                    className="w-full px-4 py-3.5 bg-gray-50/50 rounded-xl border border-gray-100 focus:outline-none focus:ring-2 focus:ring-[#496246]/20 focus:bg-white transition-all text-sm font-medium"
+                    className="w-full px-4 py-3.5 bg-[#141A15] rounded-xl border border-[#2E3D30] focus:outline-none focus:ring-2 focus:ring-[#F3B58C]/40 transition-all text-sm font-medium text-white placeholder-[#7A9378]"
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-2">
+                  <label className="block text-[11px] font-bold text-[#C2D6C0]/80 uppercase tracking-widest mb-2">
                     {t('merchant_onboarding.business.vat')}
                   </label>
                   <AgentInput
@@ -212,7 +212,7 @@ export default function BusinessDetailsPage() {
                     value={formData.vatNumber}
                     onChange={handleChange}
                     placeholder={t('merchant_onboarding.business.optional')}
-                    className="w-full px-4 py-3.5 bg-gray-50/50 rounded-xl border border-gray-100 focus:outline-none focus:ring-2 focus:ring-[#496246]/20 focus:bg-white transition-all text-sm font-medium"
+                    className="w-full px-4 py-3.5 bg-[#141A15] rounded-xl border border-[#2E3D30] focus:outline-none focus:ring-2 focus:ring-[#F3B58C]/40 transition-all text-sm font-medium text-white placeholder-[#7A9378]"
                   />
                 </div>
               </div>
@@ -221,15 +221,15 @@ export default function BusinessDetailsPage() {
             {/* Primary Contact Section */}
             <div className="mb-10">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600">
+                <div className="w-10 h-10 rounded-full bg-[#243026] flex items-center justify-center text-white">
                   <User size={20} />
                 </div>
-                <h2 className="text-xl font-bold text-gray-900">{t('merchant_onboarding.business.contact_title')}</h2>
+                <h2 className="text-xl font-bold text-white">{t('merchant_onboarding.business.contact_title')}</h2>
               </div>
 
               <div className="space-y-5">
                 <div>
-                  <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-2">
+                  <label className="block text-[11px] font-bold text-[#C2D6C0]/80 uppercase tracking-widest mb-2">
                     {t('merchant_onboarding.business.email')}
                   </label>
                   <AgentInput
@@ -242,11 +242,11 @@ export default function BusinessDetailsPage() {
                     onChange={handleChange}
                     placeholder="hello@bloomandco.com"
                     required
-                    className="w-full px-4 py-3.5 bg-gray-50/50 rounded-xl border border-gray-100 focus:outline-none focus:ring-2 focus:ring-[#496246]/20 focus:bg-white transition-all text-sm font-medium"
+                    className="w-full px-4 py-3.5 bg-[#141A15] rounded-xl border border-[#2E3D30] focus:outline-none focus:ring-2 focus:ring-[#F3B58C]/40 transition-all text-sm font-medium text-white placeholder-[#7A9378]"
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-2">
+                  <label className="block text-[11px] font-bold text-[#C2D6C0]/80 uppercase tracking-widest mb-2">
                     {t('merchant_onboarding.business.phone')}
                   </label>
                   <AgentInput
@@ -259,7 +259,7 @@ export default function BusinessDetailsPage() {
                     onChange={handleChange}
                     placeholder="+1 (555) 000-0000"
                     required
-                    className="w-full px-4 py-3.5 bg-gray-50/50 rounded-xl border border-gray-100 focus:outline-none focus:ring-2 focus:ring-[#496246]/20 focus:bg-white transition-all text-sm font-medium"
+                    className="w-full px-4 py-3.5 bg-[#141A15] rounded-xl border border-[#2E3D30] focus:outline-none focus:ring-2 focus:ring-[#F3B58C]/40 transition-all text-sm font-medium text-white placeholder-[#7A9378]"
                   />
                 </div>
               </div>
@@ -268,7 +268,7 @@ export default function BusinessDetailsPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 bg-[#496246] hover:bg-[#3A4E38] text-white rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all shadow-[0_8px_16px_rgba(73,98,70,0.2)] hover:shadow-[0_12px_20px_rgba(73,98,70,0.3)] transform hover:-translate-y-0.5"
+              className="w-full py-4 bg-[#8C5A3B] hover:bg-[#784B2E] text-white rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all shadow-[0_8px_20px_rgba(140,90,59,0.4)] hover:shadow-[0_12px_24px_rgba(140,90,59,0.5)] transform hover:-translate-y-0.5"
             >
               {loading ? t('merchant_onboarding.business.saving') : t('merchant_onboarding.business.continue')}
               <ArrowRight size={16} />
@@ -281,23 +281,23 @@ export default function BusinessDetailsPage() {
           {/* Chat Widget */}
           <motion.div
             initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-white rounded-3xl p-6 shadow-sm border border-[#E8F0E7]"
+            className="bg-[#1A231C] rounded-3xl p-6 shadow-xl border border-[#2E3D30]"
           >
             <div className="flex gap-4 mb-4">
               <img
                 src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop"
                 alt="Sarah Jenkins"
-                className="w-12 h-12 rounded-full object-cover"
+                className="w-12 h-12 rounded-full object-cover border border-[#496246]"
               />
               <div>
-                <h4 className="font-bold text-gray-900 text-sm">Sarah Jenkins</h4>
-                <p className="text-xs text-gray-500">{t('merchant_onboarding.business.specialist')}</p>
+                <h4 className="font-bold text-white text-sm">Sarah Jenkins</h4>
+                <p className="text-xs text-[#C2D6C0]">{t('merchant_onboarding.business.specialist')}</p>
               </div>
             </div>
-            <p className="text-sm text-gray-600 leading-relaxed mb-6">
+            <p className="text-sm text-[#C2D6C0]/90 leading-relaxed mb-6">
               {t('merchant_onboarding.business.chat_msg')}
             </p>
-            <button className="flex items-center gap-2 text-sm font-bold text-[#496246] hover:text-[#3A4E38] transition-colors">
+            <button className="flex items-center gap-2 text-sm font-bold text-[#F3B58C] hover:text-white transition-colors">
               <MessageSquare size={16} />
               {t('merchant_onboarding.business.chat_btn')}
             </button>
@@ -306,14 +306,14 @@ export default function BusinessDetailsPage() {
           {/* {t('merchant_onboarding.business.pro_tip')} Widget */}
           <motion.div
             initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
-            className="bg-[#F8EFEB] rounded-3xl p-6 shadow-sm border border-[#F0E0D6]"
+            className="bg-gradient-to-br from-[#3D2618] to-[#24170E] rounded-3xl p-6 shadow-xl border border-[#8C5A3B]/40"
           >
-            <div className="flex items-center gap-2 text-[#D68C5E] font-bold text-xs uppercase tracking-widest mb-3">
+            <div className="flex items-center gap-2 text-[#F3B58C] font-bold text-xs uppercase tracking-widest mb-3">
               <Lightbulb size={14} />
               {t('merchant_onboarding.business.pro_tip')}
             </div>
-            <h4 className="font-bold text-gray-900 mb-3">{t('merchant_onboarding.business.consistency_title')}</h4>
-            <p className="text-sm text-gray-700 leading-relaxed">
+            <h4 className="font-bold text-white mb-3">{t('merchant_onboarding.business.consistency_title')}</h4>
+            <p className="text-sm text-[#F3B58C]/90 leading-relaxed">
               {t('merchant_onboarding.business.consistency_desc')}
             </p>
           </motion.div>

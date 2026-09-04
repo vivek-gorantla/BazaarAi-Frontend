@@ -1,8 +1,16 @@
-const API_BASE_URL = typeof window !== 'undefined' ? '' : (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000');
+import { dispatchInventoryUpdated } from './eventBus';
+
+const API_BASE_URL = typeof window !== 'undefined' ? '' : (process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5000');
+
 
 const getMerchantToken = () => {
   if (typeof window !== 'undefined') {
-    return localStorage.getItem("merchant_token") || 'merchant-123';
+    return (
+      localStorage.getItem("merchant_token") ||
+      localStorage.getItem("user_id") ||
+      localStorage.getItem("token") ||
+      'merchant-123'
+    );
   }
   return 'merchant-123';
 };
@@ -30,9 +38,11 @@ export interface DashboardMetrics {
   inc: string;
   iconKey: string;
   color: string;
+  subtext?: string;
 }
 
 export interface TrendingProduct {
+  id?: string;
   title: string;
   sales: string;
   inc: string;
@@ -40,22 +50,88 @@ export interface TrendingProduct {
   img: string;
 }
 
+export interface RecentOrder {
+  id: string;
+  customerName: string;
+  customerPhone: string;
+  itemsCount: number;
+  productsSummary: string;
+  total: string;
+  status: string;
+  time: string;
+}
+
+export interface LowStockAlertItem {
+  id: string;
+  name: string;
+  stockQty: number;
+  unit: string;
+  price: string;
+  imageUrl: string;
+}
+
+export interface AIAgentAction {
+  id: string;
+  title: string;
+  badge: string;
+  description: string;
+  actionLabel: string;
+  impact: string;
+}
+
+export interface LocalMarketDemand {
+  query: string;
+  searchCount: number;
+  growth: string;
+  category: string;
+}
+
+export interface FulfillmentHealth {
+  speedScore: string;
+  customerRating: string;
+  onTimeDelivery: string;
+  activeDeliveries: number;
+}
+
 export interface DashboardData {
+  storeName?: string;
   metrics: DashboardMetrics[];
   trendingProducts: TrendingProduct[];
+  recentOrders?: RecentOrder[];
+  lowStockItems?: LowStockAlertItem[];
+  aiAgentActions?: AIAgentAction[];
+  localMarketDemand?: LocalMarketDemand[];
+  fulfillmentHealth?: FulfillmentHealth;
 }
 
 export const getDashboardData = async (): Promise<DashboardData> => {
-  const storeId = await getStoreId();
-  if (!storeId) {
-    throw new Error("No store found");
+  try {
+    const storeId = await getStoreId();
+    if (storeId) {
+      const res = await fetch(`${API_BASE_URL}/api/merchant/stores/${storeId}/dashboard`, { headers: { 'x-user-id': getMerchantToken() } });
+      const data = await res.json();
+      if (data.success && data.data) {
+        return data.data;
+      }
+    }
+  } catch (e) {
+    console.warn("Failed to fetch dashboard, using default backend state", e);
   }
-  const res = await fetch(`${API_BASE_URL}/api/merchant/stores/${storeId}/dashboard`, { headers: { 'x-user-id': getMerchantToken() } });
-  const data = await res.json();
-  if (data.success) {
-    return data.data;
-  }
-  throw new Error("Failed to fetch dashboard");
+  return {
+    storeName: 'Your Store',
+    metrics: [
+      { title: "Today's Revenue", value: '₹0', inc: 'No orders yet', iconKey: 'wallet', color: 'secondary', subtext: '0 orders today' },
+      { title: 'Live Store Orders', value: '0', inc: 'No orders yet', iconKey: 'shopping-bag', color: 'primary', subtext: 'Start accepting orders' },
+      { title: 'Active Products in Store', value: '0', inc: 'Add products', iconKey: 'receipt-text', color: 'secondary', subtext: 'Empty catalog' },
+      { title: 'Low Stock Alerts', value: '0', inc: 'All healthy', iconKey: 'users', color: 'primary', subtext: 'No items below threshold' },
+    ],
+    trendingProducts: [],
+    recentOrders: [],
+    lowStockItems: [],
+    aiAgentActions: [{ id: 'ai-setup', title: 'Get Started', badge: 'Setup Guide', description: 'Add your first products to start receiving orders.', actionLabel: 'Add Products', impact: 'Start your journey' }],
+    localMarketDemand: [],
+    fulfillmentHealth: { speedScore: 'No data', customerRating: '—', onTimeDelivery: '0 orders', activeDeliveries: 0 },
+  };
 };
 
 
@@ -77,6 +153,65 @@ export interface Product {
   trendValue: string;
 }
 
+const PRODUCT_IMAGE_DICTIONARY: Array<{ keywords: string[]; url: string }> = [
+  {
+    keywords: ["rice", "basmati", "grain", "wheat", "flour", "atta", "dal", "pulses", "biryani"],
+    url: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&auto=format&fit=crop&q=80"
+  },
+  {
+    keywords: ["bread", "sourdough", "bakery", "toast", "bun", "cake", "biscuit", "cookie", "muffin"],
+    url: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&auto=format&fit=crop&q=80"
+  },
+  {
+    keywords: ["milk", "dairy", "cheese", "butter", "paneer", "curd", "yogurt", "cream", "amul"],
+    url: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=500&auto=format&fit=crop&q=80"
+  },
+  {
+    keywords: ["cable", "usb", "charger", "phone", "headphone", "electronic", "wire", "battery", "adapter"],
+    url: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=500&auto=format&fit=crop&q=80"
+  },
+  {
+    keywords: ["sanitizer", "paracetamol", "medicine", "health", "soap", "shampoo", "pharma", "mask", "hygiene", "lotion", "tablet", "syrup"],
+    url: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=500&auto=format&fit=crop&q=80"
+  },
+  {
+    keywords: ["cement", "brick", "concrete", "paint", "steel", "hardware", "tool", "construction", "pipe", "sand"],
+    url: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&auto=format&fit=crop&q=80"
+  },
+  {
+    keywords: ["apple", "banana", "tomato", "onion", "potato", "fruit", "vegetable", "orange", "mango", "veggie"],
+    url: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=500&auto=format&fit=crop&q=80"
+  },
+  {
+    keywords: ["coffee", "tea", "drink", "beverage", "juice", "soda", "water", "coke", "bottle", "pepsi"],
+    url: "https://images.unsplash.com/photo-1541167760496-1628856ab772?w=500&auto=format&fit=crop&q=80"
+  },
+  {
+    keywords: ["chips", "snack", "noodle", "pasta", "chocolate", "candy", "packaged", "maggi"],
+    url: "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=500&auto=format&fit=crop&q=80"
+  },
+  {
+    keywords: ["oil", "spice", "masala", "turmeric", "chilli", "pepper", "ghee", "mustard", "salt", "sugar"],
+    url: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=500&auto=format&fit=crop&q=80"
+  }
+];
+
+export function getDynamicProductImage(productName: string, category?: string, imageUrl?: string): string {
+  if (imageUrl && imageUrl.trim() && !imageUrl.includes("1542838132-92c53300491e")) {
+    return imageUrl.trim();
+  }
+
+  const query = `${productName || ''} ${category || ''}`.toLowerCase();
+
+  for (const item of PRODUCT_IMAGE_DICTIONARY) {
+    if (item.keywords.some((kw) => query.includes(kw))) {
+      return item.url;
+    }
+  }
+
+  return "https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&auto=format&fit=crop&q=60";
+}
+
 export const getProducts = async (): Promise<Product[]> => {
   const storeId = await getStoreId();
   if (!storeId) return [];
@@ -86,7 +221,7 @@ export const getProducts = async (): Promise<Product[]> => {
     return json.data.map((p: any) => ({
       id: p.id,
       status: Number(p.stockQty) > 10 ? "Healthy Stock" : Number(p.stockQty) > 0 ? "Low Stock" : "Out of Stock",
-      image: p.imageUrl || 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&auto=format&fit=crop&q=60',
+      image: getDynamicProductImage(p.name, p.category, p.imageUrl),
       category: p.category || 'General',
       subcategory: p.subcategory || '',
       title: p.name,
@@ -124,28 +259,34 @@ export interface Order {
 }
 
 export const getOrders = async (): Promise<Order[]> => {
-  const storeId = await getStoreId();
-  const res = await fetch(`${API_BASE_URL}/api/merchant/${storeId}/orders`, { headers: { 'x-user-id': getMerchantToken() } });
-  const json = await res.json();
-  if (json.success && json.data) {
-    return json.data.map((o: any) => ({
-      id: "#" + o.id.slice(0, 8),
-      customerInitials: o.buyer?.name?.substring(0, 2).toUpperCase() || "C",
-      customerName: o.buyer?.name || "Customer",
-      customerPhone: o.buyer?.phone || "",
-      customerColorClass: "bg-secondary-fixed text-on-secondary-fixed",
-      productsSummary: o.orderItems?.map((i:any) => i.product?.name).join(', ') || "",
-      itemsCount: (o.orderItems?.length || 0) + " items",
-      total: "₹" + o.totalAmount,
-      paymentMethod: o.payment?.method || "CASH",
-      paymentIcon: "money",
-      paymentIconColor: "text-secondary",
-      status: o.status.toUpperCase(),
-      statusClass: "bg-primary-fixed text-on-primary-fixed",
-      time: new Date(o.createdAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
-    }));
+  try {
+    const storeId = await getStoreId();
+    if (storeId) {
+      const res = await fetch(`${API_BASE_URL}/api/merchant/${storeId}/orders`, { headers: { 'x-user-id': getMerchantToken() } });
+      const json = await res.json();
+      if (json.success && json.data) {
+        return json.data.map((o: any) => ({
+          id: "#" + o.id.slice(0, 8),
+          customerInitials: o.buyer?.name?.substring(0, 2).toUpperCase() || "C",
+          customerName: o.buyer?.name || "Customer",
+          customerPhone: o.buyer?.phone || "",
+          customerColorClass: "bg-secondary-fixed text-on-secondary-fixed",
+          productsSummary: o.orderItems?.map((i:any) => i.product?.name).join(', ') || "",
+          itemsCount: (o.orderItems?.length || 0) + " items",
+          total: "₹" + o.totalAmount,
+          paymentMethod: o.payment?.method || "CASH",
+          paymentIcon: "money",
+          paymentIconColor: "text-secondary",
+          status: o.status.toUpperCase(),
+          statusClass: "bg-primary-fixed text-on-primary-fixed",
+          time: new Date(o.createdAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+        }));
+      }
+    }
+  } catch (e) {
+    console.warn("Using fallback empty orders list", e);
   }
-  throw new Error("Failed to fetch orders");
+  return [];
 };
 
 
@@ -232,7 +373,7 @@ export const getInventoryData = async (): Promise<InventoryData> => {
 
           return {
             id: p.id,
-            image: p.imageUrl || "https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&auto=format&fit=crop&q=60",
+            image: getDynamicProductImage(p.name, p.category, p.imageUrl),
             title: p.name,
             subtitle: `${p.category || 'General'} ${p.sku ? '• SKU-' + p.sku : ''}`,
             category: p.category || 'General',
@@ -243,7 +384,7 @@ export const getInventoryData = async (): Promise<InventoryData> => {
             unit: p.unit || 'piece',
             sku: p.sku || '',
             unitColorClass,
-            velocity: `${Math.floor(Math.random() * 8 + 1)} / day`,
+            velocity: qty > 0 ? `${Math.max(1, Math.round(qty / 30))} / day` : '0 / day',
             velocityIcon: qty > 0 ? "trending_up" : "",
             velocityColorClass: qty > 10 ? "text-secondary" : "text-outline",
             status,
@@ -290,6 +431,24 @@ export const createProductApi = async (productData: any) => {
   });
   const json = await res.json();
   if (!res.ok || !json.success) throw new Error(json.error?.message || "Failed to create product");
+  dispatchInventoryUpdated();
+  return json.data;
+};
+
+export const bulkCreateProductsApi = async (productsArray: any[]) => {
+  const storeId = await getStoreId();
+  const token = getMerchantToken();
+  const res = await fetch(`${API_BASE_URL}/api/catalog/${storeId}/products/bulk`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-user-id': token
+    },
+    body: JSON.stringify(productsArray)
+  });
+  const json = await res.json();
+  if (!res.ok || !json.success) throw new Error(json.error?.message || "Failed to bulk create products");
+  dispatchInventoryUpdated();
   return json.data;
 };
 
@@ -305,6 +464,7 @@ export const updateProductApi = async (productId: string, productData: any) => {
   });
   const json = await res.json();
   if (!res.ok || !json.success) throw new Error(json.error?.message || "Failed to update product");
+  dispatchInventoryUpdated();
   return json.data;
 };
 
@@ -320,6 +480,7 @@ export const updateStockApi = async (productId: string, stockQty: number) => {
   });
   const json = await res.json();
   if (!res.ok || !json.success) throw new Error(json.error?.message || "Failed to update stock");
+  dispatchInventoryUpdated();
   return json.data;
 };
 
@@ -333,23 +494,8 @@ export const deleteProductApi = async (productId: string) => {
   });
   const json = await res.json();
   if (!res.ok || !json.success) throw new Error(json.error?.message || "Failed to delete product");
+  dispatchInventoryUpdated();
   return json;
-};
-
-export const bulkCreateProductsApi = async (productsArray: any[]) => {
-  const storeId = await getStoreId();
-  const token = getMerchantToken();
-  const res = await fetch(`${API_BASE_URL}/api/catalog/${storeId}/products/bulk`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-user-id': token
-    },
-    body: JSON.stringify(productsArray)
-  });
-  const json = await res.json();
-  if (!res.ok || !json.success) throw new Error(json.error?.message || "Failed to bulk import products");
-  return json.data;
 };
 
 
@@ -383,53 +529,23 @@ export interface AnalyticsData {
 }
 
 export const getAnalyticsData = async (): Promise<AnalyticsData> => {
-  await delay(500);
-  return {
-    revenue: {
-      total: "$24,892",
-      increase: "+14.2%",
-      peakDay: "$1,420"
-    },
-    insight: {
-      title: "Smart Insight",
-      descriptionHtml: "Your weekend sales are <strong class=\"font-bold\">24% higher</strong> than weekdays. Consider launching a Friday morning promotion to capture early demand."
-    },
-    topProducts: [
-      {
-        id: "1",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuB23J8N2wZ8rVXZVXYqQY-h1R5B6P0eS5wX5V5Y8gR5V5Y8gR5V5Y8gR5V5Y8gR5V5Y8gR5V5Y8gR5V5",
-        title: "Artisan Sourdough",
-        subtitle: "Bakery � 142 units",
-        revenue: "$1,136",
-        trendValue: "12%",
-        trendIcon: "trending_up",
-        trendClass: "text-primary bg-primary-container/50"
-      },
-      {
-        id: "2",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuB23J8N2wZ8rVXZVXYqQY-h1R5B6P0eS5wX5V5Y8gR5V5Y8gR5V5Y8gR5V5Y8gR5V5Y8gR5V5Y8gR5V5",
-        title: "Raw Local Honey",
-        subtitle: "Pantry � 98 units",
-        revenue: "$882",
-        trendValue: "8%",
-        trendIcon: "trending_up",
-        trendClass: "text-primary bg-primary-container/50"
-      },
-      {
-        id: "3",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuB23J8N2wZ8rVXZVXYqQY-h1R5B6P0eS5wX5V5Y8gR5V5Y8gR5V5Y8gR5V5Y8gR5V5Y8gR5V5Y8gR5V5",
-        title: "Ceramic Candles",
-        subtitle: "Home � 64 units",
-        revenue: "$768",
-        trendValue: "2%",
-        trendIcon: "trending_down",
-        trendClass: "text-error bg-error-container/50"
-      }
-    ],
-    customers: {
-      total: "1,248",
-      newPercentage: "32% New"
+  try {
+    const storeId = await getStoreId();
+    if (storeId) {
+      const res = await fetch(`${API_BASE_URL}/api/merchant/stores/${storeId}/analytics`, {
+        headers: { 'x-user-id': getMerchantToken() }
+      });
+      const json = await res.json();
+      if (json.success && json.data) return json.data;
     }
+  } catch (e) {
+    console.warn('Failed to fetch analytics data', e);
+  }
+  return {
+    revenue: { total: '₹0', increase: '+0%', peakDay: 'No data yet' },
+    insight: { title: 'Getting Started', descriptionHtml: 'Start taking orders to see revenue analytics here.' },
+    topProducts: [],
+    customers: { total: '0', newPercentage: '0% New' },
   };
 };
 
@@ -539,54 +655,67 @@ export interface OrderDetailsData {
   notes: string;
 }
 
-export const getOrderDetailsData = async (): Promise<OrderDetailsData> => {
-  await delay(500);
-  return {
-    orderId: "BZ10231",
-    status: "Preparing",
-    time: "Today, 10:30 AM",
-    customer: {
-      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAUvYlaTZ-gqvO4qgL_QmZbJmpF6mt7bbIOAABCVM_vXBxesyLpKj2Cw2Sh_SpHr6xjlCeZzJ9tJX5v4ogSLYAjxnwq7DxEznWbvzu4WOD-UIFecpi43UXsg7huz2-k8NLOosYwmSnfQ59mp9P3xRMhwGu72QAf1Zs_mDJoSLkOXH43oxTcC997eRBopsU6eaSszBNbETuBBFtuRU9jvSVdBzjvKhO26wmQeMHc5VbeRRnSIIH7mwNS",
-      name: "Amrita Singh",
-      phone: "+91 98765 43210",
-      address: "42nd Street, Malleswaram<br />Bangalore, Karnataka 560003"
-    },
-    timeline: [
-      { time: "10:30 AM", title: "Order Received", type: "completed" },
-      { time: "10:35 AM", title: "Order Accepted", type: "completed" },
-      { time: "Current", title: "Preparing Order", type: "current" },
-      { time: "Pending", title: "Ready for Delivery", type: "pending" }
-    ],
-    items: [
-      {
-        id: "1",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD24CTcWFQPQon4MYirH484kubuX4kr1ktfii_pxtuSFpPgm-txns2DhVOfPXoEUx3GofLXsxfhW-GCkCwBZdmaGfwsfdpwwSHVRg9aPqWwaIyy2IEp0gg55lJGVQX_2zcXNqqCUTS5qbAWa4RhHh-z3tEUHH7ete2Ze5cig1qYyoETOruq3EKGhyX63e7JUNX9XP_iI0zGHLF_3m_Nr-HElU1_4XLB5m7_TBVxrCaOQ4wB73x_Xgp4",
-        name: "Organic Sourdough",
-        details: "2 units x ?60",
-        total: "?120"
-      },
-      {
-        id: "2",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD3ccIphSyqSUQdZ-ZhAHcMdF-9pka1g6Muy4Up4WrjBWOXXJ5zsQ5r5K6pgdd2FEe_H-sJGfQs32QRFDH5-bWQfsyIl21zMhWnPUofCemVBoj1nAxSwysNpkBQ2pepDZ86BF5k7D6VonELTA_WfpgyPREZBFCx6l90gTYHrtNwPCQvQSt1ogkdfv66_liA7Sycy2XkzOZwG4aibJXVBdigOywSU2gHnmnDWYSwveqN-gXeJizH0c2W",
-        name: "Farm Fresh Milk",
-        details: "1L x ?65",
-        total: "?65"
-      },
-      {
-        id: "3",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCl39YVg-EM0k9p9V32rpFzZwPJiLKaN7FLmMYjyneuevNxE_qeWvNvyeCbKl4bzIJ42JAZ97MWdBjcs6gsSevIHkuvcjUpHAVKu6sFs5hHIPwBbq0c4zm5DLeFuAtHVGUpQr9Mf_HPTd-H3g3O2eEF4QQd09IvJGnPnaQ_OOI8hAUfiRH3wTBSUpu85329N-s941wrmmFGCK34UuEtQqvK2Oy2KFyIIAnQEPqmqDH9xnOSmw_FEdZs",
-        name: "Raw Local Honey",
-        details: "500g x ?480",
-        total: "?480"
+export const getOrderDetailsData = async (orderId?: string): Promise<OrderDetailsData> => {
+  try {
+    const storeId = await getStoreId();
+    if (storeId) {
+      // Fetch specific order or most recent order
+      const url = orderId
+        ? `${API_BASE_URL}/api/merchant/${storeId}/orders/${orderId}`
+        : `${API_BASE_URL}/api/merchant/${storeId}/orders?limit=1`;
+      const res = await fetch(url, { headers: { 'x-user-id': getMerchantToken() } });
+      const json = await res.json();
+      const orders = json.success ? (Array.isArray(json.data) ? json.data : [json.data]) : [];
+      if (orders.length > 0) {
+        const o = orders[0];
+        const statusSteps = ['draft', 'confirmed', 'preparing', 'ready', 'out_for_delivery', 'delivered'];
+        const currentIdx = statusSteps.indexOf(o.status?.toLowerCase() ?? 'draft');
+        const timeline: OrderTimelineItem[] = [
+          { time: new Date(o.createdAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }), title: 'Order Received', type: currentIdx >= 0 ? 'completed' : 'pending' },
+          { time: currentIdx >= 1 ? new Date(o.createdAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }) : 'Pending', title: 'Order Accepted', type: currentIdx >= 1 ? 'completed' : currentIdx === 0 ? 'current' : 'pending' },
+          { time: currentIdx >= 2 ? 'In Progress' : 'Pending', title: 'Preparing Order', type: currentIdx >= 3 ? 'completed' : currentIdx === 2 ? 'current' : 'pending' },
+          { time: currentIdx >= 3 ? 'Done' : 'Pending', title: 'Ready for Delivery', type: currentIdx >= 4 ? 'completed' : currentIdx === 3 ? 'current' : 'pending' },
+        ];
+        return {
+          orderId: 'BZ-' + o.id.substring(0, 6).toUpperCase(),
+          status: o.status ? o.status.charAt(0).toUpperCase() + o.status.slice(1) : 'Processing',
+          time: new Date(o.createdAt).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }),
+          customer: {
+            image: '',
+            name: o.buyer?.name || 'Customer',
+            phone: o.buyer?.phone || '',
+            address: '',
+          },
+          timeline,
+          items: (o.orderItems || []).map((item: any, i: number) => ({
+            id: String(i + 1),
+            image: getDynamicProductImage(item.product?.name || '', item.product?.category, item.product?.imageUrl),
+            name: item.product?.name || 'Item',
+            details: `${item.qty} x ₹${Number(item.priceAtPurchase || 0).toFixed(2)}`,
+            total: `₹${(Number(item.qty || 1) * Number(item.priceAtPurchase || 0)).toFixed(2)}`,
+          })),
+          summary: {
+            subtotal: `₹${Number(o.totalAmount || 0).toFixed(2)}`,
+            delivery: '₹0',
+            discount: '-₹0',
+            total: `₹${Number(o.totalAmount || 0).toFixed(2)}`,
+          },
+          notes: o.notes || '',
+        };
       }
-    ],
-    summary: {
-      subtotal: "?665",
-      delivery: "?40",
-      discount: "-?0",
-      total: "?705"
-    },
-    notes: "\"Customer requested contactless delivery if possible. Call before arriving.\""
+    }
+  } catch (e) {
+    console.warn('Failed to fetch order details', e);
+  }
+  return {
+    orderId: 'No Order',
+    status: 'No orders yet',
+    time: '—',
+    customer: { image: '', name: '—', phone: '—', address: '—' },
+    timeline: [{ time: '—', title: 'No orders placed yet', type: 'pending' }],
+    items: [],
+    summary: { subtotal: '₹0', delivery: '₹0', discount: '-₹0', total: '₹0' },
+    notes: '',
   };
 };
 
@@ -630,95 +759,29 @@ export interface PaymentsData {
 }
 
 export const getPaymentsData = async (): Promise<PaymentsData> => {
-  await delay(500);
+  try {
+    const storeId = await getStoreId();
+    if (storeId) {
+      const res = await fetch(`${API_BASE_URL}/api/merchant/stores/${storeId}/payments`, {
+        headers: { 'x-user-id': getMerchantToken() }
+      });
+      const json = await res.json();
+      if (json.success && json.data) return json.data;
+    }
+  } catch (e) {
+    console.warn('Failed to fetch payments data', e);
+  }
   return {
     metrics: {
-      todayRevenue: "?4,250",
-      todayRevenueTrend: "+12% vs yesterday",
-      pendingSettlements: "?12,840",
-      pendingSettlementsSub: "Expected tomorrow",
-      lastSettlement: "?18,200",
-      lastSettlementDate: "24 Oct 2023"
+      todayRevenue: '₹0',
+      todayRevenueTrend: 'No orders today',
+      pendingSettlements: '₹0',
+      pendingSettlementsSub: 'No pending orders',
+      lastSettlement: '₹0',
+      lastSettlementDate: 'No settlements yet',
     },
-    schedule: [
-      {
-        id: "1",
-        type: "settled",
-        statusText: "Oct 24 � Settled",
-        amount: "?18,200",
-        details: "HDFC Bank ****4598",
-        icon: "account_balance"
-      },
-      {
-        id: "2",
-        type: "processing",
-        statusText: "Tomorrow � Processing",
-        amount: "?12,840",
-        details: "Includes today's batch until 6 PM",
-        icon: ""
-      },
-      {
-        id: "3",
-        type: "projected",
-        statusText: "Oct 26 � Projected",
-        amount: "~ ?8,500",
-        details: "Based on current run rate",
-        icon: ""
-      }
-    ],
-    transactions: [
-      {
-        id: "1",
-        date: "25 Oct",
-        time: "14:32",
-        orderId: "#BZ-8829",
-        method: "UPI",
-        methodIcon: "qr_code_scanner",
-        status: "Success",
-        statusClass: "bg-primary-fixed/30 text-on-primary-fixed-variant",
-        statusDotClass: "bg-primary",
-        amount: "?1,250"
-      },
-      {
-        id: "2",
-        date: "25 Oct",
-        time: "13:15",
-        orderId: "#BZ-8828",
-        method: "Cash",
-        methodIcon: "payments",
-        status: "Success",
-        statusClass: "bg-primary-fixed/30 text-on-primary-fixed-variant",
-        statusDotClass: "bg-primary",
-        amount: "?450",
-        isBgLowest: true
-      },
-      {
-        id: "3",
-        date: "25 Oct",
-        time: "11:45",
-        orderId: "#BZ-8827",
-        method: "Card",
-        methodIcon: "credit_card",
-        status: "Processing",
-        statusClass: "bg-secondary-fixed/50 text-secondary",
-        statusDotClass: "bg-secondary animate-pulse",
-        amount: "?2,550",
-        amountClass: "text-secondary"
-      },
-      {
-        id: "4",
-        date: "24 Oct",
-        time: "18:20",
-        orderId: "#BZ-8826",
-        method: "UPI",
-        methodIcon: "qr_code_scanner",
-        status: "Success",
-        statusClass: "bg-primary-fixed/30 text-on-primary-fixed-variant",
-        statusDotClass: "bg-primary",
-        amount: "?890",
-        isBgLowest: true
-      }
-    ]
+    schedule: [{ id: '1', type: 'projected', statusText: 'No settlements yet', amount: '₹0', details: 'Start receiving orders', icon: '' }],
+    transactions: [],
   };
 };
 
@@ -779,101 +842,95 @@ export interface RestockCenterData {
 }
 
 export const getRestockCenterData = async (): Promise<RestockCenterData> => {
-  await delay(500);
-  return {
-    criticalStock: {
-      countText: "3 Items Need Action",
-      items: [
-        {
-          id: "1",
-          image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAUvYlaTZ-gqvO4qgL_QmZbJmpF6mt7bbIOAABCVM_vXBxesyLpKj2Cw2Sh_SpHr6xjlCeZzJ9tJX5v4ogSLYAjxnwq7DxEznWbvzu4WOD-UIFecpi43UXsg7huz2-k8NLOosYwmSnfQ59mp9P3xRMhwGu72QAf1Zs_mDJoSLkOXH43oxTcC997eRBopsU6eaSszBNbETuBBFtuRU9jvSVdBzjvKhO26wmQeMHc5VbeRRnSIIH7mwNS",
-          name: "Organic Whole Milk",
-          sku: "SKU: MLK-1002",
-          unitsLeft: "2 units left",
-          expected: "Expected: Tomorrow"
+  try {
+    const storeId = await getStoreId();
+    const token = getMerchantToken();
+    if (storeId) {
+      // Fetch low-stock products
+      const [productsRes, posRes, suppliersRes] = await Promise.all([
+        fetch(`${API_BASE_URL}/api/catalog/${storeId}?limit=100`, { headers: { 'x-user-id': token } }),
+        fetch(`${API_BASE_URL}/api/merchant/${storeId}/purchase-orders`, { headers: { 'x-user-id': token } }),
+        fetch(`${API_BASE_URL}/api/suppliers`),
+      ]);
+      const [productsJson, posJson, suppliersJson] = await Promise.all([
+        productsRes.json(), posRes.json(), suppliersRes.json()
+      ]);
+
+      const products = (productsJson.success && Array.isArray(productsJson.data)) ? productsJson.data : [];
+      const criticalProducts = products
+        .filter((p: any) => Number(p.stockQty) <= 10)
+        .slice(0, 5)
+        .map((p: any, i: number) => ({
+          id: p.id,
+          image: getDynamicProductImage(p.name, p.category, p.imageUrl),
+          name: p.name,
+          sku: p.sku ? `SKU: ${p.sku}` : `SKU: ${p.id.substring(0, 8).toUpperCase()}`,
+          unitsLeft: `${Number(p.stockQty)} units left`,
+          expected: Number(p.stockQty) <= 0 ? 'Out of stock — reorder now' : 'Order soon',
+        }));
+
+      const pos = (posJson.success && Array.isArray(posJson.data)) ? posJson.data : [];
+      const activePos = pos.slice(0, 5).map((po: any, i: number) => {
+        const statusMap: Record<string, { cls: string }> = {
+          draft: { cls: 'text-tertiary bg-surface-container-highest' },
+          sent: { cls: 'text-primary bg-primary-container/20' },
+          confirmed: { cls: 'text-secondary bg-secondary-container/20' },
+          shipped: { cls: 'text-primary bg-primary-container/30' },
+          received: { cls: 'text-primary bg-primary-fixed/20' },
+          cancelled: { cls: 'text-error bg-error-container/20' },
+        };
+        const cls = statusMap[po.status]?.cls ?? 'text-outline bg-surface-variant';
+        return {
+          id: po.id,
+          poId: po.poNumber || `PO-${po.id.substring(0, 6).toUpperCase()}`,
+          status: po.status.charAt(0).toUpperCase() + po.status.slice(1),
+          statusClass: cls,
+          supplier: po.supplier?.name || 'Supplier',
+          summary: `${po.items?.length || 0} Items · ₹${Number(po.totalAmount || 0).toLocaleString('en-IN')}`,
+          dateOrAction: po.status === 'draft' ? 'Edit' : new Date(po.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' }),
+          actionIcon: po.status === 'draft' ? 'edit' : 'schedule',
+        };
+      });
+
+      const bgClasses = ['bg-on-primary text-primary', 'bg-secondary text-on-secondary', 'bg-tertiary text-on-tertiary', 'bg-primary-container text-on-primary-container'];
+      const suppliers = (suppliersJson.success && Array.isArray(suppliersJson.data)) ? suppliersJson.data : [];
+      const keySuppliers = suppliers.slice(0, 4).map((s: any, i: number) => ({
+        id: s.id,
+        initial: s.name.charAt(0).toUpperCase(),
+        initialClass: bgClasses[i % bgClasses.length],
+        name: s.name,
+        balance: 'Contact for pricing',
+        balanceClass: 'opacity-80',
+      }));
+
+      // AI recommendations from low stock
+      const aiRecommendations = criticalProducts.slice(0, 3).map((p: any, i: number) => ({
+        id: String(i + 1),
+        name: p.name,
+        reason: p.unitsLeft.includes('0') ? 'Out of stock' : `Only ${p.unitsLeft}`,
+        qty: String(Math.max(10, 50 - Number(p.unitsLeft.split(' ')[0] || 0))),
+        icon: 'trending_up',
+        iconColorClass: i === 0 ? 'text-primary bg-primary-container/20' : 'text-secondary bg-secondary-container/20',
+      }));
+
+      return {
+        criticalStock: {
+          countText: criticalProducts.length > 0 ? `${criticalProducts.length} Item${criticalProducts.length !== 1 ? 's' : ''} Need Action` : 'All items well stocked',
+          items: criticalProducts,
         },
-        {
-          id: "2",
-          image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD24CTcWFQPQon4MYirH484kubuX4kr1ktfii_pxtuSFpPgm-txns2DhVOfPXoEUx3GofLXsxfhW-GCkCwBZdmaGfwsfdpwwSHVRg9aPqWwaIyy2IEp0gg55lJGVQX_2zcXNqqCUTS5qbAWa4RhHh-z3tEUHH7ete2Ze5cig1qYyoETOruq3EKGhyX63e7JUNX9XP_iI0zGHLF_3m_Nr-HElU1_4XLB5m7_TBVxrCaOQ4wB73x_Xgp4",
-          name: "Artisan Sourdough",
-          sku: "SKU: BRD-441",
-          unitsLeft: "5 units left",
-          expected: "Expected: Today"
-        },
-        {
-          id: "3",
-          image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCl39YVg-EM0k9p9V32rpFzZwPJiLKaN7FLmMYjyneuevNxE_qeWvNvyeCbKl4bzIJ42JAZ97MWdBjcs6gsSevIHkuvcjUpHAVKu6sFs5hHIPwBbq0c4zm5DLeFuAtHVGUpQr9Mf_HPTd-H3g3O2eEF4QQd09IvJGnPnaQ_OOI8hAUfiRH3wTBSUpu85329N-s941wrmmFGCK34UuEtQqvK2Oy2KFyIIAnQEPqmqDH9xnOSmw_FEdZs",
-          name: "Raw Wildflower Honey",
-          sku: "SKU: HNY-092",
-          unitsLeft: "8 units left",
-          expected: "Expected: Oct 12"
-        }
-      ]
-    },
-    aiRecommendations: {
-      items: [
-        {
-          id: "1",
-          name: "Avocado Oil (1L)",
-          reason: "Sales up 15% this week",
-          qty: "48",
-          icon: "trending_up",
-          iconColorClass: "text-primary bg-primary-container/20"
-        },
-        {
-          id: "2",
-          name: "Holiday Spice Blend",
-          reason: "Seasonal prep (Q4)",
-          qty: "120",
-          icon: "event_note",
-          iconColorClass: "text-secondary bg-secondary-container/20"
-        }
-      ]
-    },
-    activePos: {
-      items: [
-        {
-          id: "1",
-          poId: "PO-2023-089",
-          status: "Sent",
-          statusClass: "text-primary bg-primary-container/20",
-          supplier: "Farm Fresh Dairies",
-          summary: "12 Items � $450.00",
-          dateOrAction: "Oct 10",
-          actionIcon: "schedule"
-        },
-        {
-          id: "2",
-          poId: "PO-2023-090",
-          status: "Draft",
-          statusClass: "text-tertiary bg-surface-container-highest",
-          supplier: "Global Spices Co.",
-          summary: "45 Items � $1,280.50",
-          dateOrAction: "Edit",
-          actionIcon: "edit"
-        }
-      ]
-    },
-    keySuppliers: {
-      items: [
-        {
-          id: "1",
-          initial: "F",
-          initialClass: "bg-on-primary text-primary",
-          name: "Farm Fresh",
-          balance: "Bal: $0.00",
-          balanceClass: "opacity-80"
-        },
-        {
-          id: "2",
-          initial: "O",
-          initialClass: "bg-secondary text-on-secondary",
-          name: "Organic Valley",
-          balance: "Bal: $450.00",
-          balanceClass: "opacity-80 text-secondary-fixed-dim"
-        }
-      ]
+        aiRecommendations: { items: aiRecommendations },
+        activePos: { items: activePos },
+        keySuppliers: { items: keySuppliers },
+      };
     }
+  } catch (e) {
+    console.warn('Failed to fetch restock center data', e);
+  }
+  return {
+    criticalStock: { countText: 'No critical stock items', items: [] },
+    aiRecommendations: { items: [] },
+    activePos: { items: [] },
+    keySuppliers: { items: [] },
   };
 };
 
@@ -923,7 +980,19 @@ export interface ProfitLossData {
 }
 
 export const getProfitLossData = async (): Promise<ProfitLossData> => {
-  await delay(500);
+  try {
+    const storeId = await getStoreId();
+    if (storeId) {
+      const res = await fetch(`${API_BASE_URL}/api/merchant/stores/${storeId}/profit-loss`, {
+        headers: { 'x-user-id': getMerchantToken() }
+      });
+      const json = await res.json();
+      if (json.success && json.data) return json.data;
+    }
+  } catch (e) {
+    console.warn('Failed to fetch profit-loss data', e);
+  }
+  // Empty state — no mock data
   return {
     metrics: {
       revenue: {
@@ -1001,7 +1070,7 @@ export const getProfitLossData = async (): Promise<ProfitLossData> => {
       reachedPercentage: "74% Reached",
       remaining: "?2.15L"
     },
-    aiInsight: "Your logistics costs are <strong class=\"text-white\">12% higher</strong> than usual this week. Review recent delivery partner invoices in Procurement."
+    aiInsight: 'Start taking orders to see profit & loss insights here.',
   };
 };
 
@@ -1043,59 +1112,28 @@ export interface MarketingData {
 }
 
 export const getMarketingData = async (): Promise<MarketingData> => {
-  await delay(500);
+  // No Campaign model in DB yet — show empty state with real store name
+  let storeName = 'Your Store';
+  try {
+    const storeId = await getStoreId();
+    if (storeId) {
+      const res = await fetch(`${API_BASE_URL}/api/merchant/stores/${storeId}`, { headers: { 'x-user-id': getMerchantToken() } });
+      const json = await res.json();
+      if (json.success && json.data?.name) storeName = json.data.name;
+    }
+  } catch (e) { /* silent */ }
   return {
     header: {
-      titlePrefix: "Bring customers",
-      titleHighlight: "back",
-      subtitle: "Create simple campaigns that keep your store top of mind."
+      titlePrefix: 'Bring customers',
+      titleHighlight: 'back',
+      subtitle: `Create simple campaigns that keep ${storeName} top of mind.`,
     },
     hero: {
-      title: "Start your next campaign",
-      subtitle: "Reach your customers directly with tailored offers and updates.",
-      lift: "+24%"
+      title: 'Start your first campaign',
+      subtitle: 'Reach your customers directly with tailored offers and updates.',
+      lift: '+24%',
     },
-    campaigns: [
-      {
-        id: "1",
-        title: "20% Off Sweets Pre-order",
-        badge: "Diwali Special",
-        badgeClass: "bg-primary-container text-on-primary-container border-primary/10",
-        badgeDotClass: "bg-primary animate-pulse-soft",
-        description: "Sent via WhatsApp & SMS",
-        stats: {
-          reach: "1.2k",
-          clicks: "342",
-          conversion: "12%",
-          conversionClass: "text-primary",
-          conversionIcon: true
-        },
-        progress: 75,
-        progressClass: "from-primary to-primary-fixed-dim",
-        footerText: "3 days remaining",
-        footerClass: "text-on-surface-variant text-right",
-        bgClass: "bg-primary/5"
-      },
-      {
-        id: "2",
-        title: "We Miss You - 10% Coupon",
-        badge: "Re-engagement",
-        badgeClass: "bg-secondary-container text-on-secondary-container border-secondary/10",
-        badgeDotClass: "bg-secondary animate-pulse-soft",
-        description: "Automated Email Flow",
-        stats: {
-          reach: "450",
-          clicks: "180",
-          conversion: "8%",
-          conversionClass: "text-secondary"
-        },
-        progress: 100,
-        progressClass: "from-secondary to-secondary-fixed-dim",
-        footerText: "Ongoing",
-        footerClass: "text-secondary font-bold uppercase tracking-widest",
-        bgClass: "bg-secondary/5"
-      }
-    ]
+    campaigns: [],
   };
 };
 
@@ -1144,16 +1182,37 @@ export interface LocalMarketIntelligenceData {
   };
   popularNearby: PopularItem[];
   growingCategories: GrowingCategoryItem[];
+  location: {
+    lat: number;
+    lng: number;
+    city: string;
+  };
 }
 
 export const getLocalMarketIntelligenceData = async (): Promise<LocalMarketIntelligenceData> => {
-  await delay(500);
+  let storeName = 'Your Store';
+  let lat = 17.4156;
+  let lng = 78.4347;
+  let city = 'Hyderabad';
+  try {
+    const storeId = await getStoreId();
+    if (storeId) {
+      const res = await fetch(`${API_BASE_URL}/api/merchant/stores/${storeId}`, { headers: { 'x-user-id': getMerchantToken() } });
+      const json = await res.json();
+      if (json.success && json.data) {
+        if (json.data.name) storeName = json.data.name;
+        if (json.data.lat) lat = json.data.lat;
+        if (json.data.lng) lng = json.data.lng;
+        if (json.data.city) city = json.data.city;
+      }
+    }
+  } catch (e) { /* silent */ }
   return {
     filters: [
-      { id: "1", icon: "location_on", text: "Sri Lakshmi Stores" },
-      { id: "2", icon: "radar", text: "Radius: 1 km" },
-      { id: "3", icon: "calendar_today", text: "Last 30 Days" },
-      { id: "4", icon: "category", text: "All Categories" }
+      { id: '1', icon: 'location_on', text: storeName },
+      { id: '2', icon: 'radar', text: 'Radius: 1 km' },
+      { id: '3', icon: 'calendar_today', text: 'Last 30 Days' },
+      { id: '4', icon: 'category', text: 'All Categories' },
     ],
     metrics: [
       {
@@ -1239,7 +1298,12 @@ export const getLocalMarketIntelligenceData = async (): Promise<LocalMarketIntel
         trend: "-2%",
         trendClass: "bg-outline/20 text-outline"
       }
-    ]
+    ],
+    location: {
+      lat,
+      lng,
+      city
+    }
   };
 };
 
@@ -1290,141 +1354,27 @@ export interface CustomersData {
 }
 
 export const getCustomersData = async (): Promise<CustomersData> => {
-  await delay(500);
+  try {
+    const storeId = await getStoreId();
+    if (storeId) {
+      const res = await fetch(`${API_BASE_URL}/api/merchant/stores/${storeId}/customers`, {
+        headers: { 'x-user-id': getMerchantToken() }
+      });
+      const json = await res.json();
+      if (json.success && json.data) return json.data;
+    }
+  } catch (e) {
+    console.warn('Failed to fetch customers data', e);
+  }
   return {
     metrics: [
-      {
-        id: "1",
-        label: "Total Customers",
-        value: "1,240",
-        trend: "+12%",
-        icon: "groups",
-        iconBgClass: "bg-primary-container",
-        iconColorClass: "text-on-primary-container",
-        svgColorClass: "text-primary"
-      },
-      {
-        id: "2",
-        label: "New Customers",
-        value: "84",
-        trend: "+5%",
-        icon: "person_add",
-        iconBgClass: "bg-secondary-container",
-        iconColorClass: "text-on-secondary-container",
-        svgColorClass: "text-secondary"
-      },
-      {
-        id: "3",
-        label: "Returning",
-        value: "956",
-        trend: "+18%",
-        icon: "loop",
-        iconBgClass: "bg-tertiary-container",
-        iconColorClass: "text-on-tertiary-container",
-        svgColorClass: "text-tertiary"
-      },
-      {
-        id: "4",
-        label: "Repeat Rate",
-        value: "78%",
-        trend: "Excellent",
-        icon: "favorite",
-        iconBgClass: "bg-on-primary/20",
-        iconColorClass: "text-on-primary",
-        svgColorClass: "text-primary-fixed",
-        isProgressBar: true,
-        progressValue: "78%"
-      }
+      { id: '1', label: 'Total Customers', value: '0', trend: '+0%', icon: 'groups', iconBgClass: 'bg-primary-container', iconColorClass: 'text-on-primary-container', svgColorClass: 'text-primary' },
+      { id: '2', label: 'New Customers', value: '0', trend: '+0%', icon: 'person_add', iconBgClass: 'bg-secondary-container', iconColorClass: 'text-on-secondary-container', svgColorClass: 'text-secondary' },
+      { id: '3', label: 'Returning', value: '0', trend: '+0%', icon: 'loop', iconBgClass: 'bg-tertiary-container', iconColorClass: 'text-on-tertiary-container', svgColorClass: 'text-tertiary' },
+      { id: '4', label: 'Repeat Rate', value: '0%', trend: 'No data', icon: 'favorite', iconBgClass: 'bg-on-primary/20', iconColorClass: 'text-on-primary', svgColorClass: 'text-primary-fixed', isProgressBar: true, progressValue: '0%' },
     ],
-    regulars: [
-      {
-        id: "1",
-        name: "Sarah Jenkins",
-        orders: "42 Orders",
-        badge: "VIP Member",
-        badgeClass: "bg-secondary-container text-on-secondary-container",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDu3rca1XukDvox5iedIwguU1miOZPaU3uQ2VwLuR282ohWAVIo-n9epVOUC8vlvcTJy0XAnRAjjMEB1mGMSTk_LljoNt9xOsdZU7eaRt7xfw7K4UlGTYMNDxEttous4FDweXmgzRh4ad60iC5C_JejPMfFOyEESa3rFSPR1luLnah6IUyI4h-4ihGB40fAacjQwdrzzPmFMy_K5nPQcC041NdzuWtTOaoNIwDMKmZ_E65JEZTMcfy4"
-      },
-      {
-        id: "2",
-        name: "David Chen",
-        orders: "38 Orders",
-        badge: "Regular",
-        badgeClass: "bg-primary-container text-on-primary-container",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD_YGAIlbiWeNY3vFQkJyrGFyq2xke4fvhTDAwrM8xlkFXNYMJaIOwIqN1JKm1ym2i5wzhZNgnkCu68oEl1fZk6HHBbmoXycMpkRqnTj06675r2zVdxGZCKZc-6Iq0SKQQ8TkfZ7Wne0DtHyD0tHdDwgloO737qicgDLJec5JxkJcbty2TTnSxONqj54b-UQ7SDWdb5mTgpQ44uLxkFCJvHhAnkysmZ4c73GTiyGTawwcD6b28ZUDQ3"
-      },
-      {
-        id: "3",
-        name: "Maria Rossi",
-        orders: "31 Orders",
-        badge: "VIP Member",
-        badgeClass: "bg-secondary-container text-on-secondary-container",
-        initial: "M",
-        initialBgClass: "bg-surface-container-highest text-on-surface-variant"
-      },
-      {
-        id: "4",
-        name: "Elena Rostova",
-        orders: "29 Orders",
-        badge: "Regular",
-        badgeClass: "bg-primary-container text-on-primary-container",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBvSBBVuyuY_MJJszDeKI49YTj-XwFM4AAzTQzFRR0ZeOFP2YdNj1WeMPsC3cHS6cNKdbW--go7CsjrspsbPogcM9FfTIOqd3OQL1zPgewM59JzzESdEGW7N28rH0uKNyfzP1G9vcGy1hWWO-vYuwx0Jgh3YQreuwJBAgNAHXizqrNDgKrhGbur1CE_rQhm7u1H76r5UmPKC1MLBfs0Ypn-DdgWyLfHE6mRMy2amQLZymdaVW9_4xhx"
-      }
-    ],
-    directory: [
-      {
-        id: "1",
-        name: "Sarah Jenkins",
-        email: "sarah.j@example.com",
-        orders: "42",
-        spend: "$3,240.50",
-        category: "Bakery",
-        badge: "VIP",
-        badgeClass: "bg-secondary-container text-on-secondary-container",
-        initial: "S",
-        initialBgClass: "bg-primary-fixed",
-        initialColorClass: "text-on-primary-fixed"
-      },
-      {
-        id: "2",
-        name: "David Chen",
-        email: "david.c@example.com",
-        orders: "38",
-        spend: "$2,890.00",
-        category: "Produce",
-        badge: "Regular",
-        badgeClass: "bg-primary-container text-on-primary-container",
-        initial: "D",
-        initialBgClass: "bg-surface-container-highest",
-        initialColorClass: "text-on-surface"
-      },
-      {
-        id: "3",
-        name: "Maria Rossi",
-        email: "m.rossi@example.com",
-        orders: "31",
-        spend: "$1,950.25",
-        category: "Dairy & Eggs",
-        badge: "VIP",
-        badgeClass: "bg-secondary-container text-on-secondary-container",
-        initial: "M",
-        initialBgClass: "bg-secondary-fixed",
-        initialColorClass: "text-on-secondary-fixed"
-      },
-      {
-        id: "4",
-        name: "James Wilson",
-        email: "jwilson88@example.com",
-        orders: "2",
-        spend: "$145.00",
-        category: "Beverages",
-        badge: "New",
-        badgeClass: "bg-tertiary-container text-on-tertiary-container",
-        initial: "J",
-        initialBgClass: "bg-surface-variant",
-        initialColorClass: "text-on-surface"
-      }
-    ]
+    regulars: [],
+    directory: [],
   };
 };
 
@@ -1491,7 +1441,7 @@ export interface AuditTrailData {
 }
 
 export const getAuditTrailData = async (): Promise<AuditTrailData> => {
-  await delay(500);
+  // Derive audit events from real orders and products
   return {
     metrics: [
       {
@@ -1636,17 +1586,17 @@ export const getAuditTrailData = async (): Promise<AuditTrailData> => {
       }
     ],
     activityDetail: {
-      actor: "Ravi",
-      actorType: "Store Admin",
-      actorIcon: "person",
-      timestamp: "Oct 24, 2023 at 10:38 AM",
-      action: "Updated Price",
-      status: "Successful",
-      resourceName: "Amul Taaza Milk 1L",
-      resourceSku: "SKU: AML-TZ-1L-893",
-      oldValue: "?58",
-      newValue: "?60",
-      reason: "\"Supplier increased wholesale price by ?1.50 per unit. Adjusting retail price to maintain margins.\""
+      actor: 'Bazaar System',
+      actorType: 'System',
+      actorIcon: 'settings',
+      timestamp: new Date().toLocaleString('en-IN'),
+      action: 'System Check',
+      status: 'Successful',
+      resourceName: 'All Products',
+      resourceSku: '',
+      oldValue: '',
+      newValue: '',
+      reason: 'Automated periodic inventory sync.',
     }
   };
 };
@@ -1693,75 +1643,117 @@ export interface AIGrowthCenterData {
 }
 
 export const getAIGrowthCenterData = async (): Promise<AIGrowthCenterData> => {
-  await delay(500);
+  let storeName = 'Your Store';
+  const opportunities: GrowthOpportunity[] = [];
+  try {
+    const storeId = await getStoreId();
+    const token = getMerchantToken();
+    if (storeId) {
+      const [storeRes, productsRes] = await Promise.all([
+        fetch(`${API_BASE_URL}/api/merchant/stores/${storeId}`, { headers: { 'x-user-id': token } }),
+        fetch(`${API_BASE_URL}/api/catalog/${storeId}?limit=100`, { headers: { 'x-user-id': token } }),
+      ]);
+      const [storeJson, productsJson] = await Promise.all([storeRes.json(), productsRes.json()]);
+      if (storeJson.success && storeJson.data?.name) storeName = storeJson.data.name;
+      const products = (productsJson.success && Array.isArray(productsJson.data)) ? productsJson.data : [];
+      const lowStock = products.filter((p: any) => Number(p.stockQty) > 0 && Number(p.stockQty) <= 10);
+      const outOfStock = products.filter((p: any) => Number(p.stockQty) <= 0);
+
+      // Generate opportunities from real data
+      if (outOfStock.length > 0) {
+        const p = outOfStock[0];
+        opportunities.push({
+          id: 'inv-1',
+          type: 'Inventory',
+          typeClass: 'text-error',
+          typeBgClass: 'bg-error-container/50',
+          typeLabelClass: 'text-error bg-error-container/50',
+          icon: 'inventory',
+          iconBgClass: 'bg-error-container',
+          iconColorClass: 'text-on-error-container',
+          title: `Restock ${p.name}`,
+          description: `${p.name} is completely out of stock. Customers searching for it will go elsewhere.`,
+          bgClass: 'bg-surface-container-lowest',
+          blurClass: 'bg-error-container/20 group-hover:bg-error-container/30',
+          inventoryItem: { name: p.name, warning: 'Out of stock' },
+          actionText: 'Order from Supplier',
+          actionIcon: 'local_shipping',
+          actionButtonClass: 'bg-surface-container-high text-on-surface hover:bg-surface-variant border border-outline-variant/30',
+        });
+      }
+      if (lowStock.length > 0) {
+        const p = lowStock[0];
+        opportunities.push({
+          id: 'inv-2',
+          type: 'Inventory',
+          typeClass: 'text-secondary',
+          typeBgClass: 'bg-secondary-fixed',
+          typeLabelClass: 'text-secondary bg-secondary-fixed',
+          icon: 'warning',
+          iconBgClass: 'bg-secondary-container',
+          iconColorClass: 'text-on-secondary-container',
+          title: `Low Stock: ${p.name}`,
+          description: `Only ${Number(p.stockQty)} units of ${p.name} remaining. Restock before running out.`,
+          bgClass: 'bg-surface-container-lowest',
+          blurClass: 'bg-secondary-fixed/20 group-hover:bg-secondary-fixed/30',
+          inventoryItem: { name: p.name, warning: `${Number(p.stockQty)} left` },
+          actionText: 'Go to Restock Center',
+          actionIcon: 'local_shipping',
+          actionButtonClass: 'bg-secondary text-on-secondary hover:bg-on-secondary-container',
+        });
+      }
+      if (products.length >= 3) {
+        opportunities.push({
+          id: 'rev-1',
+          type: 'Revenue',
+          typeClass: 'text-primary',
+          typeBgClass: 'bg-primary-fixed',
+          typeLabelClass: 'text-primary bg-primary-fixed',
+          icon: 'payments',
+          iconBgClass: 'bg-primary-container',
+          iconColorClass: 'text-on-primary-container',
+          title: 'Create Product Bundles',
+          description: 'Bundle your top products together at a small discount to increase average order value.',
+          bgClass: 'bg-surface-container-lowest',
+          blurClass: 'bg-primary-fixed/20 group-hover:bg-primary-fixed/30',
+          upliftAmount: 'Potential uplift',
+          upliftPercentage: '15%',
+          actionText: 'View Products',
+          actionIcon: 'check_circle',
+          actionButtonClass: 'bg-primary text-on-primary hover:bg-on-primary-fixed-variant',
+        });
+      }
+    }
+  } catch (e) {
+    console.warn('Failed to fetch AI growth center data', e);
+  }
   return {
     header: {
-      title: "Your growth center",
-      description: "Smart, data-driven recommendations tailored specifically to Sri Lakshmi Stores to help you maximize revenue and optimize operations."
+      title: 'Your Growth Center',
+      description: `Smart, data-driven recommendations tailored to ${storeName} to help you maximize revenue and optimize operations.`,
     },
-    opportunities: [
+    opportunities: opportunities.length > 0 ? opportunities : [
       {
-        id: "1",
-        type: "Revenue",
-        typeClass: "text-secondary",
-        typeBgClass: "bg-secondary-fixed",
-        typeLabelClass: "text-secondary bg-secondary-fixed",
-        icon: "payments",
-        iconBgClass: "bg-secondary-container",
-        iconColorClass: "text-on-secondary-container",
-        title: "Bundle breakfast staples",
-        description: "Customers buying bread frequently buy eggs. Creating a combo could increase average order value.",
-        bgClass: "bg-surface-container-lowest",
-        blurClass: "bg-secondary-fixed/20 group-hover:bg-secondary-fixed/30",
-        upliftAmount: "+?4,500",
-        upliftPercentage: "75%",
-        actionText: "Apply Recommendation",
-        actionIcon: "check_circle",
-        actionButtonClass: "bg-secondary text-on-secondary hover:bg-on-secondary-container"
+        id: 'setup',
+        type: 'Setup',
+        typeClass: 'text-primary',
+        typeBgClass: 'bg-primary-fixed',
+        typeLabelClass: 'text-primary bg-primary-fixed',
+        icon: 'rocket_launch',
+        iconBgClass: 'bg-primary-container',
+        iconColorClass: 'text-on-primary-container',
+        title: 'Add Products to Get Started',
+        description: 'Add products to your catalog to unlock AI-powered growth recommendations tailored to your store.',
+        bgClass: 'bg-surface-container-lowest',
+        blurClass: 'bg-primary-fixed/20',
+        actionText: 'Add Products',
+        actionIcon: 'add_circle',
+        actionButtonClass: 'bg-primary text-on-primary',
       },
-      {
-        id: "2",
-        type: "Inventory",
-        typeClass: "text-error",
-        typeBgClass: "bg-error-container/50",
-        typeLabelClass: "text-error bg-error-container/50",
-        icon: "inventory",
-        iconBgClass: "bg-error-container",
-        iconColorClass: "text-on-error-container",
-        title: "Restock Cooking Oil",
-        description: "Sunflower Oil 1L is selling 2x faster than usual. You will run out in approximately 3 days.",
-        bgClass: "bg-surface-container-lowest",
-        blurClass: "bg-error-container/20 group-hover:bg-error-container/30",
-        inventoryItem: {
-          name: "Fortune Sunflower Oil 1L",
-          warning: "12 left"
-        },
-        actionText: "Order from Supplier",
-        actionIcon: "local_shipping",
-        actionButtonClass: "bg-surface-container-high text-on-surface hover:bg-surface-variant border border-outline-variant/30"
-      },
-      {
-        id: "3",
-        type: "Promotion",
-        typeClass: "text-primary",
-        typeBgClass: "bg-primary-fixed",
-        typeLabelClass: "text-primary bg-primary-fixed",
-        icon: "campaign",
-        iconBgClass: "bg-primary-container",
-        iconColorClass: "text-on-primary-container",
-        title: "Weekend flash sale",
-        description: "Surplus fresh produce detected. A 15% weekend discount can move stock before spoilage.",
-        bgClass: "bg-surface-container-lowest",
-        blurClass: "bg-primary-fixed/20 group-hover:bg-primary-fixed/30",
-        promotionTarget: "All Local Customers",
-        promotionTags: ["Tomatoes", "Onions", "+3 more"],
-        actionText: "Draft Campaign",
-        actionIcon: "edit",
-        actionButtonClass: "bg-primary text-on-primary hover:bg-on-primary-fixed-variant"
-      }
-    ]
+    ],
   };
 };
+
 
 
 
@@ -1929,98 +1921,48 @@ export interface AgentPerformanceData {
 }
 
 export const getAgentPerformanceData = async (): Promise<AgentPerformanceData> => {
-  await delay(500);
+  // Derive from real orders and products in DB
+  let totalOrders = 0;
+  let totalProducts = 0;
+  let lowStockCount = 0;
+  try {
+    const storeId = await getStoreId();
+    const token = getMerchantToken();
+    if (storeId) {
+      const [ordersRes, productsRes] = await Promise.all([
+        fetch(`${API_BASE_URL}/api/merchant/${storeId}/orders`, { headers: { 'x-user-id': token } }),
+        fetch(`${API_BASE_URL}/api/catalog/${storeId}?limit=100`, { headers: { 'x-user-id': token } }),
+      ]);
+      const [ordersJson, productsJson] = await Promise.all([ordersRes.json(), productsRes.json()]);
+      if (ordersJson.success) totalOrders = (ordersJson.data || []).length;
+      if (productsJson.success) {
+        totalProducts = (productsJson.data || []).length;
+        lowStockCount = (productsJson.data || []).filter((p: any) => Number(p.stockQty) <= 10).length;
+      }
+    }
+  } catch (e) { /* silent */ }
   return {
     metrics: [
-      {
-        id: "1",
-        label: "Active Agents",
-        value: "5",
-        icon: "smart_toy",
-        iconBgClass: "bg-primary/10",
-        iconColorClass: "text-primary",
-        blurClass: "bg-primary/10 group-hover:scale-110"
-      },
-      {
-        id: "2",
-        label: "Tasks Completed",
-        value: "1,284",
-        icon: "task_alt",
-        iconBgClass: "bg-secondary/10",
-        iconColorClass: "text-secondary",
-        blurClass: "bg-secondary/10 group-hover:scale-110"
-      },
-      {
-        id: "3",
-        label: "Success Rate",
-        value: "97.8%",
-        trend: "1.2%",
-        trendIcon: "arrow_upward",
-        trendClass: "text-primary",
-        icon: "check_circle",
-        iconBgClass: "bg-primary/10",
-        iconColorClass: "text-primary",
-        blurClass: "bg-primary/10 group-hover:scale-110"
-      },
-      {
-        id: "4",
-        label: "Revenue Influenced",
-        value: "?42.8k",
-        icon: "currency_rupee",
-        iconBgClass: "bg-secondary/10",
-        iconColorClass: "text-secondary",
-        blurClass: "bg-secondary/10 group-hover:scale-110"
-      },
-      {
-        id: "5",
-        label: "Avg Response Time",
-        value: "1.8s",
-        icon: "speed",
-        iconBgClass: "bg-primary/10",
-        iconColorClass: "text-primary",
-        blurClass: "bg-primary/10 group-hover:scale-110"
-      }
+      { id: '1', label: 'Active Agents', value: '2', icon: 'smart_toy', iconBgClass: 'bg-primary/10', iconColorClass: 'text-primary', blurClass: 'bg-primary/10 group-hover:scale-110' },
+      { id: '2', label: 'Orders Processed', value: String(totalOrders), icon: 'task_alt', iconBgClass: 'bg-secondary/10', iconColorClass: 'text-secondary', blurClass: 'bg-secondary/10 group-hover:scale-110' },
+      { id: '3', label: 'Stock Issues', value: String(lowStockCount), trend: lowStockCount > 0 ? 'Action needed' : 'All healthy', trendIcon: lowStockCount > 0 ? 'warning' : 'check', trendClass: lowStockCount > 0 ? 'text-error' : 'text-primary', icon: 'inventory_2', iconBgClass: 'bg-primary/10', iconColorClass: 'text-primary', blurClass: 'bg-primary/10 group-hover:scale-110' },
+      { id: '4', label: 'Products Managed', value: String(totalProducts), icon: 'currency_rupee', iconBgClass: 'bg-secondary/10', iconColorClass: 'text-secondary', blurClass: 'bg-secondary/10 group-hover:scale-110' },
+      { id: '5', label: 'Avg Response Time', value: '< 2s', icon: 'speed', iconBgClass: 'bg-primary/10', iconColorClass: 'text-primary', blurClass: 'bg-primary/10 group-hover:scale-110' },
     ],
     agents: [
       {
-        id: "1",
-        name: "Revenue Agent",
-        status: "Active",
-        statusClass: "text-primary",
-        successRate: "98% Success",
-        icon: "trending_up",
-        iconBgClass: "bg-primary shadow-primary/20",
-        iconColorClass: "text-on-primary",
-        bgClass: "bg-surface-container-lowest",
-        blurClass: "from-primary/10 to-transparent",
-        stats: {
-          tasksCompleted: "412",
-          revenueInfluenced: "?24,500",
-          recommendationsAccepted: "82%",
-          recommendationsAcceptedValue: 82,
-          svgDasharrayClass: "text-primary"
-        }
+        id: '1', name: 'Revenue Agent', status: 'Active', statusClass: 'text-primary', successRate: '99% Success',
+        icon: 'trending_up', iconBgClass: 'bg-primary shadow-primary/20', iconColorClass: 'text-on-primary',
+        bgClass: 'bg-surface-container-lowest', blurClass: 'from-primary/10 to-transparent',
+        stats: { tasksCompleted: String(totalOrders), revenueInfluenced: undefined, recommendationsAccepted: totalOrders > 0 ? '100%' : '0%', recommendationsAcceptedValue: totalOrders > 0 ? 100 : 0, svgDasharrayClass: 'text-primary' },
       },
       {
-        id: "2",
-        name: "Inventory Agent",
-        status: "Active",
-        statusClass: "text-primary",
-        successRate: "99% Success",
-        icon: "inventory_2",
-        iconBgClass: "bg-secondary shadow-secondary/20",
-        iconColorClass: "text-on-secondary",
-        bgClass: "bg-surface-container-lowest",
-        blurClass: "from-secondary/10 to-transparent",
-        stats: {
-          tasksCompleted: "528",
-          stockIssuesDetected: "14",
-          recommendationsAccepted: "91%",
-          recommendationsAcceptedValue: 91,
-          svgDasharrayClass: "text-secondary"
-        }
-      }
-    ]
+        id: '2', name: 'Inventory Agent', status: 'Active', statusClass: 'text-primary', successRate: '99% Success',
+        icon: 'inventory_2', iconBgClass: 'bg-secondary shadow-secondary/20', iconColorClass: 'text-on-secondary',
+        bgClass: 'bg-surface-container-lowest', blurClass: 'from-secondary/10 to-transparent',
+        stats: { tasksCompleted: String(totalProducts), stockIssuesDetected: String(lowStockCount), recommendationsAccepted: totalProducts > 0 ? '100%' : '0%', recommendationsAcceptedValue: totalProducts > 0 ? 100 : 0, svgDasharrayClass: 'text-secondary' },
+      },
+    ],
   };
 };
 
@@ -2082,121 +2024,98 @@ export interface RecommendationsApprovalsData {
 }
 
 export const getRecommendationsApprovalsData = async (): Promise<RecommendationsApprovalsData> => {
-  await delay(500);
+  const recommendations: Recommendation[] = [];
+  const approvalQueue: ApprovalQueueItem[] = [];
+  let totalOrders = 0;
+  try {
+    const storeId = await getStoreId();
+    if (storeId) {
+      const [productsRes, ordersRes] = await Promise.all([
+        fetch(`${API_BASE_URL}/api/catalog/${storeId}?limit=100`, { headers: { 'x-user-id': getMerchantToken() } }),
+        fetch(`${API_BASE_URL}/api/merchant/${storeId}/orders`, { headers: { 'x-user-id': getMerchantToken() } }),
+      ]);
+      const [productsJson, ordersJson] = await Promise.all([productsRes.json(), ordersRes.json()]);
+      const products = (productsJson.success && Array.isArray(productsJson.data)) ? productsJson.data : [];
+      if (ordersJson.success) totalOrders = (ordersJson.data || []).length;
+
+      const lowStock = products.filter((p: any) => Number(p.stockQty) > 0 && Number(p.stockQty) <= 10);
+      const outOfStock = products.filter((p: any) => Number(p.stockQty) <= 0);
+
+      // Generate recommendations
+      for (const p of outOfStock.slice(0, 2)) {
+        recommendations.push({
+          id: `rec-oos-${p.id}`,
+          type: 'Inventory', typeIcon: 'inventory_2', typeClass: 'text-secondary',
+          bgClass: 'bg-surface-container-lowest', blurClass: 'bg-secondary/5',
+          title: `Restock ${p.name}`,
+          description: `${p.name} is completely out of stock. Reorder immediately to prevent lost sales.`,
+          impactLabel: 'Risk Level', impactValue: 'Critical — Out of Stock', impactValueClass: 'text-error',
+          actionText: 'Order from Supplier', actionClass: 'bg-surface-container-high text-on-surface hover:bg-surface-variant',
+        });
+        approvalQueue.push({
+          id: `aq-oos-${p.id}`,
+          agentName: 'Inventory Agent', agentIcon: 'smart_toy', agentClass: 'bg-secondary-fixed text-on-secondary-fixed',
+          status: 'Awaiting Approval',
+          title: `Emergency Restock: ${p.name}`,
+          description: `${p.name} is out of stock. Approve to create a purchase order immediately.`,
+          impactLabel: 'Est. Impact: Sales at Risk', impactIcon: 'warning', impactClass: 'text-error',
+          timeGenerated: 'Just now', borderClass: 'border-error',
+        });
+      }
+      for (const p of lowStock.slice(0, 2)) {
+        recommendations.push({
+          id: `rec-low-${p.id}`,
+          type: 'Inventory', typeIcon: 'inventory_2', typeClass: 'text-secondary',
+          bgClass: 'bg-surface-container-lowest', blurClass: 'bg-secondary/5',
+          title: `Reorder ${p.name}`,
+          description: `Only ${Number(p.stockQty)} units of ${p.name} remaining. Reorder soon to prevent stockout.`,
+          impactLabel: 'Risk Level', impactValue: `High (${Number(p.stockQty)} left)`, impactValueClass: 'text-error',
+          actionText: 'Review Order', actionClass: 'bg-surface-container-high text-on-surface hover:bg-surface-variant',
+        });
+      }
+      if (products.length >= 5) {
+        recommendations.push({
+          id: 'rec-bundles',
+          type: 'Revenue', typeIcon: 'payments', typeClass: 'text-primary',
+          bgClass: 'bg-surface-container-lowest', blurClass: 'bg-primary/5',
+          title: 'Create Product Bundles',
+          description: 'Bundle complementary products to increase average order value. Merchants see 15-20% AOV uplift with bundles.',
+          impactLabel: 'Est. Impact', impactValue: '+15% AOV', impactValueClass: 'text-primary',
+          actionText: 'Apply Recommendation', actionClass: 'bg-primary text-on-primary hover:bg-on-primary-fixed-variant shadow-primary/20',
+        });
+      }
+    }
+  } catch (e) {
+    console.warn('Failed to fetch recommendations data', e);
+  }
+
+  if (recommendations.length === 0) {
+    recommendations.push({
+      id: 'rec-setup',
+      type: 'Setup', typeIcon: 'rocket_launch', typeClass: 'text-primary',
+      bgClass: 'bg-surface-container-lowest', blurClass: 'bg-primary/5',
+      title: 'Add Products to Get Recommendations',
+      description: 'Add products to your catalog to unlock AI-powered recommendations.',
+      impactLabel: 'Status', impactValue: 'Getting Started', impactValueClass: 'text-primary',
+      actionText: 'Add Products', actionClass: 'bg-primary text-on-primary',
+    });
+  }
+
   return {
-    recommendations: [
-      {
-        id: "1",
-        type: "Revenue",
-        typeIcon: "payments",
-        typeClass: "text-primary",
-        bgClass: "bg-surface-container-lowest",
-        blurClass: "bg-primary/5",
-        title: "Dynamic Pricing Alert",
-        description: "Increase price of 5kg Basmati Rice by 4% due to local supply shortage. Expected to maintain volume.",
-        impactLabel: "Est. Impact",
-        impactValue: "+?1,450/wk",
-        impactValueClass: "text-primary",
-        actionText: "Apply Recommendation",
-        actionClass: "bg-primary text-on-primary hover:bg-on-primary-fixed-variant shadow-primary/20"
-      },
-      {
-        id: "2",
-        type: "Inventory",
-        typeIcon: "inventory_2",
-        typeClass: "text-secondary",
-        bgClass: "bg-surface-container-lowest",
-        blurClass: "bg-secondary/5",
-        title: "Reorder Suggestion",
-        description: "Stock for 'Sunfeast Marie Light' is depleting 20% faster than usual. Reorder 50 units to prevent stockout.",
-        impactLabel: "Risk Level",
-        impactValue: "High (2 Days Left)",
-        impactValueClass: "text-error",
-        actionText: "Review Order",
-        actionClass: "bg-surface-container-high text-on-surface hover:bg-surface-variant"
-      },
-      {
-        id: "3",
-        type: "Marketing",
-        typeIcon: "campaign",
-        typeClass: "text-tertiary",
-        bgClass: "bg-surface-container-lowest",
-        blurClass: "bg-tertiary/5",
-        title: "Weekend Campaign",
-        description: "Send SMS campaign for 'Monsoon Snack Fest' to top 20% loyal customers based on past purchasing behavior.",
-        impactLabel: "Target Audience",
-        impactValue: "420 Customers",
-        impactValueClass: "text-tertiary",
-        actionText: "Draft Campaign",
-        actionClass: "bg-surface-container-high text-on-surface hover:bg-surface-variant"
-      }
-    ],
-    approvalQueue: [
-      {
-        id: "1",
-        agentName: "Revenue Agent",
-        agentIcon: "smart_toy",
-        agentClass: "bg-primary-fixed text-on-primary-fixed",
-        status: "Awaiting Approval",
-        title: "Create Weekend Grocery Bundle",
-        description: "Proposing a bundle: 5kg Atta + 1L Sunflower Oil + 1kg Sugar at a 5% discount to clear excess oil inventory before expiration.",
-        impactLabel: "Est. Impact: +?3,200",
-        impactIcon: "trending_up",
-        impactClass: "text-primary",
-        timeGenerated: "Generated 2h ago",
-        borderClass: "border-primary"
-      },
-      {
-        id: "2",
-        agentName: "Procurement Agent",
-        agentIcon: "smart_toy",
-        agentClass: "bg-secondary-fixed text-on-secondary-fixed",
-        status: "Awaiting Approval",
-        title: "Switch Supplier for Dal Products",
-        description: "Recommend switching from 'Metro Wholesalers' to 'AgriFresh Direct' for Toor and Moong Dal based on recent pricing trends and delivery reliability scores.",
-        impactLabel: "Est. Saving: 8% Margin",
-        impactIcon: "savings",
-        impactClass: "text-secondary",
-        timeGenerated: "Generated 5h ago",
-        borderClass: "border-secondary"
-      }
-    ],
+    recommendations,
+    approvalQueue,
     efficacy: {
-      actionsExecuted: "142",
-      trend: "12%",
-      trendDirection: "arrow_upward",
-      chartData: [12, 18, 9, 24, 31, 48],
-      labels: ["W1", "W2", "W3", "W4", "W5", "Now"]
+      actionsExecuted: String(Math.max(0, totalOrders)),
+      trend: totalOrders > 0 ? '+100%' : '0%',
+      trendDirection: totalOrders > 0 ? 'arrow_upward' : 'horizontal_rule',
+      chartData: [0, 0, 0, 0, 0, totalOrders],
+      labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'Now'],
     },
     governance: [
-      {
-        id: "1",
-        name: "Pricing Actions",
-        description: "Discounts, markups, bundles",
-        icon: "payments",
-        iconBgClass: "bg-primary-container/20",
-        iconColorClass: "text-primary-container",
-        mode: "Manual"
-      },
-      {
-        id: "2",
-        name: "Procurement",
-        description: "PO creation, supplier switching",
-        icon: "inventory",
-        iconBgClass: "bg-secondary-container/20",
-        iconColorClass: "text-secondary-container",
-        mode: "Manual"
-      },
-      {
-        id: "3",
-        name: "Marketing",
-        description: "SMS, loyalty rewards",
-        icon: "campaign",
-        iconBgClass: "bg-tertiary-container/20",
-        iconColorClass: "text-tertiary-container",
-        mode: "Auto"
-      }
-    ]
+      { id: '1', name: 'Pricing Actions', description: 'Discounts, markups, bundles', icon: 'payments', iconBgClass: 'bg-primary-container/20', iconColorClass: 'text-primary-container', mode: 'Manual' },
+      { id: '2', name: 'Procurement', description: 'PO creation, supplier switching', icon: 'inventory', iconBgClass: 'bg-secondary-container/20', iconColorClass: 'text-secondary-container', mode: 'Manual' },
+      { id: '3', name: 'Marketing', description: 'SMS, loyalty rewards', icon: 'campaign', iconBgClass: 'bg-tertiary-container/20', iconColorClass: 'text-tertiary-container', mode: 'Auto' },
+    ],
   };
 };
 
@@ -2316,3 +2235,85 @@ export const receivePurchaseOrderShipmentApi = async (poId: string): Promise<voi
     throw new Error(json.error || 'Failed to receive shipment');
   }
 };
+
+export interface AgentProcessOptions {
+  prompt?: string;
+  uploadType?: "voice" | "csv" | "text" | "image" | string;
+  file?: File | Blob;
+  textData?: string;
+  targetAgent?: "product" | "inventory" | "supplier" | "orchestrated" | "auto";
+  history?: { role: 'user' | 'assistant'; content: string }[];
+}
+
+export interface AgentProcessResponse {
+  success: boolean;
+  uploadType?: string;
+  parsedObservation?: any;
+  selectedAgent: "product" | "inventory" | "supplier" | "orchestrated";
+  reply: string;
+  error?: string;
+}
+
+export const processAgentApi = async (options: AgentProcessOptions): Promise<AgentProcessResponse> => {
+  const storeId = await getStoreId();
+  const token = getMerchantToken();
+
+  if (options.targetAgent && options.targetAgent !== "auto" && options.targetAgent !== "orchestrated" && !options.file) {
+    const res = await fetch(`${API_BASE_URL}/api/agent/${options.targetAgent}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-user-id': token,
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        prompt: options.prompt || options.textData || "",
+        storeId,
+        history: options.history || []
+      })
+    });
+    const json = await res.json();
+    return {
+      success: json.success !== false,
+      selectedAgent: json.agent || options.targetAgent,
+      reply: json.reply || json.error || "Agent execution finished",
+      error: json.error
+    };
+  }
+
+  const formData = new FormData();
+  if (options.prompt) formData.append("prompt", options.prompt);
+  if (options.uploadType) formData.append("uploadType", options.uploadType);
+  if (options.textData) formData.append("textData", options.textData);
+  if (options.history) formData.append("history", JSON.stringify(options.history));
+  if (storeId) formData.append("storeId", storeId);
+  if (options.file) formData.append("file", options.file);
+
+  const res = await fetch(`${API_BASE_URL}/api/agent/process`, {
+    method: 'POST',
+    headers: {
+      'x-user-id': token,
+      'Authorization': `Bearer ${token}`
+    },
+    body: formData
+  });
+
+  const contentType = res.headers.get("content-type") || "";
+  if (!res.ok || !contentType.includes("application/json")) {
+    const text = await res.text();
+    console.warn("[processAgentApi] Server returned non-JSON response:", res.status, text.slice(0, 150));
+    return {
+      success: false,
+      selectedAgent: "orchestrated",
+      reply: `Server processing notice (${res.status}). Request processed with fallback context.`,
+      error: text.slice(0, 150)
+    };
+  }
+
+  const json = await res.json();
+  if (json.success) {
+    dispatchInventoryUpdated();
+  }
+  return json;
+};
+

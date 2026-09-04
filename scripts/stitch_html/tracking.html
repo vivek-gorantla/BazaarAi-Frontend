@@ -1,0 +1,162 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-tertiary":"#ffffff","on-secondary":"#ffffff","on-primary-fixed":"#2c112d","on-primary-container":"#d7aed3","surface-container-highest":"#e8e0e4","error":"#ba1a1a","tertiary-container":"#3c503a","on-error-container":"#93000a","secondary":"#625e58","inverse-surface":"#332f32","secondary-fixed":"#e8e1da","surface-tint":"#755373","surface-bright":"#fff7fb","primary-container":"#60405f","outline-variant":"#d0c3cb","on-secondary-container":"#66625c","surface-variant":"#e8e0e4","on-tertiary-fixed":"#0d200d","secondary-container":"#e5dfd7","tertiary-fixed":"#d1e9cb","inverse-on-surface":"#f6eff3","on-primary-fixed-variant":"#5c3c5b","outline":"#7e747c","error-container":"#ffdad6","on-tertiary-container":"#aac1a5","inverse-primary":"#e3badf","on-secondary-fixed-variant":"#4a4641","surface":"#fff7fb","on-surface":"#1d1b1e","on-surface-variant":"#4d444b","on-error":"#ffffff","tertiary-fixed-dim":"#b6cdb0","primary-fixed":"#ffd6fa","surface-container-lowest":"#ffffff","on-background":"#1d1b1e","secondary-fixed-dim":"#ccc6be","tertiary":"#263925","primary-fixed-dim":"#e3badf","surface-container-high":"#ede6ea","primary":"#472a47","surface-container-low":"#f9f2f6","surface-container":"#f3ecf0","on-primary":"#ffffff","surface-dim":"#dfd8dc","on-secondary-fixed":"#1e1b17","on-tertiary-fixed-variant":"#384c36","background":"#fff7fb"},"borderRadius":{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},"spacing":{"margin-mobile":"20px","gutter":"20px","margin-desktop":"120px","xl":"80px","md":"24px","base":"8px","sm":"12px","lg":"48px","xs":"4px"},"fontFamily":{"display":["Lexend"],"label-md":["Lexend"],"body-lg":["Lexend"],"headline-lg":["Lexend"],"body-md":["Lexend"],"label-sm":["Lexend"],"headline-md":["Lexend"],"headline-lg-mobile":["Lexend"]},"fontSize":{"display":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"800"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"700"}],"headline-lg-mobile":["28px",{"lineHeight":"34px","fontWeight":"700"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-white shadow-[0_4px_20px_rgba(96,64,95,0.05)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col"><div class="h-20 flex items-center justify-between gap-xl"><div class="flex items-center gap-md"><img alt="Bazaar Logo" class="h-10 w-10 rounded-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/><span class="font-headline-md text-headline-md text-primary tracking-tight">Bazaar</span></div><div class="flex-1 flex items-center gap-md"><div class="flex items-center gap-xs px-md py-sm bg-surface-container-low rounded-full min-w-[180px]"><span class="material-symbols-outlined text-primary text-[20px]">location_on</span><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant">Deliver to:</span><span class="font-label-md text-label-md text-on-surface truncate">Hyderabad, TS</span></div></div><div class="relative flex-1 group"><span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span><input class="w-full h-12 pl-12 pr-4 bg-surface-container-low border-none rounded-full font-body-md focus:ring-2 focus:ring-primary-container transition-all" data-path="search" placeholder="What are you looking for?" type="text"/></div></div><div class="flex items-center gap-md"><a class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="orders" href="#"><span class="material-symbols-outlined">receipt_long</span><span class="font-label-sm text-label-sm">Orders</span></a><a class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="wishlist" href="#"><span class="material-symbols-outlined">favorite</span><span class="font-label-sm text-label-sm">Wishlist</span></a><a class="relative flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors" data-path="cart" href="#"><span class="material-symbols-outlined">shopping_bag</span><span class="absolute -top-1 -right-1 bg-primary text-on-primary text-[10px] w-4 h-4 flex items-center justify-center rounded-full">3</span><span class="font-label-sm text-label-sm">Cart</span></a><a class="ml-4 flex items-center gap-base p-xs rounded-full bg-surface-container hover:bg-surface-container-high transition-colors" data-path="account" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/><span class="material-symbols-outlined text-on-surface-variant">expand_more</span></a></div></div><nav class="h-12 flex items-center gap-xl border-t border-surface-container-highest" data-active-classes="text-primary font-bold border-b-2 border-primary"><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="home" href="#">Home</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="explore" href="#">Explore</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="categories" href="#">Categories</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="stores" href="#">Stores</a><a class="h-full flex items-center text-on-surface-variant font-label-md hover:text-primary transition-colors" data-path="offers" href="#">Offers</a></nav></div></header><main class="w-full pt-[128px] bg-background min-h-screen"><div class="flex flex-col w-full relative min-h-[calc(100vh-128px)]">
+<!-- Desktop Layout: Split View -->
+<div class="flex flex-col lg:flex-row w-full flex-1 max-w-[1440px] mx-auto px-6 lg:px-12 pb-lg gap-xl">
+<!-- Left Column: Status & Details -->
+<div class="w-full lg:w-[400px] flex flex-col gap-lg pt-lg z-10 shrink-0">
+<!-- Header Section -->
+<div class="flex flex-col gap-sm">
+<h1 class="font-display text-display text-on-surface">Arriving Soon</h1>
+<div class="flex items-center gap-sm">
+<div class="h-10 w-10 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">storefront</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Sri Lakshmi Stores</span>
+<span class="font-body-md text-body-md text-on-surface-variant">ETA: <span class="text-primary font-bold">15 mins</span></span>
+</div>
+</div>
+</div>
+<!-- Timeline Section -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-md flex flex-col gap-md relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-fixed/20 rounded-full blur-2xl -mr-16 -mt-16 pointer-events-none"></div>
+<h2 class="font-headline-md text-headline-md text-on-surface relative z-10">Order Status</h2>
+<div class="flex flex-col gap-4 relative z-10 mt-4">
+<!-- Timeline Track Line -->
+<div class="absolute left-[15px] top-[24px] bottom-[32px] w-[2px] bg-surface-variant z-0"></div>
+<!-- Step 1: Placed -->
+<div class="flex gap-md items-start relative z-10 opacity-60">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface text-[16px]">check</span>
+</div>
+<div class="flex flex-col pt-1">
+<span class="font-label-md text-label-md text-on-surface">Order Placed</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">10:42 AM</span>
+</div>
+</div>
+<!-- Step 2: Accepted -->
+<div class="flex gap-md items-start relative z-10 opacity-60">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface text-[16px]">check</span>
+</div>
+<div class="flex flex-col pt-1">
+<span class="font-label-md text-label-md text-on-surface">Store Accepted</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">10:45 AM</span>
+</div>
+</div>
+<!-- Step 3: Preparing -->
+<div class="flex gap-md items-start relative z-10 opacity-60">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface text-[16px]">check</span>
+</div>
+<div class="flex flex-col pt-1">
+<span class="font-label-md text-label-md text-on-surface">Preparing Order</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">10:55 AM</span>
+</div>
+</div>
+<!-- Step 4: Out for Delivery (Active) -->
+<div class="flex gap-md items-start relative z-10">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-on-primary text-[16px]" style="font-variation-settings: 'FILL' 1;">directions_bike</span>
+</div>
+<div class="flex flex-col pt-1">
+<span class="font-label-md text-label-md text-primary">Out for Delivery</span>
+<span class="font-label-sm text-label-sm text-primary">John is on the way</span>
+</div>
+</div>
+<!-- Step 5: Delivered -->
+<div class="flex gap-md items-start relative z-10 opacity-40">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center shrink-0">
+<div class="w-2 h-2 rounded-full bg-on-surface-variant"></div>
+</div>
+<div class="flex flex-col pt-1">
+<span class="font-label-md text-label-md text-on-surface">Delivered</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pending</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Partner Details Card -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-md flex flex-col gap-md relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="relative w-12 h-12">
+<img class="w-full h-full rounded-full object-cover" data-alt="A close up portrait of a friendly Indian delivery driver wearing a green cap, soft natural lighting, high quality lifestyle photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq6oqNiSLyiN1xznH0_cCAPI9UgoPqWFUaDVqmp2rlcwFarbx4Mi3Xxrpoy0WTgx4Y73TraXQUV7FIBuPXDSemdGm7l_GuoeMhnm2jO_9u1c_sTFNHxfQnXNIQP9zlkN4BvfBI6XJYMdDbIgZTmS84FRj85n2gOput1yQHc6XRebcRs9Z50HIUEzPluXTtfSvvE-gbvpfmxhDfWSn7gjMm_GEIWrrK09vgElIwGMM55abJloCDT_Q"/>
+<div class="absolute -bottom-1 -right-1 bg-surface-container-lowest rounded-full p-xs">
+<div class="bg-tertiary text-on-tertiary text-[10px] px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[10px] leading-none" style="font-variation-settings: 'FILL' 1;">star</span> 4.9
+                </div>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">John Doe</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Delivery Partner</span>
+</div>
+</div>
+<div class="flex gap-sm">
+<button class="w-10 h-10 rounded-full bg-surface-container-high text-primary flex items-center justify-center hover:bg-primary hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">call</span>
+</button>
+</div>
+</div>
+<div class="h-px w-full bg-surface-container-highest my-xs"></div>
+<div class="flex justify-between items-center cursor-pointer group/summary">
+<span class="font-label-md text-label-md text-on-surface">Order Summary (3 items)</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover/summary:text-primary transition-colors">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Map Area -->
+<div class="flex-1 w-full lg:h-[calc(100vh-160px)] min-h-[500px] mt-lg lg:mt-lg rounded-xl overflow-hidden relative shadow-xl z-0">
+<!-- Simulated Map Layer -->
+<div class="absolute inset-0 w-full h-full bg-surface-container bg-cover bg-center" data-location="Hyderabad, Telangana" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCryjRMqe3PEJg8tXfBqO-IVFH7gphpLlqsqurr-RjMyYAuNoZsljbTquL9SViwquVgcm1jepWEdKTcgbALnV87PAVMdwvpcExw5kgu47yIsWsapMcH2R4AdtfkuMJla1nKt3w70lBpi_mZi6KVI6PQHtyvFWwFV4jNtU7J0IiQ7i9ert3FIQBJPEKKRyjVoM3_Fwc5YMNUo2hVcAzoZwlKYa5_t1SY8JTKYBGJd6RWlMxCxpDTFYw')"></div>
+<!-- Gradient Overlay for map integration -->
+<div class="absolute inset-0 w-full h-full pointer-events-none bg-gradient-to-t from-background/40 via-transparent to-background/20"></div>
+<!-- Moving Delivery Icon Overlay -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center transition-all duration-[2000ms] ease-in-out" id="delivery-marker">
+<div class="bg-primary text-on-primary px-3 py-1 rounded-full font-label-sm text-label-sm mb-2 shadow-lg whitespace-nowrap animate-bounce">
+          15 mins away
+        </div>
+<div class="w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center border-2 border-primary relative">
+<span class="material-symbols-outlined text-primary text-[24px]" style="font-variation-settings: 'FILL' 1;">electric_moped</span>
+<!-- Radar pulse effect -->
+<div class="absolute inset-0 rounded-full border-2 border-primary animate-ping opacity-50"></div>
+</div>
+</div>
+<!-- Destination Marker Overlay -->
+<div class="absolute top-[30%] left-[70%] z-10 flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-tertiary-container text-on-tertiary-container shadow-md flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">home</span>
+</div>
+<span class="mt-1 font-label-sm text-label-sm text-on-surface bg-surface-container-lowest/80 backdrop-blur-sm px-2 py-0.5 rounded-full shadow-sm">Home</span>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple script to gently bob the delivery marker to simulate live movement along a path
+  document.addEventListener('DOMContentLoaded', () => {
+    const marker = document.getElementById('delivery-marker');
+    if (!marker) return;
+    
+    let xOffset = 0;
+    let yOffset = 0;
+    
+    setInterval(() => {
+      // Simulate random small movements
+      xOffset += (Math.random() - 0.5) * 10;
+      yOffset += (Math.random() - 0.5) * 10;
+      
+      // Constrain movement
+      if (xOffset > 50) xOffset = 50;
+      if (xOffset < -50) xOffset = -50;
+      if (yOffset > 50) yOffset = 50;
+      if (yOffset < -50) yOffset = -50;
+      
+      marker.style.transform = `translate(calc(-50% + ${xOffset}px), calc(-50% + ${yOffset}px))`;
+    }, 2000);
+  });
+</script></main><footer class="w-full bg-surface-container-low py-lg mt-xl"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center gap-md"><span class="font-headline-md text-primary opacity-50">Bazaar</span><div class="flex gap-lg text-on-surface-variant font-label-md"><a class="hover:text-primary" href="#">Privacy</a><a class="hover:text-primary" href="#">Terms</a><a class="hover:text-primary" href="#">Help</a></div><p class="text-on-surface-variant font-label-sm opacity-60">© 2024 Bazaar Customer Platform. Premium Discovery.</p></div></footer></body></html>

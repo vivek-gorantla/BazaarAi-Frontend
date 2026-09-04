@@ -220,20 +220,20 @@ export default function LocationDeliveryPage() {
     : "0";
 
   return (
-    <div className="min-h-screen bg-[#F2F7F2] font-sans pb-20">
+    <div className="min-h-screen bg-[#141A15] font-sans pb-20 text-white">
       {/* Top Navbar */}
       <nav className="flex items-center justify-between px-8 py-4 bg-transparent">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-black flex items-center justify-center rounded-sm">
-            <div className="w-4 h-0.5 bg-white" />
+          <div className="w-8 h-8 bg-white flex items-center justify-center rounded-sm">
+            <div className="w-4 h-0.5 bg-black" />
           </div>
-          <span className="text-[10px] font-bold tracking-widest uppercase text-gray-800">
+          <span className="text-[10px] font-bold tracking-widest uppercase text-white/90">
             {t('merchant_onboarding.title')}
           </span>
         </div>
-        <div className="flex items-center gap-4 text-sm font-medium text-gray-600">
+        <div className="flex items-center gap-4 text-sm font-medium text-white/70">
           <span>{t('merchant_onboarding.help')}</span>
-          <div className="w-8 h-8 rounded-full bg-[#496246] flex items-center justify-center text-white text-xs">
+          <div className="w-8 h-8 rounded-full bg-[#496246] flex items-center justify-center text-white text-xs font-bold">
             A
           </div>
         </div>
@@ -241,14 +241,14 @@ export default function LocationDeliveryPage() {
 
       {/* Stepper */}
       <div className="max-w-6xl mx-auto px-6 mt-4">
-        <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-[11px] sm:text-xs font-bold uppercase tracking-widest text-gray-400">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-[11px] sm:text-xs font-bold uppercase tracking-widest text-white/40">
           {steps.map((step, index) => (
             <div key={step.name} className="flex items-center gap-2 sm:gap-4">
-              <span className={step.active ? "text-[#496246]" : ""}>
+              <span className={step.active ? "text-[#F3B58C]" : ""}>
                 {step.name}
               </span>
               {index < steps.length - 1 && (
-                <span className="text-gray-300">&gt;</span>
+                <span className="text-white/20">&gt;</span>
               )}
             </div>
           ))}
@@ -259,25 +259,25 @@ export default function LocationDeliveryPage() {
         {/* Left Column: Form */}
         <div className="flex-1 max-w-lg">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <h1 className="text-4xl font-black text-gray-900 mb-4 tracking-tight">{t('merchant_onboarding.location.title')}</h1>
-            <p className="text-gray-600 mb-8 leading-relaxed max-w-sm">
+            <h1 className="text-4xl font-black text-white mb-4 tracking-tight">{t('merchant_onboarding.location.title')}</h1>
+            <p className="text-[#C2D6C0] mb-8 leading-relaxed max-w-sm">
               {t('merchant_onboarding.location.subtitle')}
             </p>
           </motion.div>
 
           <div className="space-y-6">
             {/* Store Address Block */}
-            <div className="bg-[#EAF3EA] rounded-[32px] p-8 shadow-sm">
+            <div className="bg-[#1A231C] rounded-[32px] p-8 shadow-2xl border border-[#2E3D30]">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="font-bold text-gray-900 text-lg">{t('merchant_onboarding.location.address_title')}</h3>
-                <div className="w-12 h-12 rounded-full border-4 border-[#DCE8DC] flex items-center justify-center opacity-30">
-                  <div className="w-4 h-4 rounded-full bg-[#496246]"></div>
+                <h3 className="font-bold text-white text-lg">{t('merchant_onboarding.location.address_title')}</h3>
+                <div className="w-12 h-12 rounded-full border-4 border-[#2E3D30] flex items-center justify-center">
+                  <div className="w-4 h-4 rounded-full bg-[#F3B58C]"></div>
                 </div>
               </div>
 
               <div className="relative mb-6">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Search size={16} className={searching ? "text-[#496246] animate-pulse" : "text-gray-400"} />
+                  <Search size={16} className={searching ? "text-[#F3B58C] animate-pulse" : "text-[#7A9378]"} />
                 </div>
                 <input
                   type="text"
@@ -285,12 +285,12 @@ export default function LocationDeliveryPage() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                   placeholder={t('merchant_onboarding.location.search_placeholder')}
-                  className="w-full pl-10 pr-24 py-3 bg-white/60 rounded-xl border border-white focus:outline-none focus:ring-2 focus:ring-[#496246]/20 transition-all text-sm placeholder-gray-500"
+                  className="w-full pl-10 pr-28 py-3 bg-[#141A15] rounded-xl border border-[#2E3D30] focus:outline-none focus:ring-2 focus:ring-[#F3B58C]/40 transition-all text-sm text-white placeholder-[#7A9378]"
                 />
                 <button
                   onClick={handleLocateMe}
                   disabled={locating}
-                  className="absolute inset-y-1.5 right-1.5 px-4 bg-[#496246] hover:bg-[#3A4E38] text-white text-xs font-bold rounded-lg transition-colors disabled:opacity-50"
+                  className="absolute inset-y-1.5 right-1.5 px-4 bg-[#8C5A3B] hover:bg-[#784B2E] text-white text-xs font-bold rounded-lg transition-colors disabled:opacity-50"
                 >
                   {locating ? t('merchant_onboarding.location.locating') : t('merchant_onboarding.location.locate_me')}
                 </button>
@@ -298,7 +298,7 @@ export default function LocationDeliveryPage() {
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1">{t('merchant_onboarding.location.street')}</label>
+                  <label className="block text-[11px] font-bold text-[#C2D6C0]/80 uppercase tracking-widest mb-1">{t('merchant_onboarding.location.street')}</label>
                   <AgentInput
                     agentId="address"
                     agentLabel="Street Address"
@@ -307,12 +307,12 @@ export default function LocationDeliveryPage() {
                     value={formData.address}
                     onChange={handleChange}
                     placeholder="123 Artisan Market Street"
-                    className="w-full px-4 py-3 bg-white rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all"
+                    className="w-full px-4 py-3 bg-[#141A15] rounded-xl border border-[#2E3D30] focus:border-[#F3B58C]/40 focus:outline-none focus:ring-2 focus:ring-[#F3B58C]/20 text-sm font-medium transition-all text-white placeholder-[#7A9378]"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1">{t('merchant_onboarding.location.city')}</label>
+                    <label className="block text-[11px] font-bold text-[#C2D6C0]/80 uppercase tracking-widest mb-1">{t('merchant_onboarding.location.city')}</label>
                     <AgentInput
                       agentId="city"
                       agentLabel="City"
@@ -320,11 +320,11 @@ export default function LocationDeliveryPage() {
                       value={formData.city}
                       onChange={handleChange}
                       placeholder="Hyderabad"
-                      className="w-full px-4 py-3 bg-white rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all"
+                      className="w-full px-4 py-3 bg-[#141A15] rounded-xl border border-[#2E3D30] focus:border-[#F3B58C]/40 focus:outline-none focus:ring-2 focus:ring-[#F3B58C]/20 text-sm font-medium transition-all text-white placeholder-[#7A9378]"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1">{t('merchant_onboarding.location.state')}</label>
+                    <label className="block text-[11px] font-bold text-[#C2D6C0]/80 uppercase tracking-widest mb-1">{t('merchant_onboarding.location.state')}</label>
                     <div className="relative">
                       <AgentSelect
                         agentId="state"
@@ -332,15 +332,15 @@ export default function LocationDeliveryPage() {
                         name="state"
                         value={formData.state}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 bg-white rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all appearance-none"
+                        className="w-full px-4 py-3 bg-[#141A15] rounded-xl border border-[#2E3D30] focus:border-[#F3B58C]/40 focus:outline-none focus:ring-2 focus:ring-[#F3B58C]/20 text-sm font-medium transition-all appearance-none text-white"
                       >
-                        <option value="">{t('merchant_onboarding.location.select')}</option>
-                        <option value="Telangana">Telangana</option>
-                        <option value="Andhra Pradesh">Andhra Pradesh</option>
-                        <option value="Karnataka">Karnataka</option>
-                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="" className="bg-[#141A15]">{t('merchant_onboarding.location.select')}</option>
+                        <option value="Telangana" className="bg-[#141A15]">Telangana</option>
+                        <option value="Andhra Pradesh" className="bg-[#141A15]">Andhra Pradesh</option>
+                        <option value="Karnataka" className="bg-[#141A15]">Karnataka</option>
+                        <option value="Maharashtra" className="bg-[#141A15]">Maharashtra</option>
                       </AgentSelect>
-                      <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-gray-400">
+                      <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-white/50">
                         <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                       </div>
                     </div>
@@ -348,7 +348,7 @@ export default function LocationDeliveryPage() {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1">{t('merchant_onboarding.location.postal')}</label>
+                    <label className="block text-[11px] font-bold text-[#C2D6C0]/80 uppercase tracking-widest mb-1">{t('merchant_onboarding.location.postal')}</label>
                     <AgentInput
                       agentId="pincode"
                       agentLabel="Postal Code"
@@ -356,11 +356,11 @@ export default function LocationDeliveryPage() {
                       value={formData.pincode}
                       onChange={handleChange}
                       placeholder="97205"
-                      className="w-full px-4 py-3 bg-white rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all"
+                      className="w-full px-4 py-3 bg-[#141A15] rounded-xl border border-[#2E3D30] focus:border-[#F3B58C]/40 focus:outline-none focus:ring-2 focus:ring-[#F3B58C]/20 text-sm font-medium transition-all text-white placeholder-[#7A9378]"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1">{t('merchant_onboarding.location.unit')}</label>
+                    <label className="block text-[11px] font-bold text-[#C2D6C0]/80 uppercase tracking-widest mb-1">{t('merchant_onboarding.location.unit')}</label>
                     <AgentInput
                       agentId="unit"
                       agentLabel="Unit/Apt"
@@ -368,7 +368,7 @@ export default function LocationDeliveryPage() {
                       value={formData.unit}
                       onChange={handleChange}
                       placeholder={t('merchant_onboarding.location.unit_placeholder')}
-                      className="w-full px-4 py-3 bg-white rounded-xl border border-transparent focus:border-[#496246]/30 focus:outline-none focus:ring-2 focus:ring-[#496246]/10 text-sm font-medium transition-all"
+                      className="w-full px-4 py-3 bg-[#141A15] rounded-xl border border-[#2E3D30] focus:border-[#F3B58C]/40 focus:outline-none focus:ring-2 focus:ring-[#F3B58C]/20 text-sm font-medium transition-all text-white placeholder-[#7A9378]"
                     />
                   </div>
                 </div>
@@ -376,18 +376,18 @@ export default function LocationDeliveryPage() {
             </div>
 
             {/* Delivery Radius Block */}
-            <div className="bg-[#EAF3EA] rounded-[32px] p-8 shadow-sm">
+            <div className="bg-[#1A231C] rounded-[32px] p-8 shadow-2xl border border-[#2E3D30]">
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#DCE8DC] flex items-center justify-center text-[#496246]">
+                  <div className="w-10 h-10 rounded-full bg-[#243026] flex items-center justify-center text-[#F3B58C]">
                     <Truck size={18} />
                   </div>
-                  <h3 className="font-bold text-gray-900 text-lg" dangerouslySetInnerHTML={{ __html: t('merchant_onboarding.location.radius_title') }}></h3>
+                  <h3 className="font-bold text-white text-lg" dangerouslySetInnerHTML={{ __html: t('merchant_onboarding.location.radius_title') }}></h3>
                 </div>
                 {/* Custom Toggle Switch */}
                 <button
                   onClick={handleToggle}
-                  className={`w-14 h-7 rounded-full p-1 transition-colors duration-300 ease-in-out flex ${formData.deliveryEnabled ? 'bg-[#496246] justify-end' : 'bg-gray-300 justify-start'}`}
+                  className={`w-14 h-7 rounded-full p-1 transition-colors duration-300 ease-in-out flex ${formData.deliveryEnabled ? 'bg-[#8C5A3B] justify-end' : 'bg-gray-700 justify-start'}`}
                 >
                   <div className="w-5 h-5 bg-white rounded-full shadow-sm" />
                 </button>
@@ -395,8 +395,8 @@ export default function LocationDeliveryPage() {
 
               <div className={`transition-opacity duration-300 ${formData.deliveryEnabled ? 'opacity-100' : 'opacity-40 pointer-events-none'}`}>
                 <div className="flex justify-between items-end mb-4">
-                  <label className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">{t('merchant_onboarding.location.zone_size')}</label>
-                  <span className="text-2xl font-black text-gray-900">{formData.deliveryRadius} <span className="text-sm">km</span></span>
+                  <label className="text-[11px] font-bold text-[#C2D6C0]/80 uppercase tracking-widest">{t('merchant_onboarding.location.zone_size')}</label>
+                  <span className="text-2xl font-black text-white">{formData.deliveryRadius} <span className="text-sm text-[#F3B58C]">km</span></span>
                 </div>
 
                 <div className="mb-8 relative">
@@ -407,34 +407,33 @@ export default function LocationDeliveryPage() {
                     step="0.5"
                     value={formData.deliveryRadius}
                     onChange={handleSliderChange}
-                    className="w-full h-2 bg-[#DCE8DC] rounded-lg appearance-none cursor-pointer outline-none slider-thumb-custom relative z-10"
+                    className="w-full h-2 bg-[#243026] rounded-lg appearance-none cursor-pointer outline-none slider-thumb-custom relative z-10"
                     style={{
-                      background: `linear-gradient(to right, #496246 0%, #496246 ${(formData.deliveryRadius / 20) * 100}%, #DCE8DC ${(formData.deliveryRadius / 20) * 100}%, #DCE8DC 100%)`
+                      background: `linear-gradient(to right, #8C5A3B 0%, #8C5A3B ${(formData.deliveryRadius / 20) * 100}%, #243026 ${(formData.deliveryRadius / 20) * 100}%, #243026 100%)`
                     }}
                   />
-                  {/* Note: In a real app we'd inject custom CSS for the thumb, but here we just rely on standard appearance or basic styling */}
                   <style dangerouslySetInnerHTML={{
                     __html: `
                     input[type=range]::-webkit-slider-thumb {
                       appearance: none;
                       width: 20px;
                       height: 20px;
-                      background: white;
-                      border: 4px solid #496246;
+                      background: #F3B58C;
+                      border: 4px solid #141A15;
                       border-radius: 50%;
                       cursor: pointer;
-                      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
                     }
                   `}} />
                 </div>
 
-                <div className="bg-[#2D3A2C] rounded-2xl p-6 text-white flex items-center justify-between shadow-lg">
+                <div className="bg-[#141A15] rounded-2xl p-6 text-white flex items-center justify-between shadow-lg border border-[#2E3D30]">
                   <div>
-                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">{t('merchant_onboarding.location.reach')}</p>
-                    <p className="text-3xl font-black">~{estimatedReach}</p>
+                    <p className="text-[10px] font-bold text-[#C2D6C0] uppercase tracking-widest mb-1">{t('merchant_onboarding.location.reach')}</p>
+                    <p className="text-3xl font-black text-[#F3B58C]">~{estimatedReach}</p>
                   </div>
-                  <div className="w-12 h-12 bg-[#3A4E38] rounded-xl flex items-center justify-center">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#8BBA87]">
+                  <div className="w-12 h-12 bg-[#243026] rounded-xl flex items-center justify-center border border-[#496246]/40">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#F3B58C]">
                       <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                     </svg>
                   </div>
@@ -446,21 +445,21 @@ export default function LocationDeliveryPage() {
             <div className="flex items-center justify-between mt-8 pt-4">
               <button
                 onClick={() => router.back()}
-                className="flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-gray-900 transition-colors uppercase tracking-widest"
+                className="flex items-center gap-2 text-xs font-bold text-white/50 hover:text-white transition-colors uppercase tracking-widest"
               >
                 {t('merchant_onboarding.location.back')}
               </button>
               <div className="flex items-center gap-4">
                 <button
                   onClick={() => router.push("/merchant/merchant-onboarding/product-catalog")}
-                  className="px-6 py-4 text-[#496246] font-bold text-sm tracking-wide hover:bg-[#496246]/10 rounded-xl transition-all"
+                  className="px-6 py-4 text-[#F3B58C] font-bold text-sm tracking-wide hover:bg-[#8C5A3B]/20 rounded-xl transition-all"
                 >
                   SKIP FOR NOW
                 </button>
                 <button
                   onClick={handleSave}
                   disabled={loading}
-                  className="px-8 py-4 bg-[#496246] hover:bg-[#3A4E38] text-white rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all shadow-md transform hover:-translate-y-0.5 disabled:opacity-50"
+                  className="px-8 py-4 bg-[#8C5A3B] hover:bg-[#784B2E] text-white rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all shadow-[0_8px_20px_rgba(140,90,59,0.4)] transform hover:-translate-y-0.5 disabled:opacity-50"
                 >
                   {loading ? t('merchant_onboarding.location.saving') : t('merchant_onboarding.location.next')}
                   <ArrowRight size={16} />
@@ -472,65 +471,64 @@ export default function LocationDeliveryPage() {
 
         {/* Right Column: Map Visualization */}
         <div className="flex-1 w-full lg:max-w-md h-[800px] relative">
-          <div className="w-full h-full bg-[#E5E3DF] rounded-[32px] overflow-hidden relative shadow-inner border border-gray-200">
-            {/* Mapbox Static Map Background */}
+          <div className="w-full h-full bg-[#141A15] rounded-[32px] overflow-hidden relative shadow-2xl border border-[#2E3D30]">
+            {/* Mapbox Static Map Background - Dark Style */}
             <img
               key={`${formData.lat}-${formData.lng}`}
-              src={`https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/${formData.lng},${formData.lat},15.5,0/800x800@2x?access_token=${MAPBOX_TOKEN}`}
+              src={`https://api.mapbox.com/styles/v1/mapbox/dark-v11/static/${formData.lng},${formData.lat},15.5,0/800x800@2x?access_token=${MAPBOX_TOKEN}`}
               alt="Mapbox Map"
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover opacity-90"
             />
 
-
             {/* Legend Map Control */}
-            <div className="absolute top-6 left-6 bg-white/90 backdrop-blur rounded-xl p-3 shadow-md border border-gray-100 z-10">
+            <div className="absolute top-6 left-6 bg-[#1A231C]/90 backdrop-blur-md rounded-xl p-3 shadow-xl border border-[#2E3D30] z-10 text-white">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-3 h-3 rounded-full bg-[#2B536C]"></div>
-                <span className="text-xs font-bold text-gray-700">{t('merchant_onboarding.location.map_store')}</span>
+                <div className="w-3 h-3 rounded-full bg-[#8C5A3B]"></div>
+                <span className="text-xs font-bold text-white/90">{t('merchant_onboarding.location.map_store')}</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full border-2 border-[#D68C5E] bg-[#D68C5E]/20"></div>
-                <span className="text-xs font-bold text-gray-700">{t('merchant_onboarding.location.map_delivery')}</span>
+                <div className="w-3 h-3 rounded-full border-2 border-[#F3B58C] bg-[#F3B58C]/30"></div>
+                <span className="text-xs font-bold text-white/90">{t('merchant_onboarding.location.map_delivery')}</span>
               </div>
             </div>
 
             {/* Map Controls */}
             <div className="absolute bottom-6 right-6 flex flex-col gap-2 z-10">
-              <div className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
-                <button className="w-10 h-10 flex items-center justify-center text-gray-700 hover:bg-gray-100 font-bold border-b border-gray-100">+</button>
-                <button className="w-10 h-10 flex items-center justify-center text-gray-700 hover:bg-gray-100 font-bold">−</button>
+              <div className="bg-[#1A231C] rounded-xl shadow-xl overflow-hidden flex flex-col border border-[#2E3D30]">
+                <button className="w-10 h-10 flex items-center justify-center text-white hover:bg-[#243026] font-bold border-b border-[#2E3D30]">+</button>
+                <button className="w-10 h-10 flex items-center justify-center text-white hover:bg-[#243026] font-bold">−</button>
               </div>
-              <button className="w-10 h-10 bg-white rounded-xl shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-100">
-                <MapPin size={18} />
+              <button className="w-10 h-10 bg-[#1A231C] rounded-xl shadow-xl flex items-center justify-center text-white hover:bg-[#243026] border border-[#2E3D30]">
+                <MapPin size={18} className="text-[#F3B58C]" />
               </button>
             </div>
 
             {/* Radius Overlay - Center Point */}
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-              <div className="mb-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full text-sm font-black text-[#496246] shadow-lg border border-white flex items-center gap-2">
-                <Store size={16} className="text-[#496246]" />
+              <div className="mb-4 bg-[#1A231C]/90 backdrop-blur-md px-4 py-2 rounded-full text-sm font-black text-white shadow-xl border border-[#8C5A3B]/40 flex items-center gap-2">
+                <Store size={16} className="text-[#F3B58C]" />
                 {formData.city ? `${formData.city}${formData.state ? `, ${formData.state}` : ''}` : "Dammaiguda, Hyderabad"}
               </div>
 
               {/* The Radius Circle */}
               {formData.deliveryEnabled && (
                 <div
-                  className="absolute rounded-full bg-[#D68C5E]/20 border border-[#D68C5E] transition-all duration-300 ease-out flex items-center justify-center"
+                  className="absolute rounded-full bg-[#F3B58C]/20 border-2 border-[#F3B58C] transition-all duration-300 ease-out flex items-center justify-center shadow-[0_0_30px_rgba(243,181,140,0.3)]"
                   style={{
                     width: `${Math.max(100, (formData.deliveryRadius / 20) * 400)}px`,
                     height: `${Math.max(100, (formData.deliveryRadius / 20) * 400)}px`
                   }}
                 >
-                  <div className="absolute w-full h-full bg-[#D68C5E]/10 rounded-full animate-pulse pointer-events-none"></div>
+                  <div className="absolute w-full h-full bg-[#F3B58C]/10 rounded-full animate-pulse pointer-events-none"></div>
                 </div>
               )}
 
               {/* Center Pin with Baazar Icon */}
               <div className="relative z-10 -mt-16">
-                <div className="w-10 h-10 bg-[#496246] rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+                <div className="w-10 h-10 bg-[#8C5A3B] rounded-full flex items-center justify-center shadow-xl border-2 border-white">
                   <Store size={18} className="text-white" />
                 </div>
-                <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-[#496246] mx-auto -mt-1 drop-shadow-md"></div>
+                <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-[#8C5A3B] mx-auto -mt-1 drop-shadow-md"></div>
               </div>
             </div>
           </div>

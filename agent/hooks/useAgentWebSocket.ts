@@ -15,8 +15,8 @@ interface UseAgentWebSocketOptions {
 
 const WS_URL =
     typeof window !== "undefined"
-        ? `ws://${window.location.hostname}:3000/ws/agent`
-        : "ws://localhost:3000/ws/agent";
+        ? `ws://${window.location.hostname}:5000/ws/agent`
+        : "ws://localhost:5000/ws/agent";
 
 /**
  * Manages the WebSocket connection lifecycle for the onboarding agent.
