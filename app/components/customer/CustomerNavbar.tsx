@@ -20,6 +20,7 @@ export function CustomerNavbar() {
     { name: "Search", href: "/customer/search" },
     { name: "Stores", href: "/customer/stores" },
     { name: "Offers", href: "/customer/offers" },
+    { name: "Audit Logs", href: "/customer/audit-logs" },
     { name: "Help & Support", href: "/customer/help" },
   ];
 

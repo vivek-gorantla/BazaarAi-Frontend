@@ -42,7 +42,7 @@ export default function CustomerDiscoverPage() {
       price: 120,
       originalPrice: 150,
       weight: "1 kg",
-      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCx7kQmefZl8H151begW5ERzoW7CLXh0vjCFhqI-YTbd3UO5ofYHCW2igquv5nQshzqubRY1aV9Y3EpmqW_4wCplLmZe98enJFEf6Lo8fH5cri7eWPI_GazC0H3Tt9PrBkGTnIWokPuGOXlhAD8CtLL_fFGpWX_yadhS6Glx9fGCCXrkz8e6Z7M2gckwphgu6XRruTkpLJRUDnhgRhuQUxyj6t2wtPc0S2IUIcYuKIue6q2YJcl6_E",
+      image: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=500",
       storeName: "Sri Lakshmi Stores",
       rating: 4.9,
       discountBadge: "TOP SELLER"
@@ -53,7 +53,7 @@ export default function CustomerDiscoverPage() {
       price: 320,
       originalPrice: 360,
       weight: "5 kg",
-      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDJ66YUs7ANW8J-5LDJ8Jie7SPA41ywcd0GZntYoG6Ph0zAetQYpOAPCO8LtMzzwMSosgwtNN-Mm8CD7cf-lZC0j3EqcwR-WY4tJT33oSJy1q0EKCiTcTA1CU8fPng4qrALSkHL1cpRJs0_75b7aTLKfXANcWvRN38QhOTEHWrjAM322r7g3VXZ3DsVS1LD3HhxkLjVIRRmCLv9tBOtKfr3e9PYiKr1wmZogcatt9Y9zTQvElZrCL4",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA8wDPgxLIpIoZDqjIk3db5qlrZj5q-1ejkjww4xDFzw&s=10",
       storeName: "Sri Lakshmi Stores",
       rating: 4.8
     },
@@ -63,7 +63,7 @@ export default function CustomerDiscoverPage() {
       price: 160,
       originalPrice: 190,
       weight: "200 g",
-      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAuyPhhaVPCxg9ckGA7lC-5xKb_1wBLCkikqaFBsaSMEBlK6Mbk0M6dymW1LtRMrmsOfSd8sYUv_b2eaARvPZtFkTq_MuqBVixYgGAIX8BYz_olydyutn_kcWpyzG41OQKJqhcDijsHl30T10lLofr4no8C3faqlmINNrSB41zDWBbsuUhxsfDOI6ueh-0sKc737uPDU4o0hbLZq1cX_ijAm1bC2YkV7PWD2r1G0Et6Zzc8to1B8X8",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQicigi_9-GYo0lJurRW_wEnzloGFhUiWt7kd8qAPztg&s=10",
       storeName: "Ravi Kirana",
       rating: 4.9,
       discountBadge: "AUTHENTIC"
@@ -74,7 +74,7 @@ export default function CustomerDiscoverPage() {
       price: 110,
       originalPrice: 130,
       weight: "250 g",
-      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBFUscaHnh-xMNSkg5rjywum7WTgyy2_sb0M3fdkQp5Rrx4QZy5kQPrCp-sZV_buZNtMxDIuV7jM8Sdx5_tamwhGvNZz9LiIPa6WbH8JVh8YPbF2neab7qC_OGirTuCyJKGtO9cl8L6vMKXv9FI6rGKNJQhQTDms3g9A2uf-ehTenDEJrEPafUj-KyqvukeMQivgleNxdRXfWfi9BhhiaguwkdCMbR8m6Au4kLFoOkyKtW6tW4eYxo",
+      image: "https://www.ambitiouskitchen.com/wp-content/uploads/2023/02/Garlic-Bread-4.jpg",
       storeName: "Local Mart",
       rating: 4.6
     }
@@ -118,11 +118,10 @@ export default function CustomerDiscoverPage() {
               key={chip}
               type="button"
               onClick={() => setActiveFilter(chip)}
-              className={`px-5 py-2.5 rounded-full font-label-md text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                activeFilter === chip
-                  ? "bg-primary text-on-primary shadow-md"
-                  : "bg-surface-container hover:bg-surface-container-high text-on-surface-variant"
-              }`}
+              className={`px-5 py-2.5 rounded-full font-label-md text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${activeFilter === chip
+                ? "bg-primary text-on-primary shadow-md"
+                : "bg-surface-container hover:bg-surface-container-high text-on-surface-variant"
+                }`}
             >
               {chip}
             </button>

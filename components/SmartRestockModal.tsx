@@ -434,14 +434,16 @@ export function SmartRestockModal({ isOpen, onClose, initialTab = "voice" }: Sma
       lowerPrompt.includes("delete") ||
       lowerPrompt.includes("remove");
 
+    const hasValidObjects = obs && obs.objects && Array.isArray(obs.objects) && obs.objects.length > 0;
+
     const isErrorOrWarning =
       lowerReply.includes("cannot decrease") ||
-      lowerReply.includes("does not exist") ||
+      (!hasValidObjects && lowerReply.includes("does not exist")) ||
       lowerReply.includes("out of stock") ||
       lowerReply.includes("insufficient") ||
       lowerReply.includes("failed") ||
-      lowerReply.includes("error") ||
-      lowerReply.includes("not found");
+      (!hasValidObjects && lowerReply.includes("error")) ||
+      (!hasValidObjects && lowerReply.includes("not found") && !lowerReply.includes("form"));
 
     if (isDeleteIntent || isErrorOrWarning || isSupplierIntent) {
       setBatchProducts([]);
@@ -494,10 +496,10 @@ export function SmartRestockModal({ isOpen, onClose, initialTab = "voice" }: Sma
       extractedName = quotedMatch[1].trim();
     } else {
       const namePattern =
-        promptRaw.match(/(?:create|add|update|restock)?\s*(?:a|an)?\s*product\s+([a-zA-Z0-9\s]+?)(?:\s+to\s+my|\s+to\s+store|\s+with|\s+at|\s+having|\s+stock|\s+price|\s+cost|\s+desc|$)/i) ||
-        promptRaw.match(/(?:update|change|set)?\s*(?:the)?\s*(?:price|cost|stock)\s+of\s+([a-zA-Z0-9\s]+?)(?:\s+to|\s+at|\s+for|\s+is|$)/i) ||
-        promptRaw.match(/(?:add|create|restock|update)\s+(\d+)\s*(?:pacs?|packs?|kgs?|g|grams?|bags?|boxes?|units?|pieces?|pcs|bottles?|litres?|l)?\s*(?:of)?\s*([a-zA-Z0-9\s]+?)(?:\s+to\s+my|\s+to\s+store|\s+with|\s+at|\s+having|\s+stock|\s+price|\s+cost|\s+each|$)/i) ||
-        promptRaw.match(/(?:create|add|update)\s+([a-zA-Z0-9\s]+?)(?:\s+to\s+my|\s+to\s+store|\s+with|\s+at|\s+having|\s+stock|\s+price|\s+cost|\s+desc|$)/i);
+        promptRaw.match(/(?:create|add|update|restock)?\s*(?:a|an)?\s*product\s+([a-zA-Z0-9\s\-.&']+?)(?:\s+to\s+my|\s+to\s+store|\s+with|\s+at|\s+having|\s+stock|\s+price|\s+cost|\s+desc|$)/i) ||
+        promptRaw.match(/(?:update|change|set)?\s*(?:the)?\s*(?:price|cost|stock)\s+of\s+([a-zA-Z0-9\s\-.&']+?)(?:\s+to|\s+at|\s+for|\s+is|$)/i) ||
+        promptRaw.match(/(?:add|create|restock|update)\s+(\d+)\s*(?:pacs?|packs?|kgs?|g|grams?|bags?|boxes?|units?|pieces?|pcs|bottles?|litres?|l)?\s*(?:of)?\s*([a-zA-Z0-9\s\-.&']+?)(?:\s+to\s+my|\s+to\s+store|\s+with|\s+at|\s+having|\s+stock|\s+price|\s+cost|\s+each|$)/i) ||
+        promptRaw.match(/(?:create|add|update)\s+([a-zA-Z0-9\s\-.&']+?)(?:\s+to\s+my|\s+to\s+store|\s+with|\s+at|\s+having|\s+stock|\s+price|\s+cost|\s+desc|$)/i);
       if (namePattern) {
         const captured = namePattern[2] || namePattern[1];
         if (captured && !isFixture(captured)) {
@@ -650,8 +652,10 @@ export function SmartRestockModal({ isOpen, onClose, initialTab = "voice" }: Sma
 
     const hasBatchItems = (obs && obs.objects && Array.isArray(obs.objects) && obs.objects.length > 0) || detectedItemsBatch.length > 0;
 
-    // Open Multi-Product Batch Form IF shelf image/batch items detected, OR if manual create prompt was not processed by agent
-    if (!isSupplierIntent && !isQueryIntent && !isDeleteIntent && !isErrorOrWarning && (hasBatchItems || (!isProcessedByAgent && (obs?.objects?.length || detectedItemsBatch.length)))) {
+    const isNewProductIntent = lowerReply.includes("form") || lowerReply.includes("details in the form") || (extractedName && !editingItem);
+
+    // Open Multi-Product Batch Form IF shelf image/batch items detected, OR if manual create prompt was not processed by agent, OR if new product intent detected
+    if (!isSupplierIntent && !isQueryIntent && !isDeleteIntent && !isErrorOrWarning && (isNewProductIntent || hasBatchItems || (!isProcessedByAgent && (obs?.objects?.length || detectedItemsBatch.length)))) {
       setShowForm(true);
     } else {
       setShowForm(false);
@@ -1326,8 +1330,9 @@ export function SmartRestockModal({ isOpen, onClose, initialTab = "voice" }: Sma
                       </div>
                     )}
 
-                    <form id="agent-product-form" onSubmit={handleSaveProductForm} className="space-y-4">
-                      <div>
+                    {batchProducts.length === 0 && (
+                      <form id="agent-product-form" onSubmit={handleSaveProductForm} className="space-y-4">
+                        <div>
                         <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1">
                           Product Name <span className="text-red-500">*</span>
                         </label>
@@ -1467,11 +1472,13 @@ export function SmartRestockModal({ isOpen, onClose, initialTab = "voice" }: Sma
                         />
                       </div>
                     </form>
+                    )}
                   </div>
 
                   {/* Sticky Footer Bar with Prominent Submit Button */}
-                  <div className="sticky bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md pt-3 pb-2 border-t border-gray-100 flex items-center justify-between gap-3 mt-4 z-30 shadow-lg rounded-b-2xl px-4">
-                    <button
+                  {batchProducts.length === 0 && (
+                    <div className="sticky bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md pt-3 pb-2 border-t border-gray-100 flex items-center justify-between gap-3 mt-4 z-30 shadow-lg rounded-b-2xl px-4">
+                      <button
                       type="button"
                       onClick={() => setShowForm(false)}
                       className="px-5 py-2.5 text-xs font-bold text-gray-600 hover:text-gray-900"
@@ -1487,7 +1494,8 @@ export function SmartRestockModal({ isOpen, onClose, initialTab = "voice" }: Sma
                       {isSubmittingForm ? <Loader2 size={16} className="animate-spin text-white" /> : <CheckCircle2 size={16} />}
                       Submit & Save Product to Inventory
                     </button>
-                  </div>
+                    </div>
+                  )}
                 </motion.div>
               ) : (
                 /* Tab Content Views */
@@ -1790,15 +1798,17 @@ export function SmartRestockModal({ isOpen, onClose, initialTab = "voice" }: Sma
     if (!resp) return null;
 
     const lowerReply = (resp.reply || "").toLowerCase();
+    const hasValidObjects = resp.parsedObservation && (resp.parsedObservation as any).objects && Array.isArray((resp.parsedObservation as any).objects) && (resp.parsedObservation as any).objects.length > 0;
+
     const isErrorOrWarning =
       resp.success === false ||
       !!resp.error ||
       lowerReply.includes("cannot decrease") ||
-      lowerReply.includes("does not exist") ||
+      (!hasValidObjects && lowerReply.includes("does not exist")) ||
       lowerReply.includes("out of stock") ||
       lowerReply.includes("insufficient") ||
       lowerReply.includes("failed") ||
-      lowerReply.includes("error");
+      (!hasValidObjects && lowerReply.includes("error"));
 
     // Helper to strip markdown stars and symbols for neat text output
     const cleanText = (str: string) => {

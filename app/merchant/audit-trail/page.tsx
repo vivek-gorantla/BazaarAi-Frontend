@@ -1,5 +1,6 @@
-import React from 'react';
 import { getAuditTrailData } from '@/services/merchantApi';
+import { AgentAuditStream } from '@/app/components/ui/AgentAuditStream';
+import React from 'react';
 
 export default async function AuditTrail() {
   const data = await getAuditTrailData();
@@ -61,7 +62,7 @@ export default async function AuditTrail() {
           <h2 className="font-headline-md text-headline-md text-on-surface mb-8">Activity Timeline</h2>
           <div className="relative pl-6">
             <div className="absolute left-[38px] top-4 bottom-4 w-px bg-outline-variant/30 z-0"></div>
-            
+
             {data.timeline.map(log => (
               <div key={log.id} className="relative z-10 flex gap-6 mb-10 group cursor-pointer" >
                 <div className="w-24 shrink-0 pt-3 text-right">
@@ -105,7 +106,7 @@ export default async function AuditTrail() {
               <span className="material-symbols-outlined">close</span>
             </button>
           </div>
-          
+
           <div className="flex-1 overflow-y-auto px-8 py-4 custom-scrollbar">
             <div className="flex items-center gap-4 mb-8 bg-surface-container p-4 rounded-2xl">
               <div className="w-14 h-14 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0 shadow-inner">
@@ -179,6 +180,10 @@ export default async function AuditTrail() {
               <span className="material-symbols-outlined text-[20px]">undo</span> Revert Change
             </button>
           </div>
+        </div>
+
+        <div className="mt-8 pt-8 border-t border-surface-container">
+          <AgentAuditStream topic="system-logs" title="Live System Audit Log Stream" height={500} />
         </div>
       </div>
     </>

@@ -6,6 +6,20 @@ import { useCart } from "../../contexts/CartContext";
 import { useCustomerAuth } from "../../contexts/CustomerAuthContext";
 import { customerApi } from "../../../services/customerApi";
 
+const loadRazorpay = () => {
+  return new Promise((resolve) => {
+    if ((window as any).Razorpay) {
+      resolve(true);
+      return;
+    }
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+};
+
 export default function CustomerCheckoutPage() {
   const router = useRouter();
   const { cartItems, grandTotal, clearCart } = useCart();
@@ -52,8 +66,44 @@ export default function CustomerCheckoutPage() {
     });
 
     if (res.success) {
-      clearCart();
-      router.push("/customer/order-confirmation");
+      if (paymentMethod !== "cod" && res.razorpay) {
+        const isLoaded = await loadRazorpay();
+        if (!isLoaded) {
+          alert("Razorpay SDK failed to load. Are you online?");
+          setIsPlacingOrder(false);
+          return;
+        }
+        const options = {
+          key: res.razorpay.keyId,
+          amount: res.razorpay.amount,
+          currency: res.razorpay.currency,
+          name: "Baazar",
+          description: "Order Payment",
+          order_id: res.razorpay.orderId,
+          handler: function (response: any) {
+             clearCart();
+             router.push("/customer/order-confirmation");
+          },
+          modal: {
+            ondismiss: function() {
+              setIsPlacingOrder(false);
+            }
+          },
+          prefill: {
+            name: "Customer Name",
+            email: "customer@example.com",
+            contact: "9999999999"
+          },
+          theme: {
+            color: "#16a34a"
+          }
+        };
+        const rzp1 = new (window as any).Razorpay(options);
+        rzp1.open();
+      } else {
+        clearCart();
+        router.push("/customer/order-confirmation");
+      }
     } else {
       setIsPlacingOrder(false);
     }

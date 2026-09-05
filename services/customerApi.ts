@@ -64,7 +64,7 @@ export interface CustomerProfile {
   };
 }
 
-const API_BASE_URL = "/api/customer";
+const API_BASE_URL = process.env.NODE_ENV === "production" ? "/api/customer" : "http://localhost:5000/api/customer";
 
 const getAuthHeaders = (): Record<string, string> => {
   const headers: Record<string, string> = { "Content-Type": "application/json" };
@@ -194,7 +194,7 @@ export const customerApi = {
   },
 
   // Cart API Calls
-  async getCart(): Promise<any[]> {
+  async getCart(): Promise<any[] | null> {
     try {
       const res = await fetch(`${API_BASE_URL}/cart`, {
         headers: getAuthHeaders()
@@ -206,7 +206,7 @@ export const customerApi = {
     } catch (e) {
       console.warn("Cart GET API fallback active", e);
     }
-    return [];
+    return null;
   },
 
   async addToCart(item: any): Promise<any[]> {
@@ -334,7 +334,7 @@ export const customerApi = {
     return null;
   },
 
-  async placeOrder(payload: any): Promise<{ success: boolean; orderId?: string }> {
+  async placeOrder(payload: any): Promise<{ success: boolean; orderId?: string; razorpay?: any }> {
     try {
       const res = await fetch(`${API_BASE_URL}/orders`, {
         method: "POST",
@@ -343,7 +343,7 @@ export const customerApi = {
       });
       if (res.ok) {
         const json = await res.json();
-        return { success: true, orderId: json.orderId };
+        return { success: true, orderId: json.orderId, razorpay: json.razorpay };
       }
     } catch (e) {
       console.warn("Order placement fallback active", e);

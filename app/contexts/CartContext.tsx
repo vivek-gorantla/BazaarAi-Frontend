@@ -84,9 +84,16 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const refreshCart = useCallback(async () => {
     try {
       const items = await customerApi.getCart();
-      if (Array.isArray(items)) {
+      if (items && Array.isArray(items)) {
         const mapped = items.map(mapCartRow);
-        setCartItems(mapped);
+        // Only override if we get a valid array from backend
+        // Use functional state update to avoid stale closure on cartItems
+        setCartItems(prev => {
+          if (items.length > 0 || prev.length === 0) {
+            return mapped;
+          }
+          return prev;
+        });
       }
     } catch (e) {
       console.error("Failed to refresh cart from API", e);

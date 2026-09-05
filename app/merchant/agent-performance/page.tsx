@@ -1,5 +1,5 @@
-import React from 'react';
 import { getAgentPerformanceData } from '@/services/merchantApi';
+import { AgentAuditStream } from '@/app/components/ui/AgentAuditStream';
 
 export default async function AgentPerformance() {
   const data = await getAgentPerformanceData();
@@ -92,6 +92,10 @@ export default async function AgentPerformance() {
               </button>
             </div>
           ))}
+        </div>
+
+        <div className="mt-8 pt-8 border-t border-surface-container">
+          <AgentAuditStream topic="agent-logs" title="Live Agent Reasoning Stream" height={500} />
         </div>
       </div>
     </>

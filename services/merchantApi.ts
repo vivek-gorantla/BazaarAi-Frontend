@@ -1,6 +1,6 @@
 import { dispatchInventoryUpdated } from './eventBus';
 
-const API_BASE_URL = typeof window !== 'undefined' ? '' : (process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5000');
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5000';
 
 
 const getMerchantToken = () => {
@@ -2241,7 +2241,7 @@ export interface AgentProcessOptions {
   uploadType?: "voice" | "csv" | "text" | "image" | string;
   file?: File | Blob;
   textData?: string;
-  targetAgent?: "product" | "inventory" | "supplier" | "orchestrated" | "auto";
+  targetAgent?: "product" | "inventory" | "supplier" | "growth" | "orchestrated" | "auto";
   history?: { role: 'user' | 'assistant'; content: string }[];
 }
 
@@ -2249,7 +2249,7 @@ export interface AgentProcessResponse {
   success: boolean;
   uploadType?: string;
   parsedObservation?: any;
-  selectedAgent: "product" | "inventory" | "supplier" | "orchestrated";
+  selectedAgent: "product" | "inventory" | "supplier" | "growth" | "orchestrated" | "auto" | string;
   reply: string;
   error?: string;
 }
